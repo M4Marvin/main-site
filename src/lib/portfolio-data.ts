@@ -1,6 +1,6 @@
 export const profile = {
   name: "Marvin V Prakash",
-  roles: ["Full Stack Architect", "Trading Systems Engineer", "Cloud-Native Developer"],
+  roles: ["Full Stack Architect", "·", "Trading Systems Engineer"],
   tagline: "Results-driven Full Stack Architect with 3+ years designing high-performance, cloud-native platforms, distributed backends, and real-time web applications.",
   location: "Abu Dhabi, UAE",
   email: "marvinprakash@gmail.com",
