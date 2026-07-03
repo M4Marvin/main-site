@@ -89,6 +89,7 @@ export const featuredProjects = [
     tech: ["React", "FastAPI", "Polars", "Parquet", "HTML5 Canvas", "Binance API"],
     link: "https://charts.m4marvin.com",
     featured: false,
+    image: "/charts-screenshot.png",
   },
   {
     title: "Self-Hosted Infrastructure",

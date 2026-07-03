@@ -1,4 +1,5 @@
 import { ExternalLink, ArrowUpRight, Sparkles } from "lucide-react"
+import { Image } from "@unpic/react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
 import { Badge } from "@/components/ui/badge"
 import { featuredProjects } from "@/lib/portfolio-data"
@@ -48,7 +49,18 @@ export function Work() {
         )}
       </div>
     ),
-    header: <ProjectGradient index={i} />,
+    header: project.image ? (
+      <Image
+        src={project.image}
+        alt={project.title}
+        className="h-full min-h-[8rem] w-full rounded-t-xl object-cover"
+        width={800}
+        height={400}
+        layout="constrained"
+      />
+    ) : (
+      <ProjectGradient index={i} />
+    ),
     icon: project.link ? <ArrowUpRight className="h-4 w-4 text-neutral-500" /> : <Sparkles className="h-4 w-4 text-neutral-500" />,
     className: "",
   }))
