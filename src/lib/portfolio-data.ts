@@ -8,6 +8,7 @@ export const profile = {
   github: "https://github.com/M4Marvin",
   linkedin: "https://linkedin.com/in/m4marvin",
   website: "https://m4marvin.com",
+  resumeUrl: "https://files.m4marvin.com/MARVIN_V_PRAKASH_RESUME.pdf",
   education: [
     { degree: "M.S. Computational Biology", school: "Jawaharlal Nehru University", year: "2023" },
     { degree: "B.Tech. Computer Science", school: "Jawaharlal Nehru University", year: "2018" },

@@ -46,7 +46,7 @@ export function Hero() {
               <ArrowDown className="h-4 w-4" /> View My Work
             </HoverBorderGradient>
           </a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
             <HoverBorderGradient
               containerClassName="rounded-full"
               className="flex items-center gap-2 bg-black px-6 py-3 text-sm font-medium text-white"
