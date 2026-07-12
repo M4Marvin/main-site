@@ -2,7 +2,7 @@ import { ExternalLink, ArrowUpRight, Sparkles } from "lucide-react"
 import { Image } from "@unpic/react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
 import { Badge } from "@/components/ui/badge"
-import { featuredProjects } from "@/lib/portfolio-data"
+import { projects } from "@/lib/portfolio-data"
 import { cn } from "@/lib/utils"
 
 function ProjectGradient({ index }: { index: number }) {
@@ -24,11 +24,12 @@ function ProjectGradient({ index }: { index: number }) {
 }
 
 export function Work() {
+  const featuredProjects = projects.filter((p) => p.featured)
   const gridItems = featuredProjects.map((project, i) => ({
     title: project.title,
     description: (
       <div className="space-y-3">
-        <p className="text-sm leading-relaxed">{project.description}</p>
+        <p className="text-sm leading-relaxed">{project.summary}</p>
         <div className="flex flex-wrap gap-1.5">
           {project.tech.map((t) => (
             <Badge key={t} variant="secondary" className="border-white/10 bg-white/5 text-[10px] text-neutral-400">

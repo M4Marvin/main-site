@@ -1,10 +1,10 @@
 import { HoverEffect } from "@/components/ui/card-hover-effect"
-import { skillCategories } from "@/lib/portfolio-data"
+import { skills } from "@/lib/portfolio-data"
 
 export function Skills() {
-  const cardItems = skillCategories.map((cat) => ({
+  const cardItems = skills.map((cat) => ({
     title: cat.title,
-    description: cat.description,
+    description: cat.items.join(" · "),
     link: "#skills",
   }))
 

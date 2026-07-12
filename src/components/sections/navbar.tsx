@@ -25,7 +25,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
+            <SheetTrigger>
               <span
                 className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-black/50 text-white"
                 aria-label="Open menu"
@@ -36,15 +36,18 @@ export function Navbar() {
             <SheetContent side="right" className="border-white/10 bg-black/95 text-white backdrop-blur-xl">
               <div className="mt-8 flex flex-col gap-2">
                 {navItems.map((item) => (
-                  <SheetClose key={item.link} asChild>
-                    <a
-                      href={item.link}
-                      className={cn(
-                        "rounded-lg px-4 py-3 text-base font-medium transition-colors hover:bg-white/10",
-                      )}
-                    >
-                      {item.name}
-                    </a>
+                  <SheetClose
+                    key={item.link}
+                    render={
+                      <a
+                        href={item.link}
+                        className={cn(
+                          "rounded-lg px-4 py-3 text-base font-medium transition-colors hover:bg-white/10",
+                        )}
+                      />
+                    }
+                  >
+                    {item.name}
                   </SheetClose>
                 ))}
                 <a
