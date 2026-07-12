@@ -1,7 +1,7 @@
 import { MapPin, GraduationCap } from "lucide-react"
 import { TracingBeam } from "@/components/ui/tracing-beam"
 import { CardSpotlight } from "@/components/ui/card-spotlight"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { profile, about } from "@/lib/portfolio-data"
 
@@ -25,11 +25,17 @@ export function About() {
           <CardSpotlight className="border-white/10 bg-black/50 p-8">
             <div className="flex flex-col gap-6 md:flex-row md:gap-8">
               <div className="flex shrink-0 flex-col items-center gap-4">
-                <Avatar className="h-24 w-24 border-2 border-white/10">
-                  <AvatarFallback className="bg-linear-to-br from-blue-600 to-violet-600 text-2xl text-white">
-                    MVP
-                  </AvatarFallback>
-                </Avatar>
+                <div className="rounded-full bg-linear-to-br from-blue-500 via-violet-500 to-fuchsia-500 p-1">
+                  <Avatar className="h-32 w-32 border-2 border-white/10">
+                    <AvatarImage
+                      src="https://wsrv.nl/?url=files.m4marvin.com%2Fmarvin_no_bg.png&w=256&h=256&fit=cover&output=png"
+                      alt={profile.name}
+                    />
+                    <AvatarFallback className="bg-linear-to-br from-blue-600 to-violet-600 text-2xl text-white">
+                      MVP
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="secondary" className="border-white/10 bg-white/5 text-white">
                     {profile.location}
