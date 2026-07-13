@@ -1,0 +1,37 @@
+flowchart LR
+    subgraph PHASE_A["<b>Phase A · ETL (offline)</b>"]
+        direction TB
+        A1["<b>Exchange APIs</b><br/>Binance fapi · Bybit api<br/>.csv.gz archives"]
+        A2["<b>CLI · Typer</b><br/>21 commands · 4 groups<br/>async aiohttp"]
+        A3["<b>Polars · PyArrow</b><br/>CSV → Parquet LZ4<br/>5s OHLCV pre-agg"]
+        A4[("<b>Parquet Data Lake</b><br/>~1.5GB · {ex}/{market}/{sym}/{Y}/{M}/{D}/")]
+        A5["<b>file_index.csv</b><br/>FileIndexer scans *.parquet<br/>metadata index"]
+
+        A1 -->|"download"| A2
+        A2 -->|"convert"| A3
+        A3 -->|"write"| A4
+        A4 -->|"index"| A5
+    end
+
+    subgraph PHASE_B["<b>Phase B · Serving (online)</b>"]
+        direction TB
+        B1["<b>Browser</b><br/>React 18 · TanStack Query<br/>Zustand stores"]
+        B2["<b>FastAPI · uvicorn</b><br/>14 endpoints · :8001<br/>Pydantic v2"]
+        B3["<b>File Index</b><br/>in-memory tree<br/>Market→Symbol→Year→Month→Day"]
+        B4["<b>Polars</b><br/>read Parquet · resample<br/>trades_to_footprint"]
+        B5["<b>Canvas 2D</b><br/>11 custom renderers<br/>candles · footprints · indicators"]
+
+        B1 -->|"GET /ohlc"| B2
+        B2 -->|"lookup"| B3
+        B3 -->|"read + aggregate"| B4
+        B4 -->|"JSON → render"| B5
+    end
+
+    A4 -.->|"shared state"| B3
+
+    classDef phaseBoundary fill:none,stroke:#525252,stroke-width:1px,stroke-dasharray:4 2,color:#737373
+    classDef dataStore fill:#0f0f0f,stroke:#a3a3a3,stroke-width:2px,color:#ffffff
+    classDef component fill:#171717,stroke:#525252,stroke-width:1px,color:#e5e5e5
+
+    class A4 dataStore
+    class A1,A2,A3,A5,B1,B2,B3,B4,B5 component

@@ -1,0 +1,41 @@
+flowchart TB
+    subgraph VPS["<b>hetzner-vps</b><br/>100.80.96.4"]
+        direction TB
+        VPS_SVC["Forgejo · Vaultwarden · Kuma<br/>Copyparty · Portfolio · Charts · Chat"]
+    end
+
+    subgraph BEAST["<b>beast</b><br/>100.105.177.97"]
+        direction TB
+        BEAST_SVC["Immich · Jellyfin<br/>Forgejo runner · ML inference"]
+    end
+
+    subgraph MAC["<b>macbook</b><br/>100.71.249.91"]
+        direction TB
+        MAC_SVC["admin · SSH · dev"]
+    end
+
+    subgraph PHONE["<b>phone</b><br/>100.91.245.46"]
+        direction TB
+        PHONE_SVC["offline"]
+    end
+
+    DNS["<b>MagicDNS</b><br/>resolves node names"]
+
+    VPS <-->|"WireGuard"| BEAST
+    VPS <-->|"WireGuard"| MAC
+    VPS <-->|"WireGuard"| PHONE
+    MAC <-->|"WireGuard"| BEAST
+    MAC <-->|"WireGuard"| PHONE
+
+    DNS -.-> VPS
+    DNS -.-> BEAST
+    DNS -.-> MAC
+    DNS -.-> PHONE
+
+    classDef online fill:#1a1a1a,stroke:#a3a3a3,stroke-width:1px,color:#e5e5e5
+    classDef offline fill:#171717,stroke:#525252,stroke-width:1px,stroke-dasharray:3 2,color:#737373
+    classDef dns fill:#0f0f0f,stroke:#a3a3a3,stroke-width:1px,stroke-dasharray:4 2,color:#a3a3a3
+
+    class VPS,BEAST,MAC online
+    class PHONE offline
+    class DNS dns

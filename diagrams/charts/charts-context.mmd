@@ -1,0 +1,17 @@
+C4Context
+    title System Context · Marv Financial Charts
+
+    Person(trader, "Trader", "Browser user")
+
+    System(app, "Marv Financial Charts", "Docker · FastAPI + React SPA")
+
+    System_Ext(edge, "Cloudflare Edge", "Anycast CDN · TLS termination")
+    System_Ext(binance, "Binance API", "fapi.binance.com · trade data")
+    System_Ext(bybit, "Bybit API", "api.bybit.com · trade data")
+
+    Rel(trader, edge, "visits (HTTPS)", "443")
+    Rel(edge, app, "routes via tunnel", "Cloudflare Tunnel")
+    Rel(app, binance, "downloads trades (ETL)", "HTTPS")
+    Rel(app, bybit, "downloads trades (ETL)", "HTTPS")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")

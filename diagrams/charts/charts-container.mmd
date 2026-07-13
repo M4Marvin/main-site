@@ -1,0 +1,22 @@
+C4Container
+    title Container · Marv Financial Charts (Hetzner VPS)
+
+    System_Boundary(vps, "Hetzner VPS · 77.42.65.13") {
+        Container(spa, "React SPA", "Vite build", "11 Canvas renderers")
+        Container(api, "FastAPI", "uvicorn :8001", "14 endpoints")
+
+        Container(cli, "CLI · Typer", "Python 3.14", "21 commands · offline ETL")
+        ContainerDb(lake, "Parquet Data Lake", "PyArrow · LZ4", "~1.5GB · bind mount")
+    }
+
+    System_Ext(tunnel, "cloudflared", "systemd sidecar", "Post-quantum tunnel")
+    SystemDb_Ext(idx, "file_index.csv", "Metadata", "in-memory tree index")
+
+    Rel(tunnel, api, "routes to", "127.0.0.1:8001")
+    Rel(spa, api, "fetches", "HTTPS")
+    Rel(api, idx, "queries", "")
+    Rel(api, lake, "reads Parquet", "Polars")
+    Rel(cli, lake, "writes Parquet", "Polars")
+    Rel(cli, idx, "builds index", "FileIndexer")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")

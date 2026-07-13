@@ -1,0 +1,52 @@
+C4Component
+    title Backend Components · app/ + cli/
+
+    Container_Boundary(backend, "FastAPI Backend") {
+        Component(uvicorn, "Uvicorn", "ASGI :8001", "main.py")
+        Component(typer, "Typer CLI", "offline", "21 cmds · 4 groups")
+
+        Component(r_data, "data_router", "API", "GET /ohlc · POST /indicator")
+        Component(r_symbols, "symbols_router", "API", "/symbols · /symbol-info")
+        Component(r_precisions, "symbol_router", "API", "/precisions")
+        Component(r_files, "files_router", "API", "/files · /markets")
+        Component(r_meta, "metadata_router", "API", "4 metadata endpoints")
+
+        Component(s_indicator, "IndicatorService", "service", "SMA · EMA · RSI · Bollinger · ROC")
+        Component(s_symbol, "SymbolService", "service", "symbol lookup · precisions")
+        Component(s_index, "FileIndexService", "service", "in-memory tree")
+        Component(s_lake, "DataLakeService", "service", "download + parquet mgr")
+
+        Component(u_ohlc, "ohlc.py", "util", "calculate_ohlc_data · footprint")
+        Component(u_polars, "polars.py", "util", "aggregate · trades_to_footprint")
+        Component(u_files, "files.py", "util", "get_data_files · paths")
+        Component(u_indexer, "file_indexer.py", "util", "scans *.parquet → file_index.csv")
+
+        Component(i_download, "CryptoDataDownloader", "infra", "async aiohttp · 778 lines")
+        Component(i_url, "DataURLGenerator", "infra", "Binance historical URLs")
+        Component(i_parquet, "ParquetFileManager", "infra", "read · write · query")
+
+        ComponentDb(d_lake, "Parquet Data Lake", "PyArrow · LZ4", "{ex}/{market}/{sym}/{Y}/{M}/{D}/")
+        ComponentDb(d_index, "file_index.csv", "CSV", "metadata")
+        ComponentDb(d_meta, "Exchange info JSON", "cache", "precisions · lot sizes")
+    }
+
+    Rel(uvicorn, r_data, "mounts")
+    Rel(uvicorn, r_symbols, "mounts")
+    Rel(uvicorn, r_precisions, "mounts")
+    Rel(uvicorn, r_files, "mounts")
+    Rel(uvicorn, r_meta, "mounts")
+
+    Rel(r_data, s_indicator, "uses")
+    Rel(r_data, s_index, "queries")
+    Rel(r_data, u_ohlc, "calls")
+    Rel(s_indicator, u_polars, "uses")
+    Rel(s_index, u_indexer, "uses")
+    Rel(s_lake, i_download, "uses")
+    Rel(s_lake, i_parquet, "uses")
+    Rel(i_download, i_url, "uses")
+    Rel(i_download, d_lake, "writes")
+    Rel(u_polars, d_lake, "reads")
+    Rel(u_indexer, d_lake, "scans")
+    Rel(u_indexer, d_index, "writes")
+
+    UpdateLayoutConfig($c4ShapeInRow="6", $c4BoundaryInRow="1")

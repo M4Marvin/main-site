@@ -1,0 +1,22 @@
+C4Container
+    title Container · My Personal Cloud (Hetzner VPS)
+
+    System_Boundary(vps, "Hetzner VPS · 77.42.65.13") {
+        Container(forgejo, "Forgejo", "Go", "Self-hosted Git · :8003")
+        Container(vault, "Vaultwarden", "Rust", "Passwords · 2FA · :8004")
+        Container(kuma, "Uptime Kuma", "Node.js", "Monitoring · :8005")
+        Container(copyparty, "Copyparty", "Python", "File server · :8009")
+        Container(portfolio, "Portfolio", "nginx + React", "This site · :8001")
+        Container(charts, "Charts", "FastAPI", "Footprint charts · :8006")
+        Container(chat, "Chat", "Auth+SQLite", "Messaging · :8002")
+
+        ContainerDb(data, "Data volumes", "bind mounts", "forgejo/ · vault/ · kuma/ · chat/ · files/")
+    }
+
+    System_Ext(tunnel, "cloudflared", "systemd sidecar", "Post-quantum tunnel")
+
+    Rel(tunnel, portfolio, "routes to", "127.0.0.1:8001")
+    Rel(tunnel, charts, "routes to", "127.0.0.1:8006")
+    Rel(tunnel, forgejo, "routes to", "127.0.0.1:8003")
+
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")

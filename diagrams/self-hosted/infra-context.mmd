@@ -1,0 +1,16 @@
+C4Context
+    title System Context · My Personal Cloud
+
+    Person(marvin, "Marvin", "Owner / operator")
+
+    System(cloud, "My Personal Cloud", "Hetzner VPS · 7 services on 127.0.0.1")
+
+    System_Ext(edge, "Cloudflare Edge", "TLS · WAF · post-quantum tunnel")
+    System_Ext(beast, "Beast", "Home server · 93GB · Immich · Jellyfin")
+
+    Rel(marvin, edge, "visits (HTTPS)", "443")
+    Rel(marvin, cloud, "manages", "SSH :3232")
+    Rel(edge, cloud, "routes via tunnel", "Cloudflare Tunnel")
+    Rel(cloud, beast, "uses", "Tailscale WireGuard")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")

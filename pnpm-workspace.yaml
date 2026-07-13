@@ -1,3 +1,6 @@
+allowBuilds:
+  puppeteer: true
 onlyBuiltDependencies:
   - esbuild
   - lightningcss
+  - puppeteer
