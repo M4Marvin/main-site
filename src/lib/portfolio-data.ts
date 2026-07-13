@@ -76,7 +76,7 @@ export interface ExperienceItem {
 
 export const profile: Profile = {
   name: "Marvin V Prakash",
-  roles: ["Full Stack Architect", "Trading Systems Engineer"],
+  roles: ["Full Stack Architect"," ",  "Trading Systems Engineer"],
   tagline:
     "I build distributed backends, real-time web apps, and self-hosted infrastructure — from canvas renderers to Cloudflare tunnels. I like owning the whole stack.",
   location: "Abu Dhabi, UAE",
