@@ -24,6 +24,9 @@ function getThumbnail(project: Project) {
   if (project.slug === "marvfinancialcharts") {
     return "https://files.m4marvin.com/charts_app/1.png"
   }
+  if (project.slug === "self-hosted-infrastructure") {
+    return "/infra-diagram.svg"
+  }
   return project.image
 }
 
@@ -144,17 +147,29 @@ function ProjectCard({ project }: ProjectCardProps) {
     </div>
   )
 
+  const isSvg = thumbnail?.toLowerCase().endsWith(".svg")
+
   const header = thumbnail ? (
-    <div className="relative h-full min-h-[8rem] w-full overflow-hidden rounded-t-xl">
-      <Image
-        src={thumbnail}
-        alt={project.title}
-        className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
-        width={800}
-        height={400}
-        layout="constrained"
-        fallback="wsrv"
-      />
+    <div className="relative h-full min-h-[8rem] w-full overflow-hidden rounded-t-xl bg-black">
+      {isSvg ? (
+        <img
+          src={thumbnail}
+          alt={project.title}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <Image
+          src={thumbnail}
+          alt={project.title}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+          width={800}
+          height={400}
+          layout="constrained"
+          fallback="wsrv"
+        />
+      )}
     </div>
   ) : (
     <ProjectGradient slug={project.slug} />

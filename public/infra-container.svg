@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="C4 Container diagram: the Hetzner VPS contains 7 Docker containers plus a cloudflared sidecar, all on 127.0.0.1, with UFW, fail2ban, AIDE, and unattended-upgrades as host-level security">
+  <defs>
+    <linearGradient id="ctn-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a0a"/>
+      <stop offset="1" stop-color="#121212"/>
+    </linearGradient>
+    <marker id="ctn-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#525252"/>
+    </marker>
+    <marker id="ctn-arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f48120"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="520" fill="url(#ctn-bg)"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" fill="#737373">
+    <text x="20" y="22" font-size="10" fill="#a3a3a3" letter-spacing="2">C4 · LEVEL 2 · CONTAINER</text>
+    <text x="780" y="22" font-size="10" fill="#a3a3a3" letter-spacing="2" text-anchor="end">My Personal Cloud</text>
+  </g>
+
+  <g transform="translate(30,40)">
+    <rect width="740" height="400" rx="10" fill="#0f0f0f" stroke="#404040" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <text x="16" y="22" font-family="ui-sans-serif, system-ui" font-size="13" font-weight="700" fill="#e5e5e5">Hetzner VPS · 77.42.65.13</text>
+    <text x="724" y="22" text-anchor="end" font-family="ui-monospace, monospace" font-size="9" fill="#737373">Ubuntu 24.04 · kernel 6.8</text>
+
+    <g transform="translate(16,40)">
+      <rect width="100" height="62" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="50" y="16" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;container&gt;&gt;</text>
+      <text x="50" y="30" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Forgejo</text>
+      <text x="50" y="44" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">Go + SQLite</text>
+      <text x="50" y="56" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#f48120">:8003</text>
+    </g>
+    <g transform="translate(126,40)">
+      <rect width="100" height="62" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="50" y="16" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;container&gt;&gt;</text>
+      <text x="50" y="30" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Vaultwarden</text>
+      <text x="50" y="44" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">Rust · Duo 2FA</text>
+      <text x="50" y="56" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#f48120">:8004</text>
+    </g>
+    <g transform="translate(236,40)">
+      <rect width="100" height="62" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="50" y="16" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;container&gt;&gt;</text>
+      <text x="50" y="30" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Uptime Kuma</text>
+      <text x="50" y="44" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">Node.js</text>
+      <text x="50" y="56" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#f48120">:8005</text>
+    </g>
+    <g transform="translate(346,40)">
+      <rect width="100" height="62" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="50" y="16" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;container&gt;&gt;</text>
+      <text x="50" y="30" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Copyparty</text>
+      <text x="50" y="44" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">Python</text>
+      <text x="50" y="56" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#f48120">:8009</text>
+    </g>
+    <g transform="translate(456,40)">
+      <rect width="100" height="62" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="50" y="16" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;container&gt;&gt;</text>
+      <text x="50" y="30" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Portfolio</text>
+      <text x="50" y="44" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">nginx + React</text>
+      <text x="50" y="56" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#f48120">:8001</text>
+    </g>
+    <g transform="translate(566,40)">
+      <rect width="100" height="62" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="50" y="16" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;container&gt;&gt;</text>
+      <text x="50" y="30" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Charts</text>
+      <text x="50" y="44" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">FastAPI</text>
+      <text x="50" y="56" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#f48120">:8006</text>
+    </g>
+    <g transform="translate(676,40)">
+      <rect width="50" height="62" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="25" y="16" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;ctn&gt;&gt;</text>
+      <text x="25" y="30" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#e5e5e5">Chat</text>
+      <text x="25" y="44" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#a3a3a3">Auth+SQLite</text>
+      <text x="25" y="56" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#f48120">:8002</text>
+    </g>
+
+    <g transform="translate(16,120)">
+      <rect width="710" height="44" rx="4" fill="#151515" stroke="#f48120" stroke-width="1"/>
+      <text x="14" y="16" font-family="ui-monospace, monospace" font-size="7" fill="#f48120">&lt;&lt;container&gt;&gt; · systemd service</text>
+      <text x="14" y="30" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#f48120">cloudflared</text>
+      <text x="100" y="30" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">outbound-only · 4 long-lived conns to 2 Cloudflare PoPs · post-quantum</text>
+      <text x="14" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">config: /etc/cloudflared/config.yml · tunnel UUID ffd206b8-...</text>
+    </g>
+
+    <g font-family="ui-monospace, monospace" font-size="9" fill="#737373">
+      <text x="16" y="190">↳ all containers bind to 127.0.0.1 · no port on 0.0.0.0 · cloudflared is the only ingress</text>
+    </g>
+
+    <g transform="translate(16,210)">
+      <text x="0" y="0" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#a3a3a3">Host-level security</text>
+
+      <g transform="translate(0,12)">
+        <rect width="100" height="40" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+        <text x="50" y="14" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+        <text x="50" y="28" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#d4d4d4">UFW</text>
+        <text x="50" y="38" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#525252">default-deny</text>
+      </g>
+      <g transform="translate(110,12)">
+        <rect width="100" height="40" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+        <text x="50" y="14" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+        <text x="50" y="28" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#d4d4d4">fail2ban</text>
+        <text x="50" y="38" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#525252">sshd jail</text>
+      </g>
+      <g transform="translate(220,12)">
+        <rect width="100" height="40" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+        <text x="50" y="14" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+        <text x="50" y="28" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#d4d4d4">AIDE</text>
+        <text x="50" y="38" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#525252">daily integrity</text>
+      </g>
+      <g transform="translate(330,12)">
+        <rect width="100" height="40" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+        <text x="50" y="14" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+        <text x="50" y="28" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9" fill="#d4d4d4">chkrootkit</text>
+        <text x="50" y="38" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#525252">daily scan</text>
+      </g>
+      <g transform="translate(440,12)">
+        <rect width="100" height="40" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+        <text x="50" y="14" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+        <text x="50" y="28" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#d4d4d4">unattended-upgr</text>
+        <text x="50" y="38" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#525252">auto security</text>
+      </g>
+      <g transform="translate(550,12)">
+        <rect width="100" height="40" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+        <text x="50" y="14" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+        <text x="50" y="28" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#d4d4d4">SSH</text>
+        <text x="50" y="38" text-anchor="middle" font-family="ui-monospace, monospace" font-size="7" fill="#525252">:3232 key-only</text>
+      </g>
+    </g>
+
+    <g transform="translate(16,290)">
+      <text x="0" y="0" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#a3a3a3">Data volumes (~/data/)</text>
+      <g font-family="ui-monospace, monospace" font-size="9" fill="#737373">
+        <text x="0" y="18">forgejo/ · vaultwarden/ · kuma/ · chat/ · files/ · copyparty-conf/</text>
+        <text x="0" y="34">backups pull from Beast over tailnet · VPS never pushes</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(20,470)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">LEGEND</text>
+    <g transform="translate(0,12)">
+      <rect width="16" height="12" rx="2" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">container</text>
+    </g>
+    <g transform="translate(100,12)">
+      <rect width="16" height="12" rx="2" fill="#151515" stroke="#f48120" stroke-width="1"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">sidecar (systemd)</text>
+    </g>
+    <g transform="translate(240,12)">
+      <rect width="16" height="12" rx="2" fill="#0f0f0f" stroke="#404040" stroke-width="1" stroke-dasharray="3 2"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">system boundary</text>
+    </g>
+    <g transform="translate(370,12)">
+      <rect width="16" height="12" rx="2" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">host component</text>
+    </g>
+  </g>
+</svg>

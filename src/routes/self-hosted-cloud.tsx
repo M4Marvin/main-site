@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { ArrowLeft, ExternalLink } from "lucide-react"
+import { Image } from "@unpic/react"
 import { Typeset } from "@/components/ui/typeset"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -7,6 +8,32 @@ import { cn } from "@/lib/utils"
 export const Route = createFileRoute("/self-hosted-cloud")({
   component: SelfHostedCloudPage,
 })
+
+function Diagram({
+  src,
+  alt,
+  caption,
+}: {
+  src: string
+  alt: string
+  caption: string
+}) {
+  return (
+    <figure className="my-8">
+      <Image
+        src={src}
+        alt={alt}
+        width={720}
+        height={420}
+        layout="constrained"
+        className="rounded-lg border border-white/10"
+      />
+      <figcaption className="mt-2 text-center text-xs text-neutral-500">
+        {caption}
+      </figcaption>
+    </figure>
+  )
+}
 
 function SelfHostedCloudPage() {
   return (
@@ -65,6 +92,12 @@ function SelfHostedCloudPage() {
             no root. Every time I type <code>ssh hetzner</code>, that is the
             whole story.
           </p>
+
+          <Diagram
+            src="/infra-context.svg"
+            alt="C4 System Context diagram: Marvin uses Cloudflare Edge to reach My Personal Cloud (Hetzner VPS), which connects to Beast over a Tailscale WireGuard mesh"
+            caption="Figure 1. System context (C4 level 1): the public edge, the VPS, and the tailnet."
+          />
 
           <h2>The Network Model</h2>
 
@@ -184,6 +217,12 @@ function SelfHostedCloudPage() {
             on the tailnet advertises private subnets.
           </p>
 
+          <Diagram
+            src="/infra-tailnet.svg"
+            alt="Tailscale tailnet topology: four devices (hetzner-vps, beast, macbook, phone) connected in a WireGuard mesh with their 100.x.y.z addresses"
+            caption="Figure 3. Tailscale tailnet: four devices on a WireGuard mesh, MagicDNS resolves node names."
+          />
+
           <p>
             The split between the two networks is a discipline. The public
             tunnel is for things the world uses. The tailnet is for things
@@ -202,6 +241,12 @@ function SelfHostedCloudPage() {
             reaches those ports. Here is what runs on the box, in the order
             it appears in the compose file.
           </p>
+
+          <Diagram
+            src="/infra-container.svg"
+            alt="C4 Container diagram: the Hetzner VPS contains 7 Docker containers plus a cloudflared sidecar, all on 127.0.0.1, with UFW, fail2ban, AIDE, and unattended-upgrades as host-level security"
+            caption="Figure 2. Container view (C4 level 2): 7 containers, 1 sidecar, all on loopback."
+          />
 
           <p>
             <strong>Forgejo</strong> (<code>codeberg.org/forgejo/forgejo:10</code>)

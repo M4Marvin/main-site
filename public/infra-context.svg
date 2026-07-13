@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" role="img" aria-label="C4 System Context diagram: Marvin uses Cloudflare Edge to reach My Personal Cloud (Hetzner VPS), which connects to Beast over a Tailscale WireGuard mesh">
+  <defs>
+    <linearGradient id="ctx-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a0a"/>
+      <stop offset="1" stop-color="#121212"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="460" fill="url(#ctx-bg)"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" fill="#737373">
+    <text x="20" y="22" font-size="10" fill="#a3a3a3" letter-spacing="2">C4 · LEVEL 1 · SYSTEM CONTEXT</text>
+    <text x="780" y="22" font-size="10" fill="#a3a3a3" letter-spacing="2" text-anchor="end">m4marvin.com</text>
+  </g>
+
+  <g transform="translate(360,40)">
+    <circle cx="40" cy="22" r="14" fill="none" stroke="#e5e5e5" stroke-width="1.5"/>
+    <line x1="40" y1="36" x2="40" y2="64" stroke="#e5e5e5" stroke-width="1.5"/>
+    <line x1="24" y1="48" x2="56" y2="48" stroke="#e5e5e5" stroke-width="1.5"/>
+    <line x1="40" y1="64" x2="28" y2="84" stroke="#e5e5e5" stroke-width="1.5"/>
+    <line x1="40" y1="64" x2="52" y2="84" stroke="#e5e5e5" stroke-width="1.5"/>
+    <text x="40" y="104" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="12" font-weight="700" fill="#e5e5e5">Marvin</text>
+    <text x="40" y="118" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9" fill="#737373">owner / operator</text>
+  </g>
+
+  <g transform="translate(40,170)">
+    <rect width="200" height="100" rx="6" fill="#171717" stroke="#f48120" stroke-width="1.5" stroke-dasharray="6 3"/>
+    <text x="190" y="16" text-anchor="end" font-family="ui-monospace, monospace" font-size="8" fill="#f48120" font-style="italic">&lt;&lt;software system&gt;&gt;</text>
+    <text x="16" y="38" font-family="ui-sans-serif, system-ui" font-size="13" font-weight="700" fill="#f48120">Cloudflare Edge</text>
+    <text x="16" y="56" font-family="ui-monospace, monospace" font-size="9" fill="#a3a3a3">Anycast CDN · WAF · DDoS</text>
+    <text x="16" y="72" font-family="ui-monospace, monospace" font-size="9" fill="#737373">TLS termination</text>
+    <text x="16" y="86" font-family="ui-monospace, monospace" font-size="9" fill="#737373">Post-quantum tunnel</text>
+  </g>
+
+  <g transform="translate(300,170)">
+    <rect width="200" height="120" rx="6" fill="#1a1a1a" stroke="#e5e5e5" stroke-width="2"/>
+    <text x="190" y="16" text-anchor="end" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3" font-style="italic">&lt;&lt;software system&gt;&gt;</text>
+    <text x="16" y="38" font-family="ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#ffffff">My Personal Cloud</text>
+    <text x="16" y="56" font-family="ui-monospace, monospace" font-size="9" fill="#a3a3a3">Hetzner VPS · 77.42.65.13</text>
+    <text x="16" y="72" font-family="ui-monospace, monospace" font-size="9" fill="#737373">Ubuntu 24.04 · 4 vCPU · 7.6GB</text>
+    <text x="16" y="88" font-family="ui-monospace, monospace" font-size="9" fill="#737373">7 containers on 127.0.0.1</text>
+    <text x="16" y="104" font-family="ui-monospace, monospace" font-size="9" fill="#737373">UFW · fail2ban · AIDE</text>
+  </g>
+
+  <g transform="translate(560,170)">
+    <rect width="200" height="100" rx="6" fill="#171717" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6 3"/>
+    <text x="190" y="16" text-anchor="end" font-family="ui-monospace, monospace" font-size="8" fill="#a855f7" font-style="italic">&lt;&lt;software system&gt;&gt;</text>
+    <text x="16" y="38" font-family="ui-sans-serif, system-ui" font-size="13" font-weight="700" fill="#a855f7">Beast</text>
+    <text x="16" y="56" font-family="ui-monospace, monospace" font-size="9" fill="#a3a3a3">Arch · Core Ultra 9 · 93GB</text>
+    <text x="16" y="72" font-family="ui-monospace, monospace" font-size="9" fill="#737373">Immich · Jellyfin · Forgejo runner</text>
+    <text x="16" y="86" font-family="ui-monospace, monospace" font-size="9" fill="#737373">Arc Pro 130T · OpenVINO ML</text>
+  </g>
+
+  <g fill="none" stroke="#525252" stroke-width="1.5">
+    <path d="M 380 130 L 150 170" marker-end="url(#arrow-grey)"/>
+    <path d="M 400 130 L 400 170" marker-end="url(#arrow-grey)"/>
+    <path d="M 420 130 L 640 170" marker-end="url(#arrow-grey)"/>
+  </g>
+  <g font-family="ui-monospace, monospace" font-size="8" fill="#737373">
+    <text x="240" y="155" text-anchor="middle">visits (HTTPS)</text>
+    <text x="408" y="155">manages (SSH :3232)</text>
+    <text x="560" y="155" text-anchor="middle">uses (tailnet)</text>
+  </g>
+
+  <g fill="none" stroke="#f48120" stroke-width="1.5">
+    <path d="M 240 210 L 300 210" marker-end="url(#arrow-orange)"/>
+    <path d="M 300 240 L 240 240" marker-end="url(#arrow-orange)"/>
+  </g>
+  <text x="270" y="200" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#f48120">routes via tunnel</text>
+
+  <g fill="none" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="5 3">
+    <path d="M 500 210 L 560 210" marker-end="url(#arrow-purple)"/>
+    <path d="M 560 240 L 500 240" marker-end="url(#arrow-purple)"/>
+  </g>
+  <text x="530" y="200" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#a855f7">WireGuard mesh</text>
+
+  <g transform="translate(20,360)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">LEGEND</text>
+    <g transform="translate(0,12)">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#e5e5e5" stroke-width="1"/>
+      <text x="22" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">person</text>
+    </g>
+    <g transform="translate(80,4)">
+      <rect width="16" height="12" rx="2" fill="#171717" stroke="#e5e5e5" stroke-width="1"/>
+      <text x="24" y="13" font-family="ui-monospace, monospace" font-size="8" fill="#737373">system under design</text>
+    </g>
+    <g transform="translate(220,4)">
+      <rect width="16" height="12" rx="2" fill="#171717" stroke="#525252" stroke-width="1" stroke-dasharray="3 2"/>
+      <text x="24" y="13" font-family="ui-monospace, monospace" font-size="8" fill="#737373">external system</text>
+    </g>
+    <g transform="translate(340,10)">
+      <line x1="0" y1="0" x2="20" y2="0" stroke="#525252" stroke-width="1.5"/>
+      <text x="26" y="3" font-family="ui-monospace, monospace" font-size="8" fill="#737373">synchronous</text>
+    </g>
+    <g transform="translate(440,10)">
+      <line x1="0" y1="0" x2="20" y2="0" stroke="#525252" stroke-width="1.5" stroke-dasharray="4 2"/>
+      <text x="26" y="3" font-family="ui-monospace, monospace" font-size="8" fill="#737373">async / mesh</text>
+    </g>
+  </g>
+
+  <defs>
+    <marker id="arrow-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#525252"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f48120"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#a855f7"/>
+    </marker>
+  </defs>
+</svg>

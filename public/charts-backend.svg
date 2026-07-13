@@ -1,0 +1,280 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 640" role="img" aria-label="C4 Level 3 Backend Component diagram: the FastAPI backend is organized in six layers from entry points through API routers, services, utilities, infrastructure, down to data stores">
+  <defs>
+    <linearGradient id="be-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a0a"/>
+      <stop offset="1" stop-color="#121212"/>
+    </linearGradient>
+    <marker id="be-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#525252"/>
+    </marker>
+    <marker id="be-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <rect width="820" height="640" fill="url(#be-bg)"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" fill="#737373">
+    <text x="20" y="22" font-size="10" fill="#a3a3a3" letter-spacing="2">C4 · LEVEL 3 · BACKEND COMPONENTS</text>
+    <text x="800" y="22" font-size="10" fill="#a3a3a3" letter-spacing="2" text-anchor="end">app/ + cli/</text>
+  </g>
+
+  <g transform="translate(20,40)">
+    <rect width="780" height="570" rx="10" fill="#0f0f0f" stroke="#404040" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <text x="16" y="22" font-family="ui-sans-serif, system-ui" font-size="13" font-weight="700" fill="#e5e5e5">FastAPI Backend · 65+ Python files</text>
+    <text x="764" y="22" text-anchor="end" font-family="ui-monospace, monospace" font-size="9" fill="#737373">Python 3.14 · uv</text>
+
+    <g transform="translate(16,38)">
+      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">ENTRY</text>
+      <g transform="translate(70,-12)">
+        <rect width="200" height="50" rx="4" fill="#222" stroke="#e5e5e5" stroke-width="1.5"/>
+        <text x="190" y="12" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#a3a3a3">&lt;&lt;entry point&gt;&gt;</text>
+        <text x="10" y="24" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#ffffff">Uvicorn (ASGI :8001)</text>
+        <text x="10" y="40" font-family="ui-monospace, monospace" font-size="8" fill="#737373">main.py · startup: index + symbols</text>
+      </g>
+      <g transform="translate(290,-12)">
+        <rect width="200" height="50" rx="4" fill="#1a1a1a" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 3"/>
+        <text x="190" y="12" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#3b82f6">&lt;&lt;entry point&gt;&gt;</text>
+        <text x="10" y="24" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#3b82f6">Typer CLI (offline)</text>
+        <text x="10" y="40" font-family="ui-monospace, monospace" font-size="8" fill="#737373">21 cmds · etl · exchange · index · bench</text>
+      </g>
+    </g>
+
+    <path d="M 186 76 L 186 88" fill="none" stroke="#525252" stroke-width="1" marker-end="url(#be-arrow)"/>
+    <path d="M 390 76 L 390 88" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#be-arrow-blue)"/>
+
+    <g transform="translate(16,90)">
+      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">API</text>
+      <text x="0" y="12" font-family="ui-monospace, monospace" font-size="7" fill="#404040">api/v1/endpoints/</text>
+    </g>
+    <g transform="translate(70,82)">
+      <rect width="110" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="104" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;router&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">data</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">/ohlc · /indicator</text>
+      <text x="8" y="46" font-family="ui-monospace, monospace" font-size="7" fill="#525252">the two that matter</text>
+    </g>
+    <g transform="translate(186,82)">
+      <rect width="110" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="104" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;router&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">symbols</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">/symbols · /symbol-info</text>
+    </g>
+    <g transform="translate(302,82)">
+      <rect width="110" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="104" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;router&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">symbol</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">/precisions</text>
+    </g>
+    <g transform="translate(418,82)">
+      <rect width="110" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="104" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;router&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">index</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">/get_symbols (legacy)</text>
+    </g>
+    <g transform="translate(534,82)">
+      <rect width="110" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="104" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;router&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">files</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">/files · /markets</text>
+    </g>
+    <g transform="translate(650,82)">
+      <rect width="110" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="104" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;router&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">metadata</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">validate · range · avail · params</text>
+    </g>
+
+    <path d="M 125 132 L 125 144" fill="none" stroke="#525252" stroke-width="1" marker-end="url(#be-arrow)"/>
+    <path d="M 390 132 L 390 144" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#be-arrow-blue)"/>
+
+    <g transform="translate(16,146)">
+      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">SVC</text>
+      <text x="0" y="12" font-family="ui-monospace, monospace" font-size="7" fill="#404040">services/</text>
+    </g>
+    <g transform="translate(70,138)">
+      <rect width="160" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="152" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;service&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">IndicatorService</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">SMA · EMA · RSI · Bollinger · ROC</text>
+      <text x="8" y="46" font-family="ui-monospace, monospace" font-size="7" fill="#525252">Pandas · server-side compute</text>
+    </g>
+    <g transform="translate(240,138)">
+      <rect width="160" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="152" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;service&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">SymbolService</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">symbol lookup · precisions</text>
+    </g>
+    <g transform="translate(410,138)">
+      <rect width="160" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="152" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;service&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">FileIndexService</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">in-memory tree index</text>
+    </g>
+    <g transform="translate(580,138)">
+      <rect width="180" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="172" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;service&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">DataLakeService</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">download + exchange info + parquet mgr</text>
+    </g>
+
+    <path d="M 150 188 L 150 200" fill="none" stroke="#525252" stroke-width="1" marker-end="url(#be-arrow)"/>
+    <path d="M 390 188 L 390 200" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#be-arrow-blue)"/>
+
+    <g transform="translate(16,202)">
+      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">UTILS</text>
+      <text x="0" y="12" font-family="ui-monospace, monospace" font-size="7" fill="#404040">utils/</text>
+    </g>
+    <g transform="translate(70,194)">
+      <rect width="160" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="152" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;module&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">ohlc.py</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">calculate_ohlc_data</text>
+      <text x="8" y="46" font-family="ui-monospace, monospace" font-size="7" fill="#525252">calculate_footprint_data</text>
+    </g>
+    <g transform="translate(240,194)">
+      <rect width="160" height="50" rx="3" fill="#1a1a1a" stroke="#e5e5e5" stroke-width="1"/>
+      <text x="152" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#a3a3a3">&lt;&lt;module&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#ffffff">polars.py</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#a3a3a3">aggregate_ohlc_data</text>
+      <text x="8" y="46" font-family="ui-monospace, monospace" font-size="7" fill="#737373">trades_to_footprint · ohlcv_5s</text>
+    </g>
+    <g transform="translate(410,194)">
+      <rect width="160" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="152" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;module&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">files.py</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">get_data_files · path resolution</text>
+    </g>
+    <g transform="translate(580,194)">
+      <rect width="180" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="172" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;module&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">file_indexer.py</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">FileIndexer · scans *.parquet</text>
+      <text x="8" y="46" font-family="ui-monospace, monospace" font-size="7" fill="#525252">builds file_index.csv</text>
+    </g>
+
+    <path d="M 320 244 L 320 256" fill="none" stroke="#525252" stroke-width="1" marker-end="url(#be-arrow)"/>
+    <path d="M 390 244 L 390 256" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#be-arrow-blue)"/>
+
+    <g transform="translate(16,258)">
+      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">INFRA</text>
+      <text x="0" y="12" font-family="ui-monospace, monospace" font-size="7" fill="#404040">infrastructure/</text>
+    </g>
+    <g transform="translate(70,250)">
+      <rect width="200" height="50" rx="3" fill="#1a1a1a" stroke="#3b82f6" stroke-width="0.5"/>
+      <text x="192" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#3b82f6">&lt;&lt;module&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#3b82f6">CryptoDataDownloader</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">async aiohttp · 778 lines</text>
+      <text x="8" y="46" font-family="ui-monospace, monospace" font-size="7" fill="#525252">Binance + Bybit trade archives</text>
+    </g>
+    <g transform="translate(280,250)">
+      <rect width="170" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="162" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;module&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">DataURLGenerator</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">Binance historical URLs</text>
+    </g>
+    <g transform="translate(460,250)">
+      <rect width="170" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="162" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;module&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">ParquetFileManager</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">read · write · query Parquet</text>
+    </g>
+    <g transform="translate(640,250)">
+      <rect width="120" height="50" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="112" y="10" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;module&gt;&gt;</text>
+      <text x="8" y="22" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#d4d4d4">data_bounds</text>
+      <text x="8" y="36" font-family="ui-monospace, monospace" font-size="7" fill="#737373">latest timestamp</text>
+      <text x="8" y="46" font-family="ui-monospace, monospace" font-size="7" fill="#525252">has_older check</text>
+    </g>
+
+    <path d="M 170 300 L 170 312" fill="none" stroke="#525252" stroke-width="1" marker-end="url(#be-arrow)"/>
+    <path d="M 400 300 L 400 312" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#be-arrow-blue)"/>
+
+    <g transform="translate(16,314)">
+      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">DATA</text>
+      <text x="0" y="12" font-family="ui-monospace, monospace" font-size="7" fill="#404040">data stores</text>
+    </g>
+    <g transform="translate(70,306)">
+      <rect width="200" height="52" rx="4" fill="#151515" stroke="#e5e5e5" stroke-width="1.5"/>
+      <text x="192" y="12" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#a3a3a3">&lt;&lt;data store&gt;&gt;</text>
+      <text x="8" y="24" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#ffffff">Parquet Data Lake</text>
+      <text x="8" y="38" font-family="ui-monospace, monospace" font-size="7" fill="#a3a3a3">PyArrow · LZ4 · ~1.5GB</text>
+      <text x="8" y="48" font-family="ui-monospace, monospace" font-size="7" fill="#525252">{ex}/{market}/{sym}/{Y}/{M}/{D}/*.parquet</text>
+    </g>
+    <g transform="translate(280,306)">
+      <rect width="170" height="52" rx="4" fill="#151515" stroke="#525252" stroke-width="1"/>
+      <text x="162" y="12" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;data store&gt;&gt;</text>
+      <text x="8" y="24" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#d4d4d4">file_index.csv</text>
+      <text x="8" y="38" font-family="ui-monospace, monospace" font-size="7" fill="#737373">exchange · market · symbol</text>
+      <text x="8" y="48" font-family="ui-monospace, monospace" font-size="7" fill="#525252">date · size · timestamps</text>
+    </g>
+    <g transform="translate(460,306)">
+      <rect width="170" height="52" rx="4" fill="#151515" stroke="#525252" stroke-width="1"/>
+      <text x="162" y="12" text-anchor="end" font-family="ui-monospace, monospace" font-size="6" fill="#737373">&lt;&lt;data store&gt;&gt;</text>
+      <text x="8" y="24" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#d4d4d4">Exchange info JSON</text>
+      <text x="8" y="38" font-family="ui-monospace, monospace" font-size="7" fill="#737373">symbol metadata cache</text>
+      <text x="8" y="48" font-family="ui-monospace, monospace" font-size="7" fill="#525252">precisions · lot sizes</text>
+    </g>
+
+    <g transform="translate(16,390)">
+      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="8" fill="#525252" letter-spacing="1">CONFIG</text>
+      <g transform="translate(60,-8)">
+        <rect width="180" height="36" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5" stroke-dasharray="3 2"/>
+        <text x="8" y="14" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">config.toml · TOML</text>
+        <text x="8" y="28" font-family="ui-monospace, monospace" font-size="7" fill="#525252">paths · exchange defaults · intervals</text>
+      </g>
+      <g transform="translate(250,-8)">
+        <rect width="180" height="36" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5" stroke-dasharray="3 2"/>
+        <text x="8" y="14" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">settings.py · pydantic-settings</text>
+        <text x="8" y="28" font-family="ui-monospace, monospace" font-size="7" fill="#525252">env vars · type-safe config</text>
+      </g>
+      <g transform="translate(440,-8)">
+        <rect width="200" height="36" rx="3" fill="#1a1a1a" stroke="#525252" stroke-width="0.5" stroke-dasharray="3 2"/>
+        <text x="8" y="14" font-family="ui-monospace, monospace" font-size="8" fill="#a3a3a3">models.py · Pydantic v2</text>
+        <text x="8" y="28" font-family="ui-monospace, monospace" font-size="7" fill="#525252">OHLCData · SymbolModel · Pagination · Metadata</text>
+      </g>
+    </g>
+
+    <g transform="translate(16,440)">
+      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="8" fill="#525252">↳ each layer depends only on the one below it · CLI path is blue (offline) · API path is grey (online)</text>
+      <text x="0" y="14" font-family="ui-monospace, monospace" font-size="8" fill="#404040">↳ polars.py highlighted: the Polars/PyArrow layer is the performance-critical path for both aggregation and footprint computation</text>
+    </g>
+
+    <g transform="translate(16,480)">
+      <rect width="750" height="60" rx="4" fill="#0d0d0d" stroke="#404040" stroke-width="0.5" stroke-dasharray="4 2"/>
+      <text x="12" y="16" font-family="ui-sans-serif, system-ui" font-size="10" font-weight="700" fill="#a3a3a3">Request flow: GET /ohlc?symbol=BTCUSDT&amp;interval=1m&amp;page=0</text>
+      <g font-family="ui-monospace, monospace" font-size="8" fill="#525252">
+        <text x="12" y="34">data_router → ohlc.py → files.py → file_index.csv → polars.py (read + aggregate) → Parquet Data Lake → JSON</text>
+        <text x="12" y="48">if footprints=true: ohlc.py → polars.py::trades_to_footprint → raw trade Parquet → bid/ask arrays → JSON</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(20,618)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">LEGEND</text>
+    <g transform="translate(0,10)">
+      <rect width="16" height="12" rx="2" fill="#1a1a1a" stroke="#525252" stroke-width="0.5"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">component</text>
+    </g>
+    <g transform="translate(100,10)">
+      <rect width="16" height="12" rx="2" fill="#1a1a1a" stroke="#e5e5e5" stroke-width="1"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">hot path</text>
+    </g>
+    <g transform="translate(180,10)">
+      <rect width="16" height="12" rx="2" fill="#1a1a1a" stroke="#3b82f6" stroke-width="0.5"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">CLI / offline</text>
+    </g>
+    <g transform="translate(280,10)">
+      <rect width="16" height="12" rx="2" fill="#151515" stroke="#e5e5e5" stroke-width="1.5"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">data store</text>
+    </g>
+    <g transform="translate(370,16)">
+      <line x1="0" y1="0" x2="20" y2="0" stroke="#525252" stroke-width="1"/>
+      <text x="26" y="3" font-family="ui-monospace, monospace" font-size="8" fill="#737373">API path</text>
+    </g>
+    <g transform="translate(440,16)">
+      <line x1="0" y1="0" x2="20" y2="0" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 2"/>
+      <text x="26" y="3" font-family="ui-monospace, monospace" font-size="8" fill="#737373">CLI path (offline)</text>
+    </g>
+  </g>
+</svg>

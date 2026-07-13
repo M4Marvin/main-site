@@ -9,6 +9,29 @@ export const Route = createFileRoute("/footprint-charts")({
   component: FootprintChartsPage,
 })
 
+function Diagram({
+  src,
+  alt,
+  caption,
+}: {
+  src: string
+  alt: string
+  caption: string
+}) {
+  return (
+    <figure className="my-8">
+      <img
+        src={src}
+        alt={alt}
+        className="w-full rounded-lg border border-white/10"
+      />
+      <figcaption className="mt-2 text-center text-xs text-neutral-500">
+        {caption}
+      </figcaption>
+    </figure>
+  )
+}
+
 function FootprintChartsPage() {
   return (
     <main className="relative min-h-screen bg-black text-white">
@@ -62,6 +85,38 @@ function FootprintChartsPage() {
             FastAPI &rarr; TanStack Query &rarr; Zustand &rarr; Canvas renderer.
           </p>
 
+          <Diagram
+            src="/charts-context.svg"
+            alt="C4 System Context diagram: a trader uses Cloudflare Edge to reach Marv Financial Charts, which downloads trade data from Binance and Bybit APIs"
+            caption="Figure 1. System context (C4 level 1): the trader, the app, and the exchange APIs."
+          />
+
+          <p>
+            The system boundary is deliberately narrow. A trader hits the app through
+            Cloudflare&rsquo;s edge, which terminates TLS and forwards to the VPS over a
+            post-quantum tunnel. The only outbound connections are to Binance and
+            Bybit&rsquo;s public REST APIs, and those only fire during offline ETL runs
+            &mdash; never at request time. The app has no database, no message queue, no
+            external cache. The Parquet data lake is the entire persistence layer.
+          </p>
+
+          <Diagram
+            src="/charts-pipeline.svg"
+            alt="Data pipeline diagram showing two phases: Phase A offline ETL from exchange APIs through CLI and Polars into a Parquet data lake, and Phase B online serving from the data lake through FastAPI and Polars to the browser Canvas renderer"
+            caption="Figure 2. Data pipeline: offline ETL writes the data lake; online serving reads from it. The two phases never overlap."
+          />
+
+          <p>
+            The pipeline has two phases that never overlap. Phase A is offline: a Typer
+            CLI pulls trade-level CSV archives from the exchange APIs, converts them to
+            LZ4-compressed Parquet with Polars, writes them to the hierarchical data lake,
+            and builds a file index. Phase B is online: the FastAPI server looks up files
+            by date range, reads the relevant Parquet files with Polars, aggregates
+            5-second OHLCV to whatever interval the client requested, and returns JSON.
+            The browser then renders everything on Canvas 2D. The data lake is the only
+            shared state between the two phases.
+          </p>
+
           <Image
             src="https://files.m4marvin.com/charts_app/1.png"
             alt="Full system view: footprint chart with Bollinger Bands, imbalance zones, and ROC indicator"
@@ -107,6 +162,23 @@ function FootprintChartsPage() {
             <code>app/api/v1/endpoints/</code>.
           </p>
 
+          <Diagram
+            src="/charts-container.svg"
+            alt="C4 Container diagram: the Hetzner VPS runs a single Docker container with FastAPI serving both the API and the React SPA static files, with a Parquet data lake bind-mounted from the host"
+            caption="Figure 3. Container view (C4 level 2): one Docker container, one port, one data lake bind-mount."
+          />
+
+          <p>
+            The entire app ships as a single Docker container. A multi-stage build
+            compiles the React SPA with Vite on a Node image, then copies the built static
+            files into a Python 3.14 image alongside the FastAPI backend. Uvicorn serves
+            both the API and the static files from port 8006. The Parquet data lake and
+            logs are bind-mounted from the host, so the container is stateless and
+            rebuildable. On the same VPS as the other services, <code>cloudflared</code>{" "}
+            routes traffic to <code>127.0.0.1:8006</code> &mdash; the same pattern every
+            other service uses.
+          </p>
+
           <h2>The API</h2>
 
           <p>
@@ -117,6 +189,27 @@ function FootprintChartsPage() {
             built in for the long history views. The indicator endpoint accepts arbitrary
             source columns and computes SMA, EMA, RSI, Bollinger Bands, and ROC server-side,
             so the frontend never recomputes the same series twice.
+          </p>
+
+          <Diagram
+            src="/charts-backend.svg"
+            alt="C4 Level 3 Backend Component diagram: the FastAPI backend is organized in six layers from entry points through API routers, services, utilities, infrastructure, down to data stores"
+            caption="Figure 4. Backend components (C4 level 3): six layers, each depending only on the one below."
+          />
+
+          <p>
+            The backend is a layered Python application. At the top, two entry points:
+            Uvicorn for the API server, Typer for the offline CLI. The API layer has six
+            routers exposing fourteen endpoints &mdash; the two that carry the real load are{" "}
+            <code>GET /ohlc</code> and <code>POST /indicator</code>. Below that, services
+            orchestrate business logic: indicator calculations, symbol lookups, file
+            indexing, and data lake management. The utility layer is where the Polars work
+            happens &mdash; OHLC aggregation, footprint computation, and file-path
+            resolution. Infrastructure holds the exchange integrations: an async
+            downloader, URL generators, and Parquet file management. At the bottom, the data
+            stores: the Parquet data lake, the file index, and cached exchange metadata.
+            Each layer only depends on the one below it, which kept the 65-file codebase
+            navigable.
           </p>
 
           <Image

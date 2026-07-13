@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Data pipeline diagram showing two phases: Phase A offline ETL from exchange APIs through CLI and Polars into a Parquet data lake, and Phase B online serving from the data lake through FastAPI and Polars to the browser Canvas renderer">
+  <defs>
+    <linearGradient id="pl-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a0a"/>
+      <stop offset="1" stop-color="#121212"/>
+    </linearGradient>
+    <marker id="pl-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#737373"/>
+    </marker>
+    <marker id="pl-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="520" fill="url(#pl-bg)"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" fill="#737373">
+    <text x="20" y="22" font-size="10" fill="#a3a3a3" letter-spacing="2">DATA PIPELINE · TWO PHASES</text>
+    <text x="780" y="22" font-size="10" fill="#a3a3a3" letter-spacing="2" text-anchor="end">mFinancialCharts</text>
+  </g>
+
+  <g transform="translate(20,42)">
+    <rect width="360" height="460" rx="8" fill="#0f0f0f" stroke="#3b82f6" stroke-width="1" stroke-dasharray="8 4" opacity="0.5"/>
+    <text x="16" y="22" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#3b82f6">Phase A · ETL (offline)</text>
+    <text x="344" y="22" text-anchor="end" font-family="ui-monospace, monospace" font-size="8" fill="#737373">never at request time</text>
+  </g>
+
+  <g transform="translate(420,42)">
+    <rect width="360" height="460" rx="8" fill="#0f0f0f" stroke="#a3a3a3" stroke-width="1" stroke-dasharray="8 4" opacity="0.3"/>
+    <text x="16" y="22" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#a3a3a3">Phase B · Serving (online)</text>
+    <text x="344" y="22" text-anchor="end" font-family="ui-monospace, monospace" font-size="8" fill="#737373">real-time requests</text>
+  </g>
+
+  <g transform="translate(40,80)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#3b82f6">&lt;&lt;external&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#3b82f6">Exchange APIs</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">Binance fapi · Bybit api · .csv.gz trade archives</text>
+  </g>
+  <path d="M 200 132 L 200 146" fill="none" stroke="#737373" stroke-width="1.5" marker-end="url(#pl-arrow)"/>
+  <text x="210" y="143" font-family="ui-monospace, monospace" font-size="7" fill="#525252">download</text>
+
+  <g transform="translate(40,148)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">CLI · Typer</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">21 commands · 4 groups · async aiohttp</text>
+  </g>
+  <path d="M 200 200 L 200 214" fill="none" stroke="#737373" stroke-width="1.5" marker-end="url(#pl-arrow)"/>
+  <text x="210" y="211" font-family="ui-monospace, monospace" font-size="7" fill="#525252">convert</text>
+
+  <g transform="translate(40,216)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Polars · PyArrow</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">CSV → Parquet LZ4 · 5s OHLCV pre-agg</text>
+  </g>
+  <path d="M 200 268 L 200 282" fill="none" stroke="#737373" stroke-width="1.5" marker-end="url(#pl-arrow)"/>
+  <text x="210" y="279" font-family="ui-monospace, monospace" font-size="7" fill="#525252">write</text>
+
+  <g transform="translate(40,284)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#e5e5e5" stroke-width="1.5"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#a3a3a3">&lt;&lt;data store&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#ffffff">Parquet Data Lake</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">~1.5GB · {ex}/{market}/{symbol}/{Y}/{M}/{D}/</text>
+  </g>
+  <path d="M 200 336 L 200 350" fill="none" stroke="#737373" stroke-width="1.5" marker-end="url(#pl-arrow)"/>
+  <text x="210" y="347" font-family="ui-monospace, monospace" font-size="7" fill="#525252">index</text>
+
+  <g transform="translate(40,352)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;data store&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">file_index.csv</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">FileIndexer scans *.parquet · metadata index</text>
+  </g>
+
+  <g transform="translate(440,80)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;container&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Browser</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">React 18 · TanStack Query · Zustand</text>
+  </g>
+  <path d="M 600 132 L 600 146" fill="none" stroke="#737373" stroke-width="1.5" marker-end="url(#pl-arrow)"/>
+  <text x="610" y="143" font-family="ui-monospace, monospace" font-size="7" fill="#525252">GET /ohlc</text>
+
+  <g transform="translate(440,148)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;container&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">FastAPI · uvicorn</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">14 endpoints · :8001 · Pydantic v2</text>
+  </g>
+  <path d="M 600 200 L 600 214" fill="none" stroke="#737373" stroke-width="1.5" marker-end="url(#pl-arrow)"/>
+  <text x="610" y="211" font-family="ui-monospace, monospace" font-size="7" fill="#525252">lookup</text>
+
+  <g transform="translate(440,216)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">File Index</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">in-memory tree · Market→Symbol→Year→Month→Day</text>
+  </g>
+  <path d="M 600 268 L 600 282" fill="none" stroke="#737373" stroke-width="1.5" marker-end="url(#pl-arrow)"/>
+  <text x="610" y="279" font-family="ui-monospace, monospace" font-size="7" fill="#525252">read + aggregate</text>
+
+  <g transform="translate(440,284)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Polars</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">read Parquet · resample 5s → 1m/5m/1h · footprint</text>
+  </g>
+  <path d="M 600 336 L 600 350" fill="none" stroke="#737373" stroke-width="1.5" marker-end="url(#pl-arrow)"/>
+  <text x="610" y="347" font-family="ui-monospace, monospace" font-size="7" fill="#525252">JSON → render</text>
+
+  <g transform="translate(440,352)">
+    <rect width="320" height="52" rx="4" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+    <text x="310" y="14" text-anchor="end" font-family="ui-monospace, monospace" font-size="7" fill="#737373">&lt;&lt;component&gt;&gt;</text>
+    <text x="12" y="26" font-family="ui-sans-serif, system-ui" font-size="11" font-weight="700" fill="#e5e5e5">Canvas 2D</text>
+    <text x="12" y="42" font-family="ui-monospace, monospace" font-size="8" fill="#737373">11 custom renderers · candles · footprints · indicators</text>
+  </g>
+
+  <g fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6 3">
+    <path d="M 360 300 L 440 216" marker-end="url(#pl-arrow-blue)"/>
+  </g>
+  <text x="400" y="250" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#3b82f6">shared</text>
+  <text x="400" y="262" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" fill="#3b82f6">data lake</text>
+
+  <g transform="translate(20,490)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="9" fill="#525252" letter-spacing="1">LEGEND</text>
+    <g transform="translate(0,10)">
+      <rect width="16" height="12" rx="2" fill="#1a1a1a" stroke="#e5e5e5" stroke-width="1.5"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">data store (shared)</text>
+    </g>
+    <g transform="translate(160,10)">
+      <rect width="16" height="12" rx="2" fill="#1a1a1a" stroke="#525252" stroke-width="1"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">component</text>
+    </g>
+    <g transform="translate(260,10)">
+      <rect width="16" height="12" rx="2" fill="#0f0f0f" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="24" y="11" font-family="ui-monospace, monospace" font-size="8" fill="#737373">phase boundary</text>
+    </g>
+    <g transform="translate(380,16)">
+      <line x1="0" y1="0" x2="20" y2="0" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6 3"/>
+      <text x="26" y="3" font-family="ui-monospace, monospace" font-size="8" fill="#737373">shared state</text>
+    </g>
+  </g>
+</svg>
