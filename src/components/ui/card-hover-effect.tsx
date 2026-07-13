@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
+import { ExternalLink } from "lucide-react";
 
 import { useState } from "react";
 
@@ -9,6 +10,8 @@ export const HoverEffect = ({
 }: {
   items: {
     title: string;
+    venue?: string;
+    year?: number;
     description: string;
     link: string;
   }[];
@@ -23,37 +26,54 @@ export const HoverEffect = ({
         className
       )}
     >
-      {items.map((item, idx) => (
-        <a
-          href={item?.link}
-          key={item?.link}
-          className="relative group  block p-2 h-full w-full"
-          onMouseEnter={() => setHoveredIndex(idx)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          <AnimatePresence>
-            {hoveredIndex === idx && (
-              <motion.span
-                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block  rounded-3xl"
-                layoutId="hoverBackground"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.15 },
-                }}
-                exit={{
-                  opacity: 0,
-                  transition: { duration: 0.15, delay: 0.2 },
-                }}
-              />
-            )}
-          </AnimatePresence>
-          <Card>
-            <CardTitle>{item.title}</CardTitle>
-            <CardDescription>{item.description}</CardDescription>
-          </Card>
-        </a>
-      ))}
+      {items.map((item, idx) => {
+        const isExternal = item.link.startsWith("http");
+        return (
+          <a
+            href={item?.link}
+            key={item?.link}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            className="relative group  block p-2 h-full w-full"
+            onMouseEnter={() => setHoveredIndex(idx)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <AnimatePresence>
+              {hoveredIndex === idx && (
+                <motion.span
+                  className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block  rounded-3xl"
+                  layoutId="hoverBackground"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.15 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    transition: { duration: 0.15, delay: 0.2 },
+                  }}
+                />
+              )}
+            </AnimatePresence>
+            <Card>
+              <div className="flex items-start justify-between gap-2">
+                <CardTitle>{item.title}</CardTitle>
+                {isExternal && (
+                  <ExternalLink className="mt-1 h-3.5 w-3.5 shrink-0 text-zinc-500 group-hover:text-zinc-300" />
+                )}
+              </div>
+              {(item.venue || item.year) && (
+                <CardVenue>
+                  {item.venue}
+                  {item.venue && item.year ? " · " : ""}
+                  {item.year}
+                </CardVenue>
+              )}
+              <CardDescription>{item.description}</CardDescription>
+            </Card>
+          </a>
+        );
+      })}
     </div>
   );
 };
@@ -89,6 +109,24 @@ export const CardTitle = ({
     <h4 className={cn("text-zinc-100 font-bold tracking-wide mt-4", className)}>
       {children}
     </h4>
+  );
+};
+export const CardVenue = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <p
+      className={cn(
+        "mt-2 text-xs font-medium text-blue-400/80 tracking-wide",
+        className
+      )}
+    >
+      {children}
+    </p>
   );
 };
 export const CardDescription = ({

@@ -306,12 +306,13 @@ export const leadership: LeadershipItem[] = [
 
 export const publications: Publication[] = [
   {
-    title: "Physics-Based Machine Learning to Predict Hydration Free Energies",
-    venue: "J. Phys. Chem. B (ACS)",
+    title:
+      "Physics-Based Machine Learning to Predict Hydration Free Energies for Small Molecules with a Minimal Number of Descriptors: Interpretable and Accurate",
+    venue: "J. Phys. Chem. B (ACS), 129(5), 1640–1647",
     year: 2025,
     description:
-      "Computational methods bridging physics-based modeling and machine learning for molecular property prediction.",
-    link: "#",
+      "A six-descriptor physics-based ML model (XGBoost) hits 0.74 kcal/mol MAE on FreeSolv. Uses Generalized Born electrostatics, polar surface area, log P, hydrogen bond donors/acceptors, and rotatable bonds — fully interpretable with no black-box features.",
+    link: "https://pubs.acs.org/doi/10.1021/acs.jpcb.4c07090",
   },
   {
     title: "HAC-Net: Hybrid Deep Learning Architecture",
