@@ -27,9 +27,18 @@ function getThumbnail(project: Project) {
   return project.image
 }
 
-function ProjectGradient() {
+function ProjectGradient({ slug }: { slug?: string }) {
+  const gradient =
+    slug === "self-hosted-infrastructure"
+      ? "from-orange-500 via-amber-500 to-rose-500"
+      : "from-blue-600 via-blue-500 to-violet-600"
   return (
-    <div className="flex h-full min-h-[8rem] w-full items-center justify-center rounded-t-xl bg-gradient-to-br from-blue-600 via-blue-500 to-violet-600">
+    <div
+      className={cn(
+        "flex h-full min-h-[8rem] w-full items-center justify-center rounded-t-xl bg-gradient-to-br",
+        gradient,
+      )}
+    >
       <Sparkles className="h-8 w-8 text-white/60" />
     </div>
   )
@@ -75,7 +84,12 @@ function ProjectCard({ project }: ProjectCardProps) {
   const Icon = getProjectIcon(project.slug)
   const thumbnail = getThumbnail(project)
 
-  const blogHref = project.slug === "marvfinancialcharts" ? "/footprint-charts" : null
+  const blogHref =
+    project.slug === "marvfinancialcharts"
+      ? "/footprint-charts"
+      : project.slug === "self-hosted-infrastructure"
+        ? "/self-hosted-cloud"
+        : null
   const cardTarget = blogHref ?? project.link ?? null
   const isInternal = !!blogHref
   const isExternal = !isInternal && !!project.link
@@ -143,7 +157,7 @@ function ProjectCard({ project }: ProjectCardProps) {
       />
     </div>
   ) : (
-    <ProjectGradient />
+    <ProjectGradient slug={project.slug} />
   )
 
   const title = (

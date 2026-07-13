@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SelfHostedCloudRouteImport } from './routes/self-hosted-cloud'
 import { Route as FootprintChartsRouteImport } from './routes/footprint-charts'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SelfHostedCloudRoute = SelfHostedCloudRouteImport.update({
+  id: '/self-hosted-cloud',
+  path: '/self-hosted-cloud',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FootprintChartsRoute = FootprintChartsRouteImport.update({
   id: '/footprint-charts',
   path: '/footprint-charts',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/footprint-charts': typeof FootprintChartsRoute
+  '/self-hosted-cloud': typeof SelfHostedCloudRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/footprint-charts': typeof FootprintChartsRoute
+  '/self-hosted-cloud': typeof SelfHostedCloudRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/footprint-charts': typeof FootprintChartsRoute
+  '/self-hosted-cloud': typeof SelfHostedCloudRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/footprint-charts'
+  fullPaths: '/' | '/footprint-charts' | '/self-hosted-cloud'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/footprint-charts'
-  id: '__root__' | '/' | '/footprint-charts'
+  to: '/' | '/footprint-charts' | '/self-hosted-cloud'
+  id: '__root__' | '/' | '/footprint-charts' | '/self-hosted-cloud'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FootprintChartsRoute: typeof FootprintChartsRoute
+  SelfHostedCloudRoute: typeof SelfHostedCloudRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/self-hosted-cloud': {
+      id: '/self-hosted-cloud'
+      path: '/self-hosted-cloud'
+      fullPath: '/self-hosted-cloud'
+      preLoaderRoute: typeof SelfHostedCloudRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/footprint-charts': {
       id: '/footprint-charts'
       path: '/footprint-charts'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FootprintChartsRoute: FootprintChartsRoute,
+  SelfHostedCloudRoute: SelfHostedCloudRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
