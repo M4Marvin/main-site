@@ -5,7 +5,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 RUN pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm build
+RUN pnpm build && chmod -R a+r /app/dist
 
 FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
