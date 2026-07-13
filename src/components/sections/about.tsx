@@ -47,9 +47,9 @@ export function About() {
               </div>
 
               <div className="flex flex-col gap-4">
-                <div className="space-y-3 leading-relaxed text-neutral-300">
-                  {about.summary.split(". ").map((sentence, i) => (
-                    <p key={i}>{sentence}{i < about.summary.split(". ").length - 1 ? "." : ""}</p>
+                <div className="space-y-4 leading-relaxed text-neutral-300">
+                  {about.summary.split("\n\n").map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
                   ))}
                 </div>
               </div>
