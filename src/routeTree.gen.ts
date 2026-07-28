@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SelfHostedCloudRouteImport } from './routes/self-hosted-cloud'
 import { Route as FootprintChartsRouteImport } from './routes/footprint-charts'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
 const SelfHostedCloudRoute = SelfHostedCloudRouteImport.update({
   id: '/self-hosted-cloud',
@@ -28,35 +30,60 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/footprint-charts' | '/self-hosted-cloud'
+  fullPaths:
+    '/' | '/footprint-charts' | '/self-hosted-cloud' | '/blog/$slug' | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/footprint-charts' | '/self-hosted-cloud'
-  id: '__root__' | '/' | '/footprint-charts' | '/self-hosted-cloud'
+  to: '/' | '/footprint-charts' | '/self-hosted-cloud' | '/blog/$slug' | '/blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/footprint-charts'
+    | '/self-hosted-cloud'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FootprintChartsRoute: typeof FootprintChartsRoute
   SelfHostedCloudRoute: typeof SelfHostedCloudRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +109,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +130,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FootprintChartsRoute: FootprintChartsRoute,
   SelfHostedCloudRoute: SelfHostedCloudRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

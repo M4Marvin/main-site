@@ -402,6 +402,7 @@ export const experience: ExperienceItem[] = [
 ]
 
 export const navItems: NavItem[] = [
+  { name: "Blog", link: "/blog" },
   { name: "About", link: "#about" },
   { name: "Work", link: "#work" },
   { name: "Skills", link: "#skills" },
