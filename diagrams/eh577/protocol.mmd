@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant Host as Linux host
+    participant Sensor as EH577 sensor
+    Host->>Sensor: init (99 commands)
+    Host->>Sensor: ARM (EGIS 61 2d 13)
+    Host->>Sensor: STATUS poll (60 00 13)
+    Host->>Sensor: GRAB (64 0f 96)
+    Sensor->>Host: 3990-byte 70x57 frame
+    Host->>Sensor: DISARM (61 2d 20)

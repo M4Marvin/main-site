@@ -1,0 +1,15 @@
+flowchart TD
+    A["Power button has a fingerprint reader"] --> B["Linux: No devices available"]
+    B --> C["Find community driver + vendor engine"]
+    C --> D["Patch Arch install script (2 lines)"]
+    D --> E["Install: side-by-side, reversible"]
+    E --> F["Enroll finger (8 stages)"]
+    F --> G["Verify: MATCH"]
+    G --> H["Finger unlocks work"]
+
+    C -. side-quest .-> V["Build live visualizer"]
+    V --> V2["Frame confirmed: real fingerprint"]
+    V2 --> F
+
+    E -. side-quest .-> X["Found + fixed stack overflow on cancel"]
+    X --> F

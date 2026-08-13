@@ -1,0 +1,8 @@
+flowchart TB
+    Apps["Apps (sudo, login, apps)"] --> fprintd["fprintd (D-Bus daemon)"]
+    fprintd --> ourlib["our libfprint<br/>(/usr/local/lib/eh577)"]
+    ourlib --> drv["eh577 driver<br/>(capture, enroll, verify)"]
+    drv --> eng["vendor engine<br/>eh577-engine.so (matching)"]
+    eng --> usb["USB sensor 1c7a:0577"]
+    drv --> usb
+    distro["distro libfprint untouched (side-by-side)"] -.-> fprintd
