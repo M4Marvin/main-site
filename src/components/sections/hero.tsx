@@ -1,4 +1,5 @@
-import { ArrowDown, ExternalLink } from "lucide-react"
+import { Link } from "@tanstack/react-router"
+import { ArrowDown, ExternalLink, PenLine } from "lucide-react"
 import { Spotlight } from "@/components/ui/spotlight"
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect"
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
@@ -52,6 +53,13 @@ export function Hero() {
             </HoverBorderGradient>
           </a>
         </div>
+
+        <Link
+          to="/blog"
+          className="mt-5 flex items-center gap-1.5 rounded-full border border-white/10 bg-transparent px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:border-white/30 hover:text-white"
+        >
+          <PenLine className="h-3.5 w-3.5" /> Blog
+        </Link>
 
         <div className="mt-8 grid grid-cols-2 gap-x-12 gap-y-4 sm:grid-cols-4">
           {stats.map((stat) => (
