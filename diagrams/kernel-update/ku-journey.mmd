@@ -1,0 +1,15 @@
+flowchart TD
+    A["Big update starts<br/>(300+ packages)"] --> B["New kernel lands on disk"]
+    B --> C["Update killed mid-way<br/>'transaction interrupted'"]
+    C --> D["Boot file still describes the old kernel"]
+    C --> E["GPU driver stranded on old version"]
+    D --> F["System boots, but half-updated"]
+    E --> F
+    F --> G["Next update blocked by an orphaned file"]
+    G --> H["Finish the update the proper way"]
+    H --> I["Switch driver to the DKMS build"]
+    I --> J["Rebuild boot files for both kernels"]
+    J --> K["Verified: hashes match, GPU works"]
+
+    C -. "what saved it" .-> S["Recovery kernel entry in the boot menu"]
+    S --> H

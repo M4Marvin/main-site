@@ -1,0 +1,12 @@
+flowchart TD
+    subgraph normal["A normal update"]
+        N1["New kernel lands on disk"] --> N2["Automatic step rebuilds the boot file"]
+        N2 --> N3["Automatic step updates the boot menu and checksums"]
+        N3 --> N4["Reboot: everything matches"]
+    end
+
+    subgraph broken["What happened to me"]
+        B1["New kernel lands on disk"] --> B2["Update killed before the automatic steps ran"]
+        B2 --> B3["Boot file still describes the old kernel"]
+        B3 --> B4["Reboot: boot file and kernel disagree"]
+    end
