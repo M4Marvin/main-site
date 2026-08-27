@@ -396,8 +396,5 @@ export const experience: ExperienceItem[] = [
 
 export const navItems: NavItem[] = [
   { name: "Work", link: "#work" },
-  { name: "Experience", link: "#experience" },
-  { name: "Skills", link: "#skills" },
   { name: "Contact", link: "#contact" },
-  { name: "Blog", link: "/blog" },
 ]
