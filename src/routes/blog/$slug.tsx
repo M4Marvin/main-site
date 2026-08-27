@@ -2,8 +2,9 @@ import { getPostBySlug, getAllPosts } from "@/lib/blog"
 import { createFileRoute, Link, notFound } from "@tanstack/react-router"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
-import { Calendar, Tag, ArrowLeft } from "lucide-react"
+import { Calendar, Tag } from "lucide-react"
 import { SkipLink } from "@/components/sections/skip-link"
+import { PageHeader } from "@/components/sections/page-header"
 
 export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
@@ -39,14 +40,8 @@ function BlogPost() {
   return (
     <main id="main" className="min-h-screen bg-black text-white">
       <SkipLink />
-      <article className="mx-auto max-w-3xl px-4 pt-32 pb-24">
-        <Link
-          to="/blog"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          All posts
-        </Link>
+      <article className="mx-auto max-w-3xl px-4 pt-24 pb-24">
+        <PageHeader backTo="/blog" backLabel="All posts" />
 
         <header className="mb-12">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">

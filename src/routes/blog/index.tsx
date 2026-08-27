@@ -1,7 +1,8 @@
 import { getAllPosts } from "@/lib/blog"
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { Calendar, Tag, ArrowLeft } from "lucide-react"
+import { Calendar, Tag } from "lucide-react"
 import { SkipLink } from "@/components/sections/skip-link"
+import { PageHeader } from "@/components/sections/page-header"
 
 export const Route = createFileRoute("/blog/")({ component: BlogIndex })
 
@@ -11,14 +12,8 @@ function BlogIndex() {
   return (
     <main id="main" className="min-h-screen bg-black text-white">
       <SkipLink />
-      <div className="mx-auto max-w-3xl px-4 pt-32 pb-24">
-        <Link
-          to="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to main
-        </Link>
+      <div className="mx-auto max-w-3xl px-4 pt-24 pb-24">
+        <PageHeader backTo="/" backLabel="Back to main" />
 
         <div className="mb-16">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">

@@ -177,6 +177,52 @@ section[id] {
     scroll-margin-top: 6rem;
 }
 
+/* Print: plain black-on-white document, expanded URLs, chrome hidden */
+@media print {
+    body,
+    main,
+    section,
+    footer {
+        background: #fff !important;
+        color: #000 !important;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    li,
+    span,
+    a {
+        color: #000 !important;
+    }
+    h1,
+    h2,
+    h3,
+    h4 {
+        background: none !important;
+        -webkit-text-fill-color: currentColor !important;
+    }
+    .fixed,
+    .availability-banner,
+    .hero-fade-up {
+        display: none !important;
+    }
+    .hero-fade-up {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #333;
+    }
+    section[id] {
+        scroll-margin-top: 0;
+    }
+}
+
 /* One-time entrance for hero content. Duration is collapsed to 0 by the
    prefers-reduced-motion block below, which is the intended fallback. */
 .hero-fade-up {

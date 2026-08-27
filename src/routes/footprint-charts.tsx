@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { ArrowLeft, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 import { Image } from "@unpic/react"
 import { Typeset } from "@/components/ui/typeset"
-import { buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 import { SkipLink } from "@/components/sections/skip-link"
+import { PageHeader } from "@/components/sections/page-header"
 
 export const Route = createFileRoute("/footprint-charts")({
   component: FootprintChartsPage,
@@ -21,10 +20,13 @@ function Diagram({
 }) {
   return (
     <figure className="my-8">
-      <img
+      <Image
         src={src}
         alt={alt}
-        className="w-full rounded-lg border border-white/10"
+        width={720}
+        height={420}
+        layout="constrained"
+        className="rounded-lg border border-white/10"
       />
       <figcaption className="mt-2 text-center text-xs text-neutral-400">
         {caption}
@@ -38,18 +40,7 @@ function FootprintChartsPage() {
     <main id="main" className="relative min-h-screen bg-black text-white">
       <SkipLink />
       <div className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-16">
-        <div className="mb-12">
-          <Link
-            to="/"
-            className={cn(
-              buttonVariants({ variant: "ghost" }),
-              "-ml-3 gap-2 text-neutral-400 hover:text-white",
-            )}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Link>
-        </div>
+        <PageHeader backTo="/" backLabel="Back to Home" />
 
         <Typeset>
           <h1>Diving Deep into Footprint Charts: Building the Ultimate Order Flow Tool for Crypto Traders</h1>

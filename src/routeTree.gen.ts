@@ -9,15 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SelfHostedCloudRouteImport } from './routes/self-hosted-cloud'
-import { Route as FootprintChartsRouteImport } from './routes/footprint-charts'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FootprintChartsRouteImport } from './routes/footprint-charts'
+import { Route as SelfHostedCloudRouteImport } from './routes/self-hosted-cloud'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
-const SelfHostedCloudRoute = SelfHostedCloudRouteImport.update({
-  id: '/self-hosted-cloud',
-  path: '/self-hosted-cloud',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FootprintChartsRoute = FootprintChartsRouteImport.update({
@@ -25,9 +25,9 @@ const FootprintChartsRoute = FootprintChartsRouteImport.update({
   path: '/footprint-charts',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SelfHostedCloudRoute = SelfHostedCloudRouteImport.update({
+  id: '/self-hosted-cloud',
+  path: '/self-hosted-cloud',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -88,11 +88,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/self-hosted-cloud': {
-      id: '/self-hosted-cloud'
-      path: '/self-hosted-cloud'
-      fullPath: '/self-hosted-cloud'
-      preLoaderRoute: typeof SelfHostedCloudRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/footprint-charts': {
@@ -102,11 +102,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FootprintChartsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/self-hosted-cloud': {
+      id: '/self-hosted-cloud'
+      path: '/self-hosted-cloud'
+      fullPath: '/self-hosted-cloud'
+      preLoaderRoute: typeof SelfHostedCloudRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {

@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowDown, ExternalLink, PenLine } from "lucide-react"
-import { AnimatedNumber } from "@/components/ui/animated-number"
 import { profile, stats } from "@/lib/portfolio-data"
 
 const roleLine = profile.roles.filter((role) => role.trim() !== "").join(" · ")
@@ -59,7 +58,7 @@ export function Hero() {
             <div key={stat.label} className="flex flex-col items-center gap-1">
               <div className="text-2xl font-bold tabular-nums text-white sm:text-3xl">
                 {stat.prefix}
-                <AnimatedNumber value={stat.value} />
+                {stat.value.toLocaleString()}
                 {stat.suffix}
               </div>
               <span className="text-xs leading-tight text-neutral-400">

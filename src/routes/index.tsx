@@ -1,10 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Navbar } from '@/components/sections/navbar'
 import { Hero } from '@/components/sections/hero'
+import { AvailabilityBanner } from '@/components/sections/availability-banner'
 
-import { About } from '@/components/sections/about'
-import { Experience } from '@/components/sections/experience'
 import { Work } from '@/components/sections/work'
+import { Experience } from '@/components/sections/experience'
+import { About } from '@/components/sections/about'
 import { Skills } from '@/components/sections/skills'
 import { Leadership } from '@/components/sections/leadership'
 import { Publications } from '@/components/sections/publications'
@@ -20,9 +21,10 @@ function Home() {
       <SkipLink />
       <Navbar />
       <Hero />
-      <About />
-      <Experience />
+      <AvailabilityBanner />
       <Work />
+      <Experience />
+      <About />
       <Skills />
       <Leadership />
       <Publications />
