@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router"
 import { Image } from "@unpic/react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
 import { Badge } from "@/components/ui/badge"
+import { SectionHeader } from "@/components/sections/section-header"
 import { projects } from "@/lib/portfolio-data"
 import { cn } from "@/lib/utils"
 import type { Project } from "@/lib/portfolio-data"
@@ -133,7 +134,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   const isSvg = thumbnail?.toLowerCase().endsWith(".svg")
 
   const header = thumbnail ? (
-    <div className="relative h-full min-h-[8rem] w-full overflow-hidden rounded-t-xl bg-black">
+    <div className="relative aspect-[2/1] min-h-[8rem] w-full overflow-hidden rounded-t-xl bg-black">
       {isSvg ? (
         <img
           src={thumbnail}
@@ -204,12 +205,7 @@ export function Work() {
   return (
     <section id="work" className="relative bg-black py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="mb-12">
-          <h2 className="bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-4xl font-bold text-transparent">
-            Selected Work
-          </h2>
-          <div className="mt-1 h-1 w-20 rounded-full bg-gradient-to-r from-blue-500 to-violet-500" />
-        </div>
+        <SectionHeader title="Selected Work" />
 
         <BentoGrid className="mx-auto max-w-7xl md:auto-rows-auto">
           {featuredProjects.map((project) => (

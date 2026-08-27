@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowDown, ExternalLink, PenLine } from "lucide-react"
-import { Spotlight } from "@/components/ui/spotlight"
 import { AnimatedNumber } from "@/components/ui/animated-number"
 import { profile, stats } from "@/lib/portfolio-data"
 
@@ -14,8 +13,6 @@ export function Hero() {
     >
       <div className="absolute inset-0 bg-grid-white/[0.1]" />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-
-      <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="white" />
 
       <div className="hero-fade-up relative z-20 flex flex-col items-center gap-6 px-4 text-center">
         <h1 className="bg-linear-to-b from-white to-neutral-400 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-7xl md:text-8xl">

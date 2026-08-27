@@ -1,5 +1,3 @@
-"use client";
-
 import { useMotionValue, motion, useMotionTemplate } from "motion/react";
 import React from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
