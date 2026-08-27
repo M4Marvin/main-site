@@ -56,7 +56,7 @@ function SelfHostedCloudPage() {
           <h1>My Personal Cloud: Two Boxes, One Tunnel, Zero Open Ports</h1>
 
           <p>
-            Six live services, one Hetzner VPS, one Cloudflare tunnel, and a
+            Eight services, one Hetzner VPS, one Cloudflare tunnel, and a
             Tailscale tailnet. No third parties holding my data, no firewall
             holes, no monthly bills to anyone but a German hosting company. This
             is the story of how I built it, what runs on it, and what I learned
@@ -72,14 +72,9 @@ function SelfHostedCloudPage() {
             Everything public lives on a single Hetzner Cloud VPS. It is a
             shared-CPU CX-class instance: 4 vCPU on Intel Xeon Skylake, 7.6GB
             of RAM, 76GB of disk. It runs Ubuntu 24.04 LTS on a 6.8 kernel and
-            has been up for 149 days at the time of writing. The floating IPv4
-            is <code>77.42.65.13</code>, allocated in Falkenstein. Hetzner
-            charges about €4.50 a month for this tier, and the reason I picked
-            them over AWS or DigitalOcean is not the price so much as the
-            posture: GDPR-compliant, ISO 27001 certified, C5 testat, with data
-            centers in Falkenstein and Nuremberg that I can drive to. The
-            AWS equivalent of this box would be a t3.small, which is roughly
-            three times the price before you start paying for egress.
+            has been up for 179 days at the time of writing. Beast, a home
+            desktop with an Intel Core Ultra 9, 93GB of RAM, and an Arc Pro
+            130T GPU, handles private compute alongside the VPS.
           </p>
 
           <p>
@@ -156,8 +151,8 @@ function SelfHostedCloudPage() {
             perspective, the VPS never accepts an inbound connection. From
             Cloudflare&apos;s perspective, the origin has no public IP that
             matters. The connection is post-quantum encrypted, and the daemon
-            maintains four long-lived connections to two Cloudflare points of
-            presence for redundancy. If one PoP dies, the others carry on.
+            maintains redundant long-lived connections to Cloudflare points of
+            presence.
           </p>
 
           <p>
@@ -175,17 +170,17 @@ function SelfHostedCloudPage() {
 
           <p>
             The ingress rules are short. The user-mode copy at{" "}
-            <code>~/.cloudflared/config.yaml</code> maps five hostnames to
-            five local ports and ends with a catch-all that returns a 404.
+            <code>~/.cloudflared/config.yaml</code> maps seven public subdomains
+            to local services and ends with a catch-all that returns a 404.
             The same tunnel UUID (<code>ffd206b8-...</code>) is referenced by
             both the root-owned and user-owned configs; the dashboard drives
             most changes, but I keep the user-mode copy editable so I can
             tweak routing without sudo. The full mapping:{" "}
-            <code>m4marvin.com</code> reaches the portfolio on port 8001,{" "}
-            <code>chat.m4marvin.com</code> reaches the chat app on 8002,{" "}
-            <code>git.m4marvin.com</code> reaches Forgejo on 8003,{" "}
-            <code>vault.m4marvin.com</code> reaches Vaultwarden on 8004, and{" "}
-            <code>status.m4marvin.com</code> reaches Uptime Kuma on 8005.{" "}
+            <code>m4marvin.com</code> reaches the portfolio,{" "}
+            <code>chat.m4marvin.com</code> reaches the chat app,{" "}
+            <code>git.m4marvin.com</code> reaches Forgejo,{" "}
+            <code>vault.m4marvin.com</code> reaches Vaultwarden, and{" "}
+            <code>status.m4marvin.com</code> reaches Uptime Kuma.{" "}
             <code>files.m4marvin.com</code> and <code>charts.m4marvin.com</code>{" "}
             are configured through the Cloudflare dashboard directly. The
             catch-all matters: any other hostname that resolves to the tunnel
@@ -196,7 +191,7 @@ function SelfHostedCloudPage() {
           <h2>Tailscale</h2>
 
           <p>
-            Tailscale is the second network. The reason I need it at all is
+            Tailscale is the private network. The reason I need it at all is
             that not everything should be on the public edge. Jellyfin, for
             one: I do not want my media server reachable from the open
             internet, full stop. The Forgejo container also exposes port 22 for
@@ -207,7 +202,7 @@ function SelfHostedCloudPage() {
           </p>
 
           <p>
-            The tailnet is a mesh of WireGuard tunnels. Each device gets a
+            The tailnet is a mesh of WireGuard tunnels across four devices. Each device gets a
             stable 100.x.y.z address, and MagicDNS resolves the device name
             (<code>hetzner-vps</code>, <code>beast</code>,{" "}
             <code>macbook</code>) to that address automatically. Subnet routing
@@ -244,20 +239,20 @@ function SelfHostedCloudPage() {
 
           <Diagram
             src="/infra-container.svg"
-            alt="C4 Container diagram: the Hetzner VPS contains 7 Docker containers plus a cloudflared sidecar, all on 127.0.0.1, with UFW, fail2ban, AIDE, and unattended-upgrades as host-level security"
-            caption="Figure 2. Container view (C4 level 2): 7 containers, 1 sidecar, all on loopback."
+            alt="C4 Container diagram: the Hetzner VPS contains 8 services plus cloudflared, all on 127.0.0.1, with UFW, fail2ban, AIDE, and unattended-upgrades as host-level security"
+            caption="Figure 2. Container view (C4 level 2): 8 services, all on loopback."
           />
 
           <p>
             <strong>Forgejo</strong> (<code>codeberg.org/forgejo/forgejo:10</code>)
-            on port 8003, reached at <code>git.m4marvin.com</code>. This is the
+            reached at <code>git.m4marvin.com</code>. This is the
             Git server. The Actions framework is enabled, with a runner on
             Beast doing the actual CI/CD work &mdash; the runner attaches
-            through the tailnet. <strong>Vaultwarden</strong> on port 8004,
+            through the tailnet. <strong>Vaultwarden</strong> reached at
             reached at <code>vault.m4marvin.com</code>. Signups are disabled,
             and the CSP header in the response includes Duo, so two-factor
             authentication is enforced on every login.{" "}
-            <strong>Uptime Kuma</strong> on port 8001, reached at{" "}
+            <strong>Uptime Kuma</strong> reached at{" "}
             <code>status.m4marvin.com</code>. The heartbeat dashboard for
             every public service, plus a few internal ones. I recently wired
             up monitors for all the subdomains, so if any one of them goes
@@ -265,21 +260,21 @@ function SelfHostedCloudPage() {
           </p>
 
           <p>
-            <strong>Copyparty</strong> on port 8009, reached at{" "}
+            <strong>Copyparty</strong> reached at{" "}
             <code>files.m4marvin.com</code>. A single-binary file server. It
             hosts the resume PDF, the screenshots that appear on this site,
             the blog images, and a few other static assets. The service is
             auth-gated &mdash; a fresh request to the URL gets a 403, which is
-            the correct answer. <strong>Portfolio</strong> on port 8001,
+            the correct answer. <strong>Portfolio</strong> on its local port,
             reached at <code>m4marvin.com</code>. The site you are reading
             right now, built with TanStack Router and Vite, served by nginx
-            inside the container. <strong>Charts</strong> on port 8006,
+            inside the container. <strong>Charts</strong>,
             reached at <code>charts.m4marvin.com</code>. The mFinancialCharts
             instance, built from the codebase covered in the{" "}
             <Link to="/footprint-charts">footprint charts writeup</Link>.{" "}
-            <strong>Chat</strong> on port 8002, reached at{" "}
+            <strong>Chat</strong> reached at{" "}
             <code>chat.m4marvin.com</code>. A small custom app (Better Auth
-            and SQLite, with a local DB file) for a private messaging surface.
+            and SQLite, with a local DB file) for a private messaging surface. <strong>Beszel</strong> provides metrics through a Tailscale-only hub backed by SQLite.
           </p>
 
           <p>
@@ -290,8 +285,7 @@ function SelfHostedCloudPage() {
             pipeline (facial recognition and natural-language search) runs on
             the Arc Pro GPU via OpenVINO, and Jellyfin because a media server
             on the public internet is asking for trouble. Forgejo&apos;s CI
-            runner is also on Beast, with 16 cores and Docker-in-Docker
-            available. The rule is simple: anything that wants more than
+            runner is also on Beast. The rule is simple: anything that wants more than
             network and disk, or that has no business being public, lives on
             Beast.
           </p>
@@ -356,15 +350,15 @@ function SelfHostedCloudPage() {
             93GB of RAM and an Arc Pro 130T GPU, sitting on my desk in Abu
             Dhabi. It runs Arch (not Ubuntu) and hosts the things that need
             real compute: Immich with OpenVINO ML on the Arc GPU, the
-            Forgejo Actions runner on 16 cores, and Jellyfin on the tailnet.
+            Forgejo Actions runner, and Jellyfin on the tailnet.
             The two boxes do not see each other on the public internet; they
             see each other on the tailnet, at{" "}
             <code>100.80.96.4</code> and <code>100.105.177.97</code>.
           </p>
 
           <p>
-            Backups run from Beast, not the VPS. The job is scheduled on
-            Beast and pulls from the VPS over the Tailscale tailnet, which
+            Backups run nightly via <code>backup-vps.sh</code> from Beast, not
+            the VPS. The job is scheduled on Beast and pulls from the VPS over the Tailscale tailnet, which
             means the backup traffic is encrypted and never touches the
             public edge. The VPS does not need to know backups are happening.
             The data that moves is the small stuff: Forgejo repositories,
@@ -375,16 +369,15 @@ function SelfHostedCloudPage() {
 
           <p>
             The cost math is what sold me on doing this in the first place.
-            Hetzner is about €4.50 a month, the domain is $12 a year, and
-            both Cloudflare and Tailscale are free on the personal tier.
-            That works out to roughly <strong>$66 a year</strong> for the
+            The total cost is roughly <strong>€60 a year</strong>, with
+            Cloudflare and Tailscale on the personal tier. That covers the
             whole stack: Git hosting, password sync, file server, status
             page, this site, the charts, the chat app, plus a private mesh
             VPN across all my devices. The equivalent managed stack
             &mdash; GitHub Pro at $48, Bitwarden Premium at $40, Google
             Photos 200GB at $30, Dropbox Plus at $120, StatusCake Solo at
             $80, Vercel Pro at $240 &mdash; comes out to{" "}
-            <strong>roughly $560 a year</strong>, and at the end of it I
+            <strong>roughly $558 a year</strong>, and at the end of it I
             still do not own a single byte of my data.
           </p>
 
