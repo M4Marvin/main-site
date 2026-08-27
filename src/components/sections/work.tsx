@@ -12,7 +12,6 @@ function getProjectIcon(slug: string) {
   switch (slug) {
     case "marvfinancialcharts":
       return LineChart
-    case "qdata-octo":
     case "sirius-trading-platform":
       return TrendingUp
     case "self-hosted-infrastructure":

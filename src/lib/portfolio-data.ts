@@ -175,7 +175,6 @@ export const projects: Project[] = [
     reflection:
       "Built the data pipeline and charting engine around the hardest case—Bitcoin's high-volume trade stream—so the same system could serve every supported instrument and timeframe.",
     link: "https://charts.m4marvin.com",
-    image: "/charts-screenshot.png",
     featured: true,
   },
   {
