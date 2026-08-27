@@ -1,15 +1,10 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowDown, ExternalLink, PenLine } from "lucide-react"
 import { Spotlight } from "@/components/ui/spotlight"
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect"
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
 import { AnimatedNumber } from "@/components/ui/animated-number"
 import { profile, stats } from "@/lib/portfolio-data"
 
-const roleWords = profile.roles.map((role) => ({
-  text: role,
-  className: "text-neutral-300",
-}))
+const roleLine = profile.roles.filter((role) => role.trim() !== "").join(" · ")
 
 export function Hero() {
   return (
@@ -22,41 +17,42 @@ export function Hero() {
 
       <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="white" />
 
-      <div className="relative z-20 flex flex-col items-center gap-6 px-4 text-center">
-        <h1 className="bg-linear-to-b from-white to-neutral-400 bg-clip-text text-5xl font-bold text-transparent sm:text-7xl md:text-8xl">
+      <div className="hero-fade-up relative z-20 flex flex-col items-center gap-6 px-4 text-center">
+        <h1 className="bg-linear-to-b from-white to-neutral-400 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-7xl md:text-8xl">
           {profile.name}
         </h1>
 
-        <div className="-mt-2">
-          <TypewriterEffectSmooth words={roleWords} />
-        </div>
+        <p
+          className="bg-linear-to-r from-white to-blue-400/80 bg-clip-text text-base font-semibold tracking-tight text-transparent sm:text-xl md:text-2xl"
+          aria-label={roleLine}
+        >
+          {roleLine}
+        </p>
 
         <p className="max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg">
           {profile.tagline}
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <a href="#work">
-            <HoverBorderGradient
-              containerClassName="rounded-full"
-              className="flex items-center gap-2 bg-black px-6 py-3 text-sm font-medium text-white"
-            >
-              <ArrowDown className="h-4 w-4" /> View Work
-            </HoverBorderGradient>
+          <a
+            href="#work"
+            className="inline-flex items-center gap-2 rounded-full bg-white/[0.06] px-6 py-3 text-sm font-medium text-white ring-1 ring-white/15 transition-all duration-200 hover:bg-white/10 hover:ring-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
+          >
+            <ArrowDown className="h-4 w-4" /> View Work
           </a>
-          <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
-            <HoverBorderGradient
-              containerClassName="rounded-full"
-              className="flex items-center gap-2 bg-black px-6 py-3 text-sm font-medium text-white"
-            >
-              <ExternalLink className="h-4 w-4" /> Resume
-            </HoverBorderGradient>
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-blue-500 to-violet-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-600/25 transition-all duration-200 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
+          >
+            <ExternalLink className="h-4 w-4" /> Resume
           </a>
         </div>
 
         <Link
           to="/blog"
-          className="mt-5 flex items-center gap-1.5 rounded-full border border-white/10 bg-transparent px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:border-white/30 hover:text-white"
+          className="mt-5 flex items-center gap-1.5 rounded-full border border-white/10 bg-transparent px-3 py-2 text-xs text-neutral-400 transition-colors duration-200 hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
         >
           <PenLine className="h-3.5 w-3.5" /> Blog
         </Link>
@@ -69,7 +65,7 @@ export function Hero() {
                 <AnimatedNumber value={stat.value} />
                 {stat.suffix}
               </div>
-              <span className="text-xs leading-tight text-neutral-500">
+              <span className="text-xs leading-tight text-neutral-400">
                 {stat.label}
               </span>
             </div>

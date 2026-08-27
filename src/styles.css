@@ -200,8 +200,26 @@
 
 html {
     scroll-behavior: smooth;
+    color-scheme: dark;
 }
 
 section[id] {
     scroll-margin-top: 6rem;
+}
+
+/* One-time entrance for hero content. Duration is collapsed to 0 by the
+   prefers-reduced-motion block below, which is the intended fallback. */
+.hero-fade-up {
+    animation: hero-fade-up 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes hero-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
