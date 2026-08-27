@@ -76,61 +76,60 @@ export interface ExperienceItem {
 
 export const profile: Profile = {
   name: "Marvin V Prakash",
-  roles: ["Full Stack Architect"," ",  "Trading Systems Engineer"],
+  roles: ["Full Stack Architect", "Trading Systems Engineer"],
   tagline:
-    "I build distributed backends, real-time web apps, and self-hosted infrastructure — from canvas renderers to Cloudflare tunnels. I like owning the whole stack.",
+    "Full Stack Architect / Tech Lead — 3+ years building production trading infrastructure, data pipelines, and web platforms end to end.",
   location: "Abu Dhabi, UAE",
   email: "marvinprakash@gmail.com",
   phone: "+971 553391151",
   github: "https://github.com/M4Marvin",
-  linkedin: "https://linkedin.com/in/m4marvin",
+  linkedin: "https://www.linkedin.com/in/marvin-v-prakash/",
   website: "https://m4marvin.com",
   resumeUrl: "https://files.m4marvin.com/MARVIN_V_PRAKASH_RESUME.pdf",
   education: [
-    { degree: "M.S. Computational Biology", school: "Jawaharlal Nehru University", year: "2023" },
-    { degree: "B.Tech. Computer Science", school: "Jawaharlal Nehru University", year: "2018" },
+    { degree: "B.Tech + M.S. Dual Degree — Computer Science & Engineering + Computational Biology", school: "Jawaharlal Nehru University", year: "2018–2023" },
   ],
 }
 
 export const about = {
   summary:
-    "I build things end-to-end. The trading platform I work on processes over a hundred thousand TradingView signals a day and has placed five thousand-plus automated trades — real money, not paper trading, which changes how you think about latency. The charts that visualize all of it are raw HTML5 Canvas: eleven custom renderers I wrote because nothing else could do per-trade footprint charts at the time. The data behind them is a Polars pipeline turning millisecond-level exchange trades into a Parquet data lake. I wrote the API, the rendering engine, the ETL, the deploy. All of it. Some of it twice.\n\nOff the clock I run my own cloud. One Hetzner VPS, seven services, everything behind Cloudflare tunnels and a Tailscale mesh between my machines. Git, passwords, photos, monitoring — I don't trust third parties with any of it if I can avoid it. I started in computational biology, actually — there's a published paper on physics-based ML for molecular property prediction in J. Phys. Chem. B if you want to see the weird tangent. I drifted into distributed systems and frontend because the problems there were more interesting and I could ship something and see it work the same day, not six months later. The thread through all of it is the same: I like knowing how every layer works, from the kernel module to the pixel.",
+    "I have 3+ years of experience (Apr 2023–Feb 2026) owning systems end to end: the trading engine, ingestor, and dashboard at Sirius International Holding; an internal market-analysis platform as the solo founding engineer at mFinancialCharts; and the web platform and MLOps at ACBR. I also operate a self-hosted cloud and co-authored a J. Phys. Chem. B paper. I am currently on a planned sabbatical for upskilling, actively looking for work, and available for immediate joining.",
 }
 
 export const projects: Project[] = [
   {
-    slug: "qdata-octo",
-    title: "Qdata-Octo — Algorithmic Trading Platform",
+    slug: "sirius-trading-platform",
+    title: "Sirius International Holding — Algorithmic Trading Platform",
     summary:
-      "Production algorithmic trading platform. 106,185+ TradingView signals and 5,000+ automated trades a day. Real money, real consequences. Second engineering hire.",
+      "Production algorithmic trading platform. 106,185+ signals processed and 5,000+ automated trades per day on average. Second engineering hire.",
     role: "Algorithmic Trading Infrastructure Engineer",
-    org: "Qdata-Octo",
-    period: "Aug 2025 – Feb 2026",
+    org: "Sirius International Holding",
+    period: "Apr 2025 – Feb 2026",
     location: "Abu Dhabi, UAE",
     story: [
-      "Second engineering hire. Co-developed the platform from scratch with one other engineer.",
-      "106,185+ TradingView signals and 5,000+ automated trades a day across multiple accounts. Every edge case mattered. Every failure mode had to be thought through.",
+      "Second engineering hire. Built the core trading engine and signal ingestor solo end to end, and built the trading dashboard solo; AWS, VPC, and Cloudflare infrastructure were shared with one coworker.",
+      "Processed 106,185+ signals and averaged 5,000+ automated trades per day across 50 Windows systems, with 200ms end-to-end latency and zero downtime for four months.",
     ],
     contributions: [
       {
         label: "Trade execution engine",
-        text: "FastAPI talking to MetaTrader 5. Parallel multi-account execution, grid-based strategies, dynamic position sizing. Enterprise-grade security from day one — when money is on the line you do not cut corners.",
+        text: "Built the core execution engine with a custom mt5-client wrapper around the MetaTrader 5 Python API. It executes trader-designed strategies across 5 brokers and 20–25 assets, with dynamic position sizing, risk controls, circuit breakers, and multi-channel alerting.",
       },
       {
         label: "Signal ingestion pipeline",
-        text: "Real-time, zero race conditions, dual-database persistence. Adapted to evolving webhook formats as TradingView changed their schemas, without missing a beat.",
+        text: "Built the custom message-queue-style ingestor solo: authenticates, validates, and routes TradingView and proprietary signals through a REST API, with correlation-ID tracing, dual logging to each system and Postgres, and layer-level risk controls and alerting.",
       },
       {
         label: "Monitoring dashboard",
-        text: "React + TanStack Start. Real-time account visibility, historical trade analytics, operational insights.",
+        text: "Built the React + TanStack Start dashboard solo for live account monitoring, execution reports, signal-quality statistics, strategy performance, and inter-strategy correlation.",
       },
       {
         label: "Risk management",
-        text: "Automated circuit breakers, multi-channel alerting. The safety net that stops things before they burn.",
+        text: "Implemented dynamic position sizing, circuit breakers, and multi-channel alerting across the engine and ingestor.",
       },
       {
         label: "Team",
-        text: "Onboarded and mentored 6 engineers. Got them shipping production features within two weeks. Established the platform's engineering standards.",
+        text: "Onboarded and mentored 6 engineers over the tenure, establishing production engineering standards.",
       },
     ],
     tech: ["Python", "FastAPI", "React", "TanStack Start", "MetaTrader 5", "PostgreSQL"],
@@ -141,40 +140,40 @@ export const projects: Project[] = [
     slug: "marvfinancialcharts",
     title: "mFinancialCharts",
     summary:
-      "Real-time crypto charting platform with a custom HTML5 Canvas engine — 11 renderers, footprint charts, 60fps. Built solo, from scratch. Live at charts.m4marvin.com.",
-    role: "Sole Engineer",
-    org: "Personal Project (Contract)",
-    period: "Jan 2024 – May 2024",
-    location: "Remote",
+      "Internal market-analysis tool for ~5 traders with custom multi-canvas footprint charts, a 4TB compressed data lake, and p99 60fps performance. Live at charts.m4marvin.com.",
+    role: "Founding Engineer",
+    org: "mFinancialCharts",
+    period: "Aug 2023 – Sep 2024",
+    location: "New Delhi, India",
     story: [
-      "Contract job. Client wanted footprint charts for crypto — per-trade level visualization showing buy/sell activity at every price level inside each candle. TradingView did not have footprint charts when I built this. No references.",
-      "Designed and implemented the whole thing alone: backend, frontend, rendering engine, deployment.",
+      "Solo founding engineer for an internal market-analysis tool used by ~5 traders, designed for granular crypto data processing and visualization.",
+      "Built the backend, frontend, custom charting engine, data pipeline, and deployment end to end; the tool supports 1-second timeframes, candles, indicators, indicators-on-indicators, and fully custom footprint charts.",
     ],
     contributions: [
       {
         label: "Backend",
-        text: "Raw trade data from Binance and Bybit APIs, per-trade level processing for max accuracy. Polars (Rust DataFrame) for processing, Parquet with LZ4 compression for storage. 3,664 parquet files across 818 symbols, ~6GB.",
+        text: "Downloaded every Binance instrument and Bybit trades daily from Binance's public S3 bucket with SHA checksum verification. Built all_trades and 5s_candles from Bitcoin's 2M average daily trades (30M peaks), covering ~1100 spot and ~900 futures instruments, with LZ4 compression and ~4TB of compressed Parquet data in a custom in-house data lake.",
       },
       {
         label: "API",
-        text: "FastAPI, 14 endpoints: OHLC data, technical indicators (SMA, EMA, RSI, Bollinger Bands, ROC), symbol metadata, file discovery. CLI with 21 commands across 4 groups for ETL, exchange ops, indexing, benchmarking.",
+        text: "FastAPI data delivery with bulk candle requests and smaller footprint-data chunks for responsive infinite loading; Polars via Python reads the Parquet data lake.",
       },
       {
         label: "Frontend",
-        text: "React + TypeScript. Entire charting engine built on raw HTML5 Canvas. 11 custom canvas renderers. No TradingView, no Chart.js, no Recharts.",
+        text: "React + TypeScript charting engine built with multiple HTML5 canvases for chart, axes, and hover layers, with Zustand state management and virtualization.",
       },
       {
         label: "Footprint chart",
-        text: "80+ configurable settings. 16 display values (buy/sell volume, trades, percentages, quote volume). Point of Control markers. Value Area Range with standard and greedy algorithms. Imbalance detection with thresholds and zone plotting. Support/resistance detection. 6 marker types. Asymmetric volume coloring. Candle positioning (left/middle/right).",
+        text: "Fully custom footprint charts show per-price-level volume, trade counts, buy/sell delta, imbalance zones, lopsided formats, and variance, alongside candles and indicators-on-indicators.",
       },
       {
         label: "Performance",
-        text: "Separate canvases for hover, chart, axes — one canvas kills performance with re-renders. Custom grid system. Text auto-hides below font size 6 to hold 60fps. Felt more like building a game than a webpage.",
+        text: "Multi-canvas rendering, virtualization, and dynamic multi-pane/multi-axis layouts achieved p99 60fps on Firefox and Chrome with thousands of objects on screen.",
       },
     ],
     tech: ["Python", "FastAPI", "React", "TypeScript", "Polars", "Parquet", "HTML5 Canvas", "Zustand", "React Query"],
     reflection:
-      "No references. No team. Learned everything by doing — backend architecture, canvas rendering, optimization, deployment. Gave up several times. No guide existed for most of it.",
+      "Built the data pipeline and charting engine around the hardest case—Bitcoin's high-volume trade stream—so the same system could serve every supported instrument and timeframe.",
     link: "https://charts.m4marvin.com",
     image: "/charts-screenshot.png",
     featured: true,
@@ -183,26 +182,26 @@ export const projects: Project[] = [
     slug: "self-hosted-infrastructure",
     title: "Self-Hosted Infrastructure",
     summary:
-      "My personal cloud. Two machines, two Cloudflare tunnels, no third parties holding my data. Git, photos, passwords, monitoring — all self-hosted.",
+      "My personal cloud. Two machines, one Cloudflare tunnel, and zero exposed ports. Git, photos, passwords, monitoring, files, charts, and chat are self-hosted.",
     role: "Sole Operator",
     org: "Personal",
     period: "Ongoing",
     location: "Abu Dhabi, UAE",
     story: [
-      "My personal cloud. Two machines, two Cloudflare tunnels, no third parties holding my data.",
+      "My personal cloud. Two machines, one Cloudflare tunnel, and zero exposed ports.",
     ],
     contributions: [
       {
         label: "VPS (Hetzner)",
-        text: "4 vCPU, 8GB RAM, 76GB disk, Ubuntu. Forgejo (self-hosted Git, git.m4marvin.com), Vaultwarden (passwords, vault.m4marvin.com), Uptime Kuma (monitoring, status.m4marvin.com), Copyparty (file server for resume PDF, screenshots, site images, files.m4marvin.com). All bound to 127.0.0.1 — no public ports except SSH on a non-standard port.",
+        text: "Hetzner VPS with 4 vCPU Skylake, 7.6GB RAM, 76GB disk, and Ubuntu 24.04. Forgejo, Vaultwarden, Uptime Kuma, Copyparty, the portfolio, charts, chat, and Beszel run with containers bound to 127.0.0.1; SSH uses port 3232.",
       },
       {
         label: "Beast (Arch Desktop)",
-        text: "Intel Core Ultra 9, 93GB RAM, Arc Pro 130T GPU. Immich (self-hosted Google Photos, 40k+ photos, ML search + facial recognition via OpenVINO on the Arc GPU, photos.m4marvin.com), mFinancialCharts (charts.m4marvin.com), Forgejo runner (CI/CD on 16 cores, Docker-in-Docker), Jellyfin (tailnet-only).",
+        text: "Beast runs Arch on an Intel Core Ultra 9 with 93GB RAM and an Arc Pro 130T GPU. Immich uses OpenVINO on the Arc GPU and Jellyfin is tailnet-only; backups move over Tailscale.",
       },
       {
         label: "Cloudflare tunnels",
-        text: "Two tunnels, no open ports on either machine. Systemd services, not containers. Cloudflare handles TLS and DDoS. I handle everything else.",
+        text: "One systemd-managed Cloudflare tunnel, zero exposed ports, UFW default-deny, fail2ban, AIDE daily integrity checks, unattended-upgrades, and nightly backup-vps.sh.",
       },
     ],
     tech: ["Docker", "Cloudflare Tunnels", "Forgejo", "Immich", "Vaultwarden", "Uptime Kuma", "Linux", "Arch"],
@@ -212,33 +211,34 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "laboratory-websites",
-    title: "Laboratory Websites Ecosystem",
+    slug: "acbr-drug-discovery",
+    title: "ACBR Drug Discovery Web Server",
     summary:
-      "Research showcase platform for a university lab. Next.js + FastAPI, AI model hosting, mobile-first.",
-    role: "Full-Stack Developer",
-    org: "Jawaharlal Nehru University",
-    period: "Nov 2024 – Jul 2025",
+      "Open-source web server for target-driven early-stage drug discovery, serving bioactivity prediction, virtual screening, Tanimoto similarity, and drug-likeness QED via RDKit.",
+    role: "Sole Engineer — ML & Web Platform",
+    org: "ACBR (Ambedkar Center for Biomedical Research), University of Delhi",
+    period: "Sep 2024 – Mar 2025",
     location: "New Delhi, India",
     story: [
-      "Research showcase platform for a university lab. Computational research tools made accessible and cross-device.",
+      "Models were built by the lab; my role was optimization, MLOps for deploying and serving trained models, and the website.",
     ],
     contributions: [
       {
         label: "Frontend",
-        text: "Next.js + React + Tailwind. Responsive, mobile-first, custom animations.",
+        text: "Designed and developed the Next.js + React + Tailwind website for the open-source server.",
       },
       {
         label: "Backend",
-        text: "FastAPI services: AI model hosting, data encryption, email automation, background task processing, real-time research model APIs.",
+        text: "Built FastAPI services to deploy and serve the lab's trained models for bioactivity prediction and virtual screening.",
       },
       {
         label: "Integration",
-        text: "Computational research tools wired into a mobile-first interface for accessibility and cross-device performance.",
+        text: "Integrated Tanimoto similarity and RDKit QED drug-likeness analysis into the web platform.",
       },
     ],
-    tech: ["Next.js", "React", "FastAPI", "Tailwind CSS", "AI Model Hosting"],
-    featured: false,
+    tech: ["Next.js", "React", "FastAPI", "Tailwind CSS", "RDKit", "MLOps"],
+    link: "https://bic.acbr.du.ac.in/",
+    featured: true,
   },
   {
     slug: "secure-cloud-storage",
@@ -246,9 +246,9 @@ export const projects: Project[] = [
     summary:
       "Encrypted file storage with biometric auth — face recognition, liveness detection, AES/RSA. Dockerized.",
     role: "Full-Stack Developer",
-    org: "Personal",
-    period: "Aug 2023 – Dec 2023",
-    location: "Remote",
+    org: "Client Work",
+    period: "Apr 2023 – Jul 2023",
+    location: "New Delhi, India",
     story: [
       "Encrypted file storage with biometric authentication. Identity verification, not just passwords.",
     ],
@@ -281,7 +281,7 @@ export const skills: SkillCategory[] = [
   { title: "Architecture", items: ["Microservices", "REST", "Distributed Systems", "Event-Driven", "Async Python", "System Design", "Algorithmic Trading"], icon: "Boxes" },
   { title: "Cloud & DevOps", items: ["Cloudflare", "Docker", "CI/CD", "Forgejo", "Linux", "Git", "GitHub"], icon: "Cloud" },
   { title: "Data Engineering", items: ["PostgreSQL", "SQLAlchemy", "Polars", "Pandas", "NumPy", "Parquet", "ETL Pipelines"], icon: "Database" },
-  { title: "ML & Performance", items: ["ONNX Runtime", "MediaPipe", "XGBoost", "Face Recognition", "HTML5 Canvas (60 FPS)"], icon: "Brain" },
+  { title: "ML & Performance", items: ["ONNX Runtime", "MediaPipe", "Model Serving (MLOps)", "RDKit", "Face Recognition", "HTML5 Canvas (60 FPS)"], icon: "Brain" },
 ]
 
 export const leadership: LeadershipItem[] = [
@@ -292,15 +292,15 @@ export const leadership: LeadershipItem[] = [
   },
   {
     title: "Engineering Mentorship",
-    subtitle: "JNU & Qdata-Octo",
+    subtitle: "JNU & Sirius International Holding",
     description:
-      "Mentored 50+ undergrads in DSA and full-stack (90%+ satisfaction). Guided 6 engineers through production architecture, deployment, and standards at Qdata-Octo.",
+      "Mentored 50+ undergrads in DSA and full-stack (90%+ satisfaction). Guided 6 engineers through production architecture, deployment, and standards at Sirius International Holding.",
   },
   {
     title: "Technical Leadership",
-    subtitle: "Qdata-Octo, Abu Dhabi",
+    subtitle: "Sirius International Holding, Abu Dhabi",
     description:
-      "Onboarded 6 engineers to full productivity in two weeks. Set engineering standards for a platform running 5,000+ automated trades daily.",
+      "Onboarded 6 engineers and set engineering standards for a platform averaging 5,000+ automated trades daily.",
   },
 ]
 
@@ -311,14 +311,8 @@ export const publications: Publication[] = [
     venue: "J. Phys. Chem. B (ACS), 129(5), 1640–1647",
     year: 2025,
     description:
-      "A six-descriptor physics-based ML model (XGBoost) hits 0.74 kcal/mol MAE on FreeSolv. Uses Generalized Born electrostatics, polar surface area, log P, hydrogen bond donors/acceptors, and rotatable bonds — fully interpretable with no black-box features.",
+      "A six-descriptor physics-based ML model achieves 0.74 kcal/mol MAE on FreeSolv. Equal contribution with Ajeet Kumar Yadav. Uses Generalized Born electrostatics, polar surface area, log P, hydrogen bond donors/acceptors, and rotatable bonds.",
     link: "https://pubs.acs.org/doi/10.1021/acs.jpcb.4c07090",
-  },
-  {
-    title: "HAC-Net: Hybrid Deep Learning Architecture",
-    description:
-      "Hybrid deep learning architecture for protein-ligand binding affinity prediction — convolutional + attention mechanisms for molecular interaction modeling.",
-    link: "#",
   },
   {
     title: "Coarse-Grained Force Field for Protein-ssDNA Interactions",
@@ -326,7 +320,7 @@ export const publications: Publication[] = [
     year: 2023,
     description:
       "Coarse-grained simulation framework for protein-ssDNA interactions — lower computational cost, maintained accuracy.",
-    link: "#",
+    link: "",
   },
 ]
 
@@ -338,59 +332,59 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-  { value: 106185, suffix: "+", label: "TradingView signals processed" },
-  { value: 5000, suffix: "+", label: "Automated trades per day" },
-  { value: 11, label: "Custom canvas renderers" },
-  { value: 60, suffix: "fps", label: "Charting engine performance" },
+  { value: 200, suffix: "ms", label: "End-to-end signal-to-trade latency" },
+  { value: 5000, suffix: "+", label: "Automated trades per day (average)" },
+  { value: 50, label: "Trading systems in production" },
+  { value: 4, suffix: "", label: "Months zero downtime" },
 ]
 
 export const experience: ExperienceItem[] = [
   {
     title: "Algorithmic Trading Infrastructure Engineer",
-    company: "Qdata-Octo",
+    company: "Sirius International Holding",
     location: "Abu Dhabi, UAE",
-    period: "Aug 2025 – Feb 2026",
+    period: "Apr 2025 – Feb 2026",
     bullets: [
-      "Co-developed a production-grade algorithmic trading platform from scratch as the second engineering hire, enabling 106,185+ TradingView signals and 5,000+ automated trades daily across multiple accounts.",
-      "Built a high-performance trade execution engine using FastAPI and MetaTrader 5, supporting parallel multi-account execution, grid-based strategies, dynamic position sizing, and enterprise-grade security.",
-      "Developed a resilient, real-time signal ingestion pipeline with zero race conditions and dual-database persistence, ensuring seamless adaptation to evolving webhook formats.",
-      "Created a live monitoring dashboard with React and TanStack Start, providing real-time account visibility, historical trade analytics, and operational insights.",
-      "Strengthened platform resilience with advanced risk management controls, automated circuit breakers, and multi-channel alerting.",
-      "Accelerated team productivity by mentoring 6 engineers, enabling them to ship their first production features within two weeks.",
+      "Built the core trading engine and signal ingestor solo end to end as the second engineering hire, and built the trading dashboard solo; shared AWS, VPC, and Cloudflare infrastructure with one coworker.",
+      "Processed 106,185+ signals and averaged 5,000+ automated trades per day across 50 Windows systems, with 200ms end-to-end latency and zero downtime for four months.",
+      "Built a custom mt5-client wrapper around the MetaTrader 5 Python API to execute trader-designed strategies across 5 brokers and 20–25 assets, with dynamic position sizing and robust trade and market-condition handling.",
+      "Built the custom REST-based ingestor with authentication, validation, routing, correlation-ID logging, dual logging to each system and Postgres, and layer-level risk controls and alerting.",
+      "Created the React and TanStack Start dashboard for live account monitoring, execution reports, signal-quality statistics, strategy performance, and inter-strategy correlation.",
+      "Onboarded and mentored 6 engineers over the tenure and established production engineering standards.",
     ],
     tech: ["Python", "FastAPI", "React", "TanStack Start", "MetaTrader 5", "PostgreSQL"],
   },
   {
     title: "Full-Stack Developer",
-    company: "mFinancialCharts (Personal Project)",
-    location: "Remote",
-    period: "Jan 2024 – May 2024",
+    company: "mFinancialCharts",
+    location: "New Delhi, India",
+    period: "Aug 2023 – Sep 2024",
     bullets: [
-      "Developed a real-time HTML5 Canvas charting engine achieving 60 FPS (sub-16ms), enabling smooth multi-asset technical analysis and dynamic scaling.",
-      "Designed and launched a high-performance multi-asset financial analytics platform using React, Zustand, and React Context with scalable state management.",
-      "Built a production-ready data processing framework with Polars (Rust) and Parquet storage, automating daily Binance market data ingestion while minimising memory.",
-      "Crafted a FastAPI backend with optimised database indexing, advanced technical indicator calculations, and bidirectional infinite data loading via React Query.",
-      "Automated end-to-end daily ETL workflows delivering instant access to thousands of historical candlestick records across multiple timeframes.",
+      "Built a custom multi-canvas HTML5 charting engine with virtualization, Zustand state management, 1-second timeframes, and p99 60fps on Firefox and Chrome with thousands of objects.",
+      "Built fully custom footprint charts, candles, OHLCV indicators, and indicators-on-indicators for an internal tool used by ~5 traders.",
+      "Automated daily Binance and Bybit ingestion from Binance's public S3 bucket with SHA verification into all_trades and 5s_candles; Bitcoin handled 2M average daily trades and 30M peaks.",
+      "Processed every Binance instrument (~1100 spot and ~900 futures) into Parquet with LZ4 compression in a custom in-house data lake containing ~4TB compressed data, using Polars via Python.",
+      "Built the FastAPI data delivery layer with bulk candle requests and smaller footprint-data chunks for responsive infinite loading.",
     ],
     tech: ["Python", "FastAPI", "React", "TypeScript", "Polars", "Parquet", "HTML5 Canvas", "Zustand", "React Query"],
   },
   {
     title: "Full-Stack Developer",
-    company: "Laboratory Websites Ecosystem",
+    company: "ACBR (Ambedkar Center for Biomedical Research), University of Delhi",
     location: "New Delhi, India",
-    period: "Nov 2024 – Jul 2025",
+    period: "Sep 2024 – Mar 2025",
     bullets: [
-      "Engineered a research showcase platform using Next.js, React, FastAPI, and Tailwind CSS, delivering a responsive experience with custom animations.",
-      "Developed secure backend services with AI model hosting, data encryption, email automation, background task processing, and real-time research model APIs.",
-      "Crafted a mobile-first, responsive interface that seamlessly integrated computational research tools, enhancing accessibility and cross-device performance.",
+      "Sole engineer for an open-source target-driven early-stage drug-discovery web server using Next.js, React, FastAPI, and Tailwind CSS.",
+      "Optimized and deployed/served lab-built trained models for bioactivity prediction and virtual screening; did not train or tune the models.",
+      "Implemented Tanimoto similarity and drug-likeness QED via RDKit and built the website for the lab's model-backed platform.",
     ],
     tech: ["Next.js", "React", "FastAPI", "Tailwind CSS", "AI Model Hosting"],
   },
   {
     title: "Full-Stack Developer",
     company: "Secure Cloud Storage Platform",
-    location: "Remote",
-    period: "Aug 2023 – Dec 2023",
+    location: "New Delhi, India",
+    period: "Apr 2023 – Jul 2023",
     bullets: [
       "Built a secure cloud storage platform using Flask with end-to-end encrypted file storage and secure user access.",
       "Integrated advanced authentication: Face Recognition, Liveness Detection, and 256-bit AES/RSA encryption for data protection and identity verification.",
@@ -402,9 +396,9 @@ export const experience: ExperienceItem[] = [
 ]
 
 export const navItems: NavItem[] = [
-  { name: "Blog", link: "/blog" },
-  { name: "About", link: "#about" },
   { name: "Work", link: "#work" },
+  { name: "Experience", link: "#experience" },
   { name: "Skills", link: "#skills" },
   { name: "Contact", link: "#contact" },
+  { name: "Blog", link: "/blog" },
 ]
