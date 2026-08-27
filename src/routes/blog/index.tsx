@@ -10,7 +10,7 @@ function BlogIndex() {
   const posts = getAllPosts()
 
   return (
-    <main id="main" className="min-h-screen bg-black text-white">
+    <main id="main" tabIndex={-1} className="min-h-screen bg-black text-white">
       <SkipLink />
       <div className="mx-auto max-w-3xl px-4 pt-24 pb-24">
         <PageHeader backTo="/" backLabel="Back to Home" />

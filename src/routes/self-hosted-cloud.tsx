@@ -37,7 +37,7 @@ function Diagram({
 
 function SelfHostedCloudPage() {
   return (
-    <main id="main" className="relative min-h-screen bg-black text-white">
+    <main id="main" tabIndex={-1} className="relative min-h-screen bg-black text-white">
       <SkipLink />
       <div className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-16">
         <PageHeader backTo="/" backLabel="Back to Home" />
@@ -68,14 +68,10 @@ function SelfHostedCloudPage() {
           </p>
 
           <p>
-            Access is a single line in <code>~/.ssh/config</code>:{" "}
-            <code>Host hetzner</code> maps to the floating IP, user{" "}
-            <code>marv</code>, key file <code>~/.ssh/hetzner_key</code>. The SSH
-            daemon listens on port 3232, not 22, with{" "}
-            <code>PermitRootLogin no</code> and{" "}
-            <code>PasswordAuthentication no</code>. Key-only, non-standard port,
-            no root. Every time I type <code>ssh hetzner</code>, that is the
-            whole story.
+            Access is a single line in <code>~/.ssh/config</code>: a{" "}
+            <code>Host hetzner</code> alias that maps to the floating IP with
+            key-only authentication. Every time I type <code>ssh hetzner</code>,
+            that is the whole story.
           </p>
 
           <Diagram
@@ -102,8 +98,8 @@ function SelfHostedCloudPage() {
             The tunnel terminates on a service bound to{" "}
             <code>127.0.0.1</code>. No port on the VPS is ever exposed to the
             public internet. The only thing a port scan will find on the
-            floating IP is SSH on 3232, and the floating IP is the only thing
-            the VPS has anyway.
+            floating IP is SSH, locked to key-only authentication, and the
+            floating IP is the only thing the VPS has anyway.
           </p>
 
           <p>
@@ -124,7 +120,7 @@ function SelfHostedCloudPage() {
             want the world to use &mdash; Git, password vault, file server,
             charts, chat, this site &mdash; goes on the public tunnel.
             Anything I only want for myself &mdash; media servers, internal
-            admin UIs, the Forgejo container&apos;s port 22, the database
+            admin UIs, the Forgejo SSH endpoint, the database
             sockets &mdash; goes on the tailnet. The two networks are not
             symmetric. The public one is heavily filtered, the private one is
             trusted, and the box is the bridge between them.
@@ -184,8 +180,8 @@ function SelfHostedCloudPage() {
             Tailscale is the private network. The reason I need it at all is
             that not everything should be on the public edge. Jellyfin, for
             one: I do not want my media server reachable from the open
-            internet, full stop. The Forgejo container also exposes port 22 for
-            SSH over Git, and I do not want that port on the public edge
+            internet, full stop. The Forgejo container also exposes SSH over
+            Git, and I do not want that endpoint on the public edge
             either. Internal admin UIs (Uptime Kuma&apos;s settings page, the
             Vaultwarden admin token endpoint) are the same shape &mdash; things
             that exist but should not be guessed.
@@ -291,18 +287,16 @@ function SelfHostedCloudPage() {
             course: it is enabled with the default-deny inbound policy, and
             Cloudflare absorbs everything at the L3 and L4 layer before it
             even reaches the host. A port scan on the floating IP finds
-            nothing except SSH on 3232.
+            nothing except SSH.
           </p>
 
           <p>
-            At the SSH layer, the daemon listens on port 3232, refuses root
-            logins, refuses password authentication, and accepts only key
-            auth. <code>fail2ban</code> watches the auth log and bans any IP
-            that fails too many times in a row. The default jail is on,
-            which is enough for a single-user box. The combination &mdash;
-            non-standard port, key-only, and a bouncer &mdash; is
-            aggressively effective at making automated SSH attacks a
-            non-event.
+            At the SSH layer, the daemon accepts only key-based
+            authentication. <code>fail2ban</code> watches the auth log and
+            bans any IP that fails too many times in a row. The default jail
+            is on, which is enough for a single-user box. The combination
+            &mdash; key-only auth and a bouncer &mdash; is aggressively
+            effective at making automated SSH attacks a non-event.
           </p>
 
           <p>

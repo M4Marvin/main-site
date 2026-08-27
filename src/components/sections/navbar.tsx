@@ -1,9 +1,9 @@
 import { useState } from "react"
-import { Menu, Github } from "lucide-react"
+import { Menu, Github, ExternalLink } from "lucide-react"
 import { FloatingNav } from "@/components/ui/floating-navbar"
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
-import { navItems } from "@/lib/portfolio-data"
+import { navItems, profile } from "@/lib/portfolio-data"
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
@@ -14,7 +14,7 @@ export function Navbar() {
         <FloatingNav navItems={navItems} />
       </div>
 
-      <div className="fixed left-0 right-0 top-0 z-[5000] flex items-center justify-between px-4 py-3 md:hidden">
+      <div className="fixed left-0 right-0 top-0 z-[5000] flex items-center justify-between border-b border-white/10 bg-black/80 px-4 py-3 backdrop-blur-md md:hidden">
         <span className="text-sm font-semibold text-white">Marvin V Prakash</span>
         <div className="flex items-center gap-2">
           <Sheet open={open} onOpenChange={setOpen}>
@@ -45,6 +45,19 @@ export function Navbar() {
                     {item.name}
                   </SheetClose>
                 ))}
+                <SheetClose
+                  render={
+                    <a
+                      href={profile.resumeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-linear-to-r from-blue-500 to-violet-500 px-4 py-3 text-base font-medium text-white shadow-lg shadow-blue-600/25 active:scale-[0.97]"
+                    />
+                  }
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  Resume
+                </SheetClose>
                 <a
                   href="https://github.com/M4Marvin"
                   target="_blank"

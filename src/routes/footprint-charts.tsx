@@ -37,13 +37,13 @@ function Diagram({
 
 function FootprintChartsPage() {
   return (
-    <main id="main" className="relative min-h-screen bg-black text-white">
+    <main id="main" tabIndex={-1} className="relative min-h-screen bg-black text-white">
       <SkipLink />
       <div className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-16">
         <PageHeader backTo="/" backLabel="Back to Home" />
 
         <Typeset>
-          <h1>Diving Deep into Footprint Charts: Building the Ultimate Order Flow Tool for Crypto Traders</h1>
+          <h1>Building Footprint Charts on HTML5 Canvas</h1>
 
           <p>
             A walkthrough of how <code>mFinancialCharts</code> renders per-trade order flow on

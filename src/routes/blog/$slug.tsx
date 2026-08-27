@@ -38,7 +38,7 @@ function BlogPost() {
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null
 
   return (
-    <main id="main" className="min-h-screen bg-black text-white">
+    <main id="main" tabIndex={-1} className="min-h-screen bg-black text-white">
       <SkipLink />
       <article className="mx-auto max-w-3xl px-4 pt-24 pb-24">
         <PageHeader backTo="/blog" backLabel="Back to Home" />

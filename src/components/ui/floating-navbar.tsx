@@ -33,13 +33,6 @@ export const FloatingNav = ({
         <div className="h-5 w-px bg-white/10" />
 
         <a
-          href="#contact"
-          className="relative rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 active:scale-[0.97]"
-        >
-          <span>Get in Touch</span>
-        </a>
-
-        <a
           href={profile.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"

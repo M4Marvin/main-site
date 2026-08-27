@@ -174,7 +174,7 @@ html {
 }
 
 section[id] {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 4.5rem;
 }
 
 /* Print: plain black-on-white document, expanded URLs, chrome hidden */

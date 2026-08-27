@@ -12,7 +12,7 @@ export const Route = createFileRoute('/')({ component: Home })
 
 function Home() {
   return (
-    <main id="main" className="relative min-h-screen bg-black text-white">
+    <main id="main" tabIndex={-1} className="relative min-h-screen bg-black text-white">
       <SkipLink />
       <Navbar />
       <div className="pt-20 md:pt-24">
