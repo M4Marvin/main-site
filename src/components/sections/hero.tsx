@@ -1,5 +1,4 @@
-import { Link } from "@tanstack/react-router"
-import { ArrowDown, ExternalLink, PenLine } from "lucide-react"
+import { ArrowDown, ExternalLink } from "lucide-react"
 import { profile, stats } from "@/lib/portfolio-data"
 
 const roleLine = profile.roles.filter((role) => role.trim() !== "").join(" · ")
@@ -45,13 +44,6 @@ export function Hero() {
             <ExternalLink className="h-4 w-4" /> Resume
           </a>
         </div>
-
-        <Link
-          to="/blog"
-          className="mt-5 flex items-center gap-1.5 rounded-full border border-white/10 bg-transparent px-3 py-2 text-xs text-neutral-400 transition-colors duration-200 hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
-        >
-          <PenLine className="h-3.5 w-3.5" /> Blog
-        </Link>
 
         <div className="mt-8 grid grid-cols-2 gap-x-12 gap-y-4 sm:grid-cols-4">
           {stats.map((stat) => (

@@ -20,8 +20,10 @@ function Home() {
     <main id="main" className="relative min-h-screen bg-black text-white">
       <SkipLink />
       <Navbar />
+      <div className="pt-20 md:pt-24">
+        <AvailabilityBanner />
+      </div>
       <Hero />
-      <AvailabilityBanner />
       <Work />
       <Experience />
       <About />

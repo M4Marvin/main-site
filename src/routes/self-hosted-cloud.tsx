@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { ArrowLeft, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 import { Image } from "@unpic/react"
 import { Typeset } from "@/components/ui/typeset"
-import { buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { SkipLink } from "@/components/sections/skip-link"
+import { PageHeader } from "@/components/sections/page-header"
 
 export const Route = createFileRoute("/self-hosted-cloud")({
   component: SelfHostedCloudPage,
@@ -28,7 +28,7 @@ function Diagram({
         layout="constrained"
         className="rounded-lg border border-white/10"
       />
-      <figcaption className="mt-2 text-center text-xs text-neutral-500">
+      <figcaption className="mt-2 text-center text-xs text-neutral-400">
         {caption}
       </figcaption>
     </figure>
@@ -37,20 +37,10 @@ function Diagram({
 
 function SelfHostedCloudPage() {
   return (
-    <main className="relative min-h-screen bg-black text-white">
+    <main id="main" className="relative min-h-screen bg-black text-white">
+      <SkipLink />
       <div className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-16">
-        <div className="mb-12">
-          <Link
-            to="/"
-            className={cn(
-              buttonVariants({ variant: "ghost" }),
-              "-ml-3 gap-2 text-neutral-400 hover:text-white",
-            )}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Link>
-        </div>
+        <PageHeader backTo="/" backLabel="Back to Home" />
 
         <Typeset>
           <h1>My Personal Cloud: Two Boxes, One Tunnel, Zero Open Ports</h1>

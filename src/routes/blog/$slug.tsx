@@ -41,7 +41,7 @@ function BlogPost() {
     <main id="main" className="min-h-screen bg-black text-white">
       <SkipLink />
       <article className="mx-auto max-w-3xl px-4 pt-24 pb-24">
-        <PageHeader backTo="/blog" backLabel="All posts" />
+        <PageHeader backTo="/blog" backLabel="Back to Home" />
 
         <header className="mb-12">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">

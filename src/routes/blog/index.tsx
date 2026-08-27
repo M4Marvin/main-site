@@ -13,7 +13,7 @@ function BlogIndex() {
     <main id="main" className="min-h-screen bg-black text-white">
       <SkipLink />
       <div className="mx-auto max-w-3xl px-4 pt-24 pb-24">
-        <PageHeader backTo="/" backLabel="Back to main" />
+        <PageHeader backTo="/" backLabel="Back to Home" />
 
         <div className="mb-16">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">

@@ -95,12 +95,12 @@ function ProjectCard({ project }: ProjectCardProps) {
 
   const description = (
     <div className="space-y-3">
-      <div className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-neutral-400">
+      <div className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-neutral-300">
         <span>{project.role}</span>
         {project.period && (
           <>
             <span aria-hidden>·</span>
-            <span>{project.period}</span>
+            <span className="whitespace-nowrap">{project.period}</span>
           </>
         )}
       </div>
@@ -160,8 +160,8 @@ function ProjectCard({ project }: ProjectCardProps) {
 
   const title = (
     <div className="flex items-center gap-2 font-sans font-bold text-neutral-200">
-      <Icon className="h-4 w-4 text-neutral-400" aria-hidden />
-      <span>{project.title}</span>
+      <Icon className="h-4 w-4 shrink-0 text-neutral-400" aria-hidden />
+      <span className="text-neutral-200">{project.title}</span>
     </div>
   )
 

@@ -14,7 +14,7 @@ export function Footer() {
           >
             MARVIN
           </div>
-          <div className="mx-auto mt-2 h-px w-40 bg-linear-to-r from-transparent via-blue-500 to-transparent" />
+          <div className="mx-auto mt-6 h-px w-40 bg-linear-to-r from-transparent via-blue-500 to-transparent" />
         </div>
 
         <div className="grid gap-8 sm:grid-cols-3">

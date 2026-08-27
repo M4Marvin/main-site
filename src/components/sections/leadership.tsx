@@ -18,10 +18,12 @@ export function Leadership() {
                 key={item.title}
                 className="flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors duration-200 hover:border-white/20"
               >
-                <div>
-                  <Icon className="mb-4 h-8 w-8 text-blue-400" />
-                  <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                  <p className="mt-1 text-sm font-medium text-blue-300">{item.subtitle}</p>
+                <div className="flex items-start gap-3">
+                  <Icon className="mt-0.5 h-7 w-7 shrink-0 text-blue-400" aria-hidden />
+                  <div>
+                    <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                    <p className="mt-1 text-sm font-medium text-blue-300">{item.subtitle}</p>
+                  </div>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-neutral-300">{item.description}</p>
               </div>
