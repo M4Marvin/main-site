@@ -1,4 +1,4 @@
-import { ExternalLink, LineChart, TrendingUp, Server, Sparkles } from "lucide-react"
+import { ExternalLink, LineChart, TrendingUp, Sparkles } from "lucide-react"
 import { Link } from "@tanstack/react-router"
 import { Image } from "@unpic/react"
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
@@ -14,8 +14,6 @@ function getProjectIcon(slug: string) {
       return LineChart
     case "sirius-trading-platform":
       return TrendingUp
-    case "self-hosted-infrastructure":
-      return Server
     default:
       return Sparkles
   }
@@ -25,38 +23,39 @@ function getThumbnail(project: Project) {
   if (project.slug === "marvfinancialcharts") {
     return "https://files.m4marvin.com/charts_app/1.png"
   }
-  if (project.slug === "self-hosted-infrastructure") {
-    return "/infra-diagram.svg"
+  if (project.slug === "sirius-trading-platform") {
+    return "/sirius-architecture.svg"
+  }
+  if (project.slug === "acbr-drug-discovery") {
+    return "/acbr-screenshot.webp"
   }
   return project.image
 }
 
-function ProjectGradient() {
-  return (
-    <div className="flex h-full min-h-[8rem] w-full items-center justify-center rounded-t-xl bg-gradient-to-br from-blue-600 via-blue-500 to-violet-600">
-      <Sparkles className="h-8 w-8 text-white/60" />
-    </div>
-  )
+function demoLabel(project: Project) {
+  if (project.slug === "acbr-drug-discovery") return "Visit the live site"
+  return "Live demo"
 }
 
 type CardLinkProps = {
   to?: string
   href?: string
+  ariaLabel?: string
   className?: string
   children: React.ReactNode
 }
 
-function CardLink({ to, href, className, children }: CardLinkProps) {
+function CardLink({ to, href, ariaLabel, className, children }: CardLinkProps) {
   if (to) {
     return (
-      <Link to={to} className={className}>
+      <Link to={to} aria-label={ariaLabel} className={className}>
         {children}
       </Link>
     )
   }
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+      <a href={href} target="_blank" rel="noopener noreferrer" aria-label={ariaLabel} className={className}>
         {children}
       </a>
     )
@@ -72,12 +71,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   const Icon = getProjectIcon(project.slug)
   const thumbnail = getThumbnail(project)
 
-  const blogHref =
-    project.slug === "marvfinancialcharts"
-      ? "/footprint-charts"
-      : project.slug === "self-hosted-infrastructure"
-        ? "/self-hosted-cloud"
-        : null
+  const blogHref = project.slug === "marvfinancialcharts" ? "/footprint-charts" : null
   const cardTarget = blogHref ?? project.link ?? null
   const isInternal = !!blogHref
   const isClickable = !!cardTarget
@@ -124,7 +118,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-blue-400 transition-colors duration-200 hover:border-blue-400/30 hover:bg-blue-400/10 hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
         >
           <ExternalLink className="h-3 w-3" />
-          Live demo
+          {demoLabel(project)}
         </a>
       )}
     </div>
@@ -154,9 +148,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         />
       )}
     </div>
-  ) : (
-    <ProjectGradient />
-  )
+  ) : null
 
   const title = (
     <div className="flex items-center gap-2 font-sans font-bold text-neutral-200">
@@ -176,7 +168,7 @@ function ProjectCard({ project }: ProjectCardProps) {
   )
 
   const headerNode = isClickable ? (
-    <CardLink {...linkProps} className={focusRing}>
+    <CardLink {...linkProps} ariaLabel={project.title} className={focusRing}>
       {header}
     </CardLink>
   ) : (
