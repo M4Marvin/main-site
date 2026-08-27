@@ -18,7 +18,7 @@ export function Skills() {
           <div className="mt-1 h-1 w-20 rounded-full bg-linear-to-r from-blue-500 to-violet-500" />
         </div>
 
-        <HoverEffect items={cardItems} />
+        <HoverEffect items={cardItems} layoutId="skillsHover" />
       </div>
     </section>
   )

@@ -3,6 +3,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Calendar, Tag, ArrowLeft } from "lucide-react"
+import { SkipLink } from "@/components/sections/skip-link"
 
 export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
@@ -36,7 +37,8 @@ function BlogPost() {
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main id="main" className="min-h-screen bg-black text-white">
+      <SkipLink />
       <article className="mx-auto max-w-3xl px-4 pt-32 pb-24">
         <Link
           to="/blog"
@@ -50,7 +52,7 @@ function BlogPost() {
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
             {post.title}
           </h1>
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-500">
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-400">
             <span className="flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" />
               {new Date(post.date).toLocaleDateString("en-US", {
@@ -89,7 +91,7 @@ function BlogPost() {
                 params={{ slug: prevPost.slug }}
                 className="group text-left"
               >
-                <span className="text-xs text-zinc-500">Previous</span>
+                <span className="text-xs text-zinc-400">Previous</span>
                 <p className="mt-1 text-sm font-medium group-hover:text-blue-400 transition-colors">
                   {prevPost.title}
                 </p>
@@ -103,7 +105,7 @@ function BlogPost() {
                 params={{ slug: nextPost.slug }}
                 className="group text-right"
               >
-                <span className="text-xs text-zinc-500">Next</span>
+                <span className="text-xs text-zinc-400">Next</span>
                 <p className="mt-1 text-sm font-medium group-hover:text-blue-400 transition-colors">
                   {nextPost.title}
                 </p>

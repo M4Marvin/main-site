@@ -4,6 +4,7 @@ import { Image } from "@unpic/react"
 import { Typeset } from "@/components/ui/typeset"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { SkipLink } from "@/components/sections/skip-link"
 
 export const Route = createFileRoute("/footprint-charts")({
   component: FootprintChartsPage,
@@ -25,7 +26,7 @@ function Diagram({
         alt={alt}
         className="w-full rounded-lg border border-white/10"
       />
-      <figcaption className="mt-2 text-center text-xs text-neutral-500">
+      <figcaption className="mt-2 text-center text-xs text-neutral-400">
         {caption}
       </figcaption>
     </figure>
@@ -34,7 +35,8 @@ function Diagram({
 
 function FootprintChartsPage() {
   return (
-    <main className="relative min-h-screen bg-black text-white">
+    <main id="main" className="relative min-h-screen bg-black text-white">
+      <SkipLink />
       <div className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-16">
         <div className="mb-12">
           <Link

@@ -12,7 +12,7 @@ export function Publications() {
           <div className="mt-1 h-1 w-20 rounded-full bg-linear-to-r from-blue-500 to-violet-500" />
         </div>
 
-        <HoverEffect items={publications} />
+        <HoverEffect items={publications} layoutId="publicationsHover" />
       </div>
     </section>
   )

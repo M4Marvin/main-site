@@ -12,6 +12,7 @@ function getProjectIcon(slug: string) {
     case "marvfinancialcharts":
       return LineChart
     case "qdata-octo":
+    case "sirius-trading-platform":
       return TrendingUp
     case "self-hosted-infrastructure":
       return Server
@@ -30,53 +31,37 @@ function getThumbnail(project: Project) {
   return project.image
 }
 
-function ProjectGradient({ slug }: { slug?: string }) {
-  const gradient =
-    slug === "self-hosted-infrastructure"
-      ? "from-orange-500 via-amber-500 to-rose-500"
-      : "from-blue-600 via-blue-500 to-violet-600"
+function ProjectGradient() {
   return (
-    <div
-      className={cn(
-        "flex h-full min-h-[8rem] w-full items-center justify-center rounded-t-xl bg-gradient-to-br",
-        gradient,
-      )}
-    >
+    <div className="flex h-full min-h-[8rem] w-full items-center justify-center rounded-t-xl bg-gradient-to-br from-blue-600 via-blue-500 to-violet-600">
       <Sparkles className="h-8 w-8 text-white/60" />
     </div>
   )
 }
 
-type CardWrapperProps = {
-  href?: string
+type CardLinkProps = {
   to?: string
+  href?: string
   className?: string
   children: React.ReactNode
 }
 
-function CardWrapper({ href, to, className, children }: CardWrapperProps) {
-  const classes = cn(
-    "group/card block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/40",
-    className,
-  )
-
+function CardLink({ to, href, className, children }: CardLinkProps) {
   if (to) {
     return (
-      <Link to={to} className={classes}>
+      <Link to={to} className={className}>
         {children}
       </Link>
     )
   }
-
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
         {children}
       </a>
     )
   }
-
-  return <div className={classes}>{children}</div>
+  return <>{children}</>
 }
 
 type ProjectCardProps = {
@@ -95,25 +80,22 @@ function ProjectCard({ project }: ProjectCardProps) {
         : null
   const cardTarget = blogHref ?? project.link ?? null
   const isInternal = !!blogHref
-  const isExternal = !isInternal && !!project.link
   const isClickable = !!cardTarget
 
-  const handleDemoClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (project.link) {
-      window.open(project.link, "_blank", "noopener,noreferrer")
-    }
-  }
+  const linkProps = isClickable
+    ? isInternal
+      ? { to: cardTarget as string }
+      : { href: cardTarget as string }
+    : {}
 
   const cardClasses = cn(
     "h-full transition-transform duration-200",
-    isClickable && "group-hover/card:-translate-y-1",
+    isClickable && "group/card cursor-pointer hover:-translate-y-1 active:scale-[0.98]",
   )
 
   const description = (
     <div className="space-y-3">
-      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-neutral-500">
+      <div className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-neutral-400">
         <span>{project.role}</span>
         {project.period && (
           <>
@@ -128,21 +110,22 @@ function ProjectCard({ project }: ProjectCardProps) {
           <Badge
             key={t}
             variant="secondary"
-            className="border-white/10 bg-white/5 text-[10px] text-neutral-400"
+            className="border-white/10 bg-white/5 text-xs text-neutral-400"
           >
             {t}
           </Badge>
         ))}
       </div>
       {project.link && (
-        <button
-          type="button"
-          onClick={handleDemoClick}
-          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-blue-400 transition-colors hover:border-blue-400/30 hover:bg-blue-400/10 hover:text-blue-300"
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-blue-400 transition-colors duration-200 hover:border-blue-400/30 hover:bg-blue-400/10 hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
         >
           <ExternalLink className="h-3 w-3" />
           Live demo
-        </button>
+        </a>
       )}
     </div>
   )
@@ -155,7 +138,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         <img
           src={thumbnail}
           alt={project.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover/card:scale-105"
           loading="lazy"
           decoding="async"
         />
@@ -163,7 +146,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         <Image
           src={thumbnail}
           alt={project.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover/card:scale-105"
           width={800}
           height={400}
           layout="constrained"
@@ -172,7 +155,7 @@ function ProjectCard({ project }: ProjectCardProps) {
       )}
     </div>
   ) : (
-    <ProjectGradient slug={project.slug} />
+    <ProjectGradient />
   )
 
   const title = (
@@ -182,27 +165,36 @@ function ProjectCard({ project }: ProjectCardProps) {
     </div>
   )
 
-  const cardInner = (
+  const focusRing = "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/40"
+
+  const titleNode = isClickable ? (
+    <CardLink {...linkProps} className={focusRing}>
+      {title}
+    </CardLink>
+  ) : (
+    title
+  )
+
+  const headerNode = isClickable ? (
+    <CardLink {...linkProps} className={focusRing}>
+      {header}
+    </CardLink>
+  ) : (
+    header
+  )
+
+  return (
     <div className={cardClasses}>
       <BentoGridItem
-        title={title}
+        title={titleNode}
         description={description}
-        header={header}
+        header={headerNode}
         className={cn(
           "h-full border-white/[0.1] transition-colors duration-200",
           isClickable && "hover:border-white/20",
         )}
       />
     </div>
-  )
-
-  return (
-    <CardWrapper
-      {...(isInternal ? { to: cardTarget as string } : {})}
-      {...(isExternal ? { href: cardTarget as string } : {})}
-    >
-      {cardInner}
-    </CardWrapper>
   )
 }
 

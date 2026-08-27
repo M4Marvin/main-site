@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin } from "lucide-react"
+import { Mail, Github, Linkedin, Phone } from "lucide-react"
 import { LampContainer } from "@/components/ui/lamp"
 import { MagneticButton } from "@/components/ui/magnetic-button"
 import { profile } from "@/lib/portfolio-data"
@@ -23,6 +23,16 @@ export function Contact() {
               >
                 <Mail className="h-4 w-4" />
                 {profile.email}
+              </a>
+            </MagneticButton>
+
+            <MagneticButton>
+              <a
+                href={`tel:${profile.phone.replace(/\s+/g, "")}`}
+                className="flex items-center gap-2 rounded-lg border border-white/10 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10"
+              >
+                <Phone className="h-4 w-4" />
+                {profile.phone}
               </a>
             </MagneticButton>
 

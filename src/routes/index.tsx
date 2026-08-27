@@ -10,12 +10,14 @@ import { Leadership } from '@/components/sections/leadership'
 import { Publications } from '@/components/sections/publications'
 import { Contact } from '@/components/sections/contact'
 import { Footer } from '@/components/sections/footer'
+import { SkipLink } from '@/components/sections/skip-link'
 
 export const Route = createFileRoute('/')({ component: Home })
 
 function Home() {
   return (
-    <main className="relative min-h-screen bg-black text-white">
+    <main id="main" className="relative min-h-screen bg-black text-white">
+      <SkipLink />
       <Navbar />
       <Hero />
       <About />

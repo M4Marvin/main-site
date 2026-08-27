@@ -62,7 +62,7 @@ export function About() {
                 <div className="flex items-center gap-3">
                   <fact.icon className="h-5 w-5 text-blue-400" />
                   <div>
-                    <p className="text-xs font-medium text-neutral-500 uppercase tracking-wider">{fact.label}</p>
+                    <p className="text-xs font-medium text-neutral-400 uppercase tracking-wider">{fact.label}</p>
                     <p className="mt-0.5 text-sm text-neutral-300">{fact.value}</p>
                   </div>
                 </div>

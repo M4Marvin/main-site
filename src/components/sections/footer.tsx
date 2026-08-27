@@ -8,9 +8,12 @@ export function Footer() {
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-24">
         <div className="mb-12 text-center">
-          <h2 className="text-[3rem] leading-none font-bold text-neutral-800 sm:text-[6rem] md:text-[8rem] dark:text-neutral-800">
+          <div
+            aria-hidden="true"
+            className="text-[3rem] leading-none font-bold text-neutral-700 select-none sm:text-[6rem] md:text-[8rem]"
+          >
             MARVIN
-          </h2>
+          </div>
           <div className="mx-auto mt-2 h-px w-40 bg-linear-to-r from-transparent via-blue-500 to-transparent" />
         </div>
 
@@ -58,14 +61,14 @@ export function Footer() {
 
           <div>
             <h3 className="mb-3 text-sm font-semibold text-white uppercase tracking-wider">Built With</h3>
-            <p className="text-sm leading-relaxed text-neutral-500">
-              React 19 · TanStack Router · shadcn/ui · Aceternity UI · Tailwind CSS v4 · Vite · motion
+            <p className="text-sm leading-relaxed text-neutral-400">
+              React 19 · TanStack Router · Tailwind CSS v4 · Vite · motion · shadcn/ui
             </p>
           </div>
         </div>
 
         <div className="mt-12 border-t border-white/5 pt-8 text-center">
-          <p className="text-xs text-neutral-600">
+          <p className="text-xs text-neutral-400">
             &copy; {new Date().getFullYear()} Marvin V Prakash. Built with love in Abu Dhabi.
           </p>
         </div>

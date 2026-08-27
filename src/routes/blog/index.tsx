@@ -1,6 +1,7 @@
 import { getAllPosts } from "@/lib/blog"
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { Calendar, Tag, ArrowLeft } from "lucide-react"
+import { SkipLink } from "@/components/sections/skip-link"
 
 export const Route = createFileRoute("/blog/")({ component: BlogIndex })
 
@@ -8,7 +9,8 @@ function BlogIndex() {
   const posts = getAllPosts()
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main id="main" className="min-h-screen bg-black text-white">
+      <SkipLink />
       <div className="mx-auto max-w-3xl px-4 pt-32 pb-24">
         <Link
           to="/"
@@ -39,7 +41,7 @@ function BlogIndex() {
                 {post.title}
               </h2>
               <p className="mt-2 text-zinc-400">{post.description}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-500">
+              <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-400">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-3.5 w-3.5" />
                   {new Date(post.date).toLocaleDateString("en-US", {
