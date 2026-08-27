@@ -124,7 +124,6 @@ function ProjectCard({ project }: ProjectCardProps) {
     </div>
   )
 
-  const isSvg = thumbnail?.toLowerCase().endsWith(".svg")
   const isExternalImage = !!thumbnail?.startsWith("http")
 
   const header = thumbnail ? (
