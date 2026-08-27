@@ -1,8 +1,7 @@
 import { Mail, Github, Linkedin, Phone } from "lucide-react"
-import { SectionHeader } from "@/components/sections/section-header"
 import { profile } from "@/lib/portfolio-data"
 
-const secondaryLinks = [
+const links = [
   { href: profile.github, label: "GitHub", icon: Github, external: true },
   { href: profile.linkedin, label: "LinkedIn", icon: Linkedin, external: true },
   { href: `tel:${profile.phone.replace(/\s+/g, "")}`, label: profile.phone, icon: Phone },
@@ -12,10 +11,12 @@ export function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden bg-black py-24 md:py-32">
       <div className="mx-auto flex max-w-3xl flex-col items-center px-4 text-center">
-        <SectionHeader title="Let's build something." />
+        <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
+          Available now — Architect / Tech Lead · Abu Dhabi, UAE
+        </h2>
 
-        <p className="-mt-6 max-w-md text-center text-sm leading-relaxed text-neutral-400 md:text-base">
-          Open to opportunities and collaborations. Reach out if you&apos;d like to work together.
+        <p className="mt-4 max-w-md text-center text-sm leading-relaxed text-neutral-400 md:text-base">
+          Open to full-time or contractor roles. Immediate joining. Email me about your team.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -27,7 +28,7 @@ export function Contact() {
             {profile.email}
           </a>
 
-          {secondaryLinks.map(({ href, label, icon: Icon, external }) => (
+          {links.map(({ href, label, icon: Icon, external }) => (
             <a
               key={label}
               href={href}
