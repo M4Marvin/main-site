@@ -125,10 +125,11 @@ function ProjectCard({ project }: ProjectCardProps) {
   )
 
   const isSvg = thumbnail?.toLowerCase().endsWith(".svg")
+  const isExternalImage = !!thumbnail?.startsWith("http")
 
   const header = thumbnail ? (
     <div className="relative aspect-[2/1] min-h-[8rem] w-full overflow-hidden rounded-t-xl bg-black">
-      {isSvg ? (
+      {!isExternalImage ? (
         <img
           src={thumbnail}
           alt={project.title}

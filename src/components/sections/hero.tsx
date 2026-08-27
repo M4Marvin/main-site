@@ -10,12 +10,12 @@ export function Hero() {
       <div className="absolute inset-0 bg-grid-white/[0.1]" />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
 
-      <div className="hero-fade-up relative z-20 flex w-full max-w-2xl flex-col items-center gap-6 text-center">
-        <h1 className="text-5xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl">
+      <div className="hero-fade-up relative z-20 flex w-full max-w-2xl flex-col items-center gap-4 text-center">
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl">
           {profile.name}
         </h1>
 
-        <p className="text-base leading-relaxed text-neutral-300 sm:text-lg">
+        <p className="text-base leading-normal text-neutral-300 sm:text-lg sm:leading-relaxed">
           {profile.tagline}
         </p>
 
@@ -36,7 +36,7 @@ export function Hero() {
           </a>
         </div>
 
-        <div className="mt-6 grid w-full grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4">
+        <div className="mt-3 grid w-full grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1">
               <div className="text-2xl font-bold tabular-nums text-white sm:text-3xl">
