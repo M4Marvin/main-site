@@ -23,17 +23,11 @@ function RootComponent() {
       <HeadContent />
       <SkipLink />
       <PageMark compact={!home} />
-      <div
-        className={
-          home
-            ? "relative z-10 mx-auto flex min-h-dvh w-full max-w-[68rem] flex-col px-6 sm:px-8"
-            : "relative z-10 mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-6 sm:px-8"
-        }
-      >
+      <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[68rem] flex-col px-6 sm:px-8">
         <Reveal>
           <SiteHeader />
         </Reveal>
-        <div className="flex-1">
+        <div className={home ? "flex-1" : "flex-1 max-w-3xl"}>
           <Outlet />
         </div>
         <Footer />

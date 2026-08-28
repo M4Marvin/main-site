@@ -103,6 +103,7 @@
         color-scheme: dark;
         scroll-padding-top: 1.25rem;
         background-color: var(--background);
+        scrollbar-gutter: stable;
     }
     body {
         @apply bg-background text-foreground antialiased;

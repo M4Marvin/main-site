@@ -6,9 +6,8 @@ export function SiteHeader() {
   const home = pathname === "/"
   const writing = pathname.startsWith("/blog")
 
-  const nameClass = home
-    ? "text-[1.75rem] font-medium tracking-[-0.04em] text-zinc-50 sm:text-[2.35rem] sm:leading-none"
-    : "text-[1.25rem] font-medium tracking-[-0.03em] text-zinc-50 sm:text-[1.35rem]"
+  const nameClass =
+    "text-[1.75rem] font-medium tracking-[-0.04em] text-zinc-50 sm:text-[2.35rem] sm:leading-none"
 
   return (
     <header className="flex flex-col gap-3 pt-10 pb-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 sm:pt-16 sm:pb-12">
