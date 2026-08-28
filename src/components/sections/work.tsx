@@ -1,8 +1,9 @@
-import { ExternalLink, LineChart, TrendingUp, Server, Sparkles } from "lucide-react"
+import { ArrowRight, ExternalLink, LineChart, TrendingUp, Sparkles } from "lucide-react"
 import { Link } from "@tanstack/react-router"
 import { Image } from "@unpic/react"
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
+import { BentoGridItem } from "@/components/ui/bento-grid"
 import { Badge } from "@/components/ui/badge"
+import { SectionHeader } from "@/components/sections/section-header"
 import { projects } from "@/lib/portfolio-data"
 import { cn } from "@/lib/utils"
 import type { Project } from "@/lib/portfolio-data"
@@ -11,10 +12,8 @@ function getProjectIcon(slug: string) {
   switch (slug) {
     case "marvfinancialcharts":
       return LineChart
-    case "qdata-octo":
+    case "sirius-trading-platform":
       return TrendingUp
-    case "self-hosted-infrastructure":
-      return Server
     default:
       return Sparkles
   }
@@ -24,138 +23,131 @@ function getThumbnail(project: Project) {
   if (project.slug === "marvfinancialcharts") {
     return "https://files.m4marvin.com/charts_app/1.png"
   }
-  if (project.slug === "self-hosted-infrastructure") {
-    return "/infra-diagram.svg"
+  if (project.slug === "sirius-trading-platform") {
+    return "/sirius-architecture.svg"
   }
-  return project.image
+  if (project.slug === "acbr-drug-discovery") {
+    return "/acbr-ankalan.webp"
+  }
+  return null
 }
 
-function ProjectGradient({ slug }: { slug?: string }) {
-  const gradient =
-    slug === "self-hosted-infrastructure"
-      ? "from-orange-500 via-amber-500 to-rose-500"
-      : "from-blue-600 via-blue-500 to-violet-600"
+type Action = { label: string; to?: string; href?: string }
+
+function cardAction(project: Project): Action | null {
+  if (project.slug === "sirius-trading-platform") {
+    return { label: "Read the case study", to: "/work/sirius" }
+  }
+  if (project.slug === "acbr-drug-discovery" && project.link) {
+    return { label: "Open the live tool", href: project.link }
+  }
+  if (project.link) {
+    return { label: "Live demo", href: project.link }
+  }
+  return null
+}
+
+function titleTarget(project: Project): { to?: string; href?: string } {
+  if (project.slug === "sirius-trading-platform") return { to: "/work/sirius" }
+  if (project.slug === "marvfinancialcharts") return { to: "/footprint-charts" }
+  if (project.link) return { href: project.link }
+  return {}
+}
+
+const focusRing = "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/40"
+
+function ProjectMeta({ project }: { project: Project }) {
   return (
-    <div
-      className={cn(
-        "flex h-full min-h-[8rem] w-full items-center justify-center rounded-t-xl bg-gradient-to-br",
-        gradient,
+    <div className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-neutral-300">
+      <span>{project.role}</span>
+      {project.period && (
+        <>
+          <span aria-hidden>·</span>
+          <span className="whitespace-nowrap">{project.period}</span>
+        </>
       )}
-    >
-      <Sparkles className="h-8 w-8 text-white/60" />
     </div>
   )
 }
 
-type CardWrapperProps = {
-  href?: string
-  to?: string
-  className?: string
-  children: React.ReactNode
+function TechBadges({ tech }: { tech: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {tech.map((t) => (
+        <Badge key={t} variant="secondary" className="border-white/10 bg-white/5 text-xs text-neutral-400">
+          {t}
+        </Badge>
+      ))}
+    </div>
+  )
 }
 
-function CardWrapper({ href, to, className, children }: CardWrapperProps) {
-  const classes = cn(
-    "group/card block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/40",
-    className,
-  )
-
-  if (to) {
+function ActionButton({ action }: { action: Action }) {
+  const cls =
+    "inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-blue-400 transition-colors duration-200 hover:border-blue-400/30 hover:bg-blue-400/10 hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
+  if (action.to) {
     return (
-      <Link to={to} className={classes}>
-        {children}
+      <Link to={action.to} className={cls}>
+        {action.label}
+        <ArrowRight className="h-3 w-3" />
       </Link>
     )
   }
-
-  if (href) {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
-        {children}
-      </a>
-    )
-  }
-
-  return <div className={classes}>{children}</div>
-}
-
-type ProjectCardProps = {
-  project: Project
-}
-
-function ProjectCard({ project }: ProjectCardProps) {
-  const Icon = getProjectIcon(project.slug)
-  const thumbnail = getThumbnail(project)
-
-  const blogHref =
-    project.slug === "marvfinancialcharts"
-      ? "/footprint-charts"
-      : project.slug === "self-hosted-infrastructure"
-        ? "/self-hosted-cloud"
-        : null
-  const cardTarget = blogHref ?? project.link ?? null
-  const isInternal = !!blogHref
-  const isExternal = !isInternal && !!project.link
-  const isClickable = !!cardTarget
-
-  const handleDemoClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (project.link) {
-      window.open(project.link, "_blank", "noopener,noreferrer")
-    }
-  }
-
-  const cardClasses = cn(
-    "h-full transition-transform duration-200",
-    isClickable && "group-hover/card:-translate-y-1",
+  return (
+    <a href={action.href} target="_blank" rel="noopener noreferrer" className={cls}>
+      <ExternalLink className="h-3 w-3" />
+      {action.label}
+    </a>
   )
+}
 
-  const description = (
-    <div className="space-y-3">
-      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-neutral-500">
-        <span>{project.role}</span>
-        {project.period && (
-          <>
-            <span aria-hidden>·</span>
-            <span>{project.period}</span>
-          </>
-        )}
+function FeaturedCard({ project }: { project: Project }) {
+  const Icon = getProjectIcon(project.slug)
+  const action = cardAction(project)
+  const target = titleTarget(project)
+
+  return (
+    <div className="grid grid-cols-1 overflow-hidden rounded-xl border border-white/10 bg-black transition-colors duration-200 hover:border-white/20 md:grid-cols-5">
+      <div className="bg-black md:col-span-3">
+        <img
+          src="/sirius-architecture.svg"
+          alt={project.title}
+          width={1000}
+          height={500}
+          decoding="async"
+          className="h-full w-full object-cover"
+        />
       </div>
-      <p className="text-sm leading-relaxed text-neutral-300">{project.summary}</p>
-      <div className="flex flex-wrap gap-1.5">
-        {project.tech.map((t) => (
-          <Badge
-            key={t}
-            variant="secondary"
-            className="border-white/10 bg-white/5 text-[10px] text-neutral-400"
-          >
-            {t}
-          </Badge>
-        ))}
+      <div className="flex flex-col justify-center gap-4 p-6 md:col-span-2 md:p-8">
+        <Link to={target.to} aria-label={project.title} className={cn("w-fit", focusRing)}>
+          <div className="flex items-center gap-2 font-sans text-xl font-bold text-neutral-200 md:text-2xl">
+            <Icon className="h-5 w-5 shrink-0 text-neutral-400" aria-hidden />
+            <span className="text-neutral-200">{project.title}</span>
+          </div>
+        </Link>
+        <ProjectMeta project={project} />
+        <p className="text-sm leading-relaxed text-neutral-300">{project.summary}</p>
+        <TechBadges tech={project.tech} />
+        {action && <ActionButton action={action} />}
       </div>
-      {project.link && (
-        <button
-          type="button"
-          onClick={handleDemoClick}
-          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-blue-400 transition-colors hover:border-blue-400/30 hover:bg-blue-400/10 hover:text-blue-300"
-        >
-          <ExternalLink className="h-3 w-3" />
-          Live demo
-        </button>
-      )}
     </div>
   )
+}
 
-  const isSvg = thumbnail?.toLowerCase().endsWith(".svg")
+function ProjectCard({ project }: { project: Project }) {
+  const Icon = getProjectIcon(project.slug)
+  const thumbnail = getThumbnail(project)
+  const isExternalImage = !!thumbnail?.startsWith("http")
+  const action = cardAction(project)
+  const target = titleTarget(project)
 
   const header = thumbnail ? (
-    <div className="relative h-full min-h-[8rem] w-full overflow-hidden rounded-t-xl bg-black">
-      {isSvg ? (
+    <div className="relative aspect-[2/1] min-h-[8rem] w-full overflow-hidden rounded-t-xl bg-black">
+      {!isExternalImage ? (
         <img
           src={thumbnail}
           alt={project.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover/card:scale-105"
           loading="lazy"
           decoding="async"
         />
@@ -163,7 +155,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         <Image
           src={thumbnail}
           alt={project.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover/card:scale-105"
           width={800}
           height={400}
           layout="constrained"
@@ -171,59 +163,71 @@ function ProjectCard({ project }: ProjectCardProps) {
         />
       )}
     </div>
-  ) : (
-    <ProjectGradient slug={project.slug} />
-  )
+  ) : null
 
   const title = (
     <div className="flex items-center gap-2 font-sans font-bold text-neutral-200">
-      <Icon className="h-4 w-4 text-neutral-400" aria-hidden />
-      <span>{project.title}</span>
+      <Icon className="h-4 w-4 shrink-0 text-neutral-400" aria-hidden />
+      <span className="text-neutral-200">{project.title}</span>
     </div>
   )
 
-  const cardInner = (
-    <div className={cardClasses}>
-      <BentoGridItem
-        title={title}
-        description={description}
-        header={header}
-        className={cn(
-          "h-full border-white/[0.1] transition-colors duration-200",
-          isClickable && "hover:border-white/20",
-        )}
-      />
+  const titleNode = target.to ? (
+    <Link to={target.to} aria-label={project.title} className={focusRing}>
+      {title}
+    </Link>
+  ) : target.href ? (
+    <a
+      href={target.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={project.title}
+      className={focusRing}
+    >
+      {title}
+    </a>
+  ) : (
+    title
+  )
+
+  const description = (
+    <div className={cn("space-y-3", !thumbnail && "pt-5 md:pt-7")}>
+      <ProjectMeta project={project} />
+      <p className="text-sm leading-relaxed text-neutral-300">{project.summary}</p>
+      <TechBadges tech={project.tech} />
+      {action && <ActionButton action={action} />}
     </div>
   )
 
   return (
-    <CardWrapper
-      {...(isInternal ? { to: cardTarget as string } : {})}
-      {...(isExternal ? { href: cardTarget as string } : {})}
-    >
-      {cardInner}
-    </CardWrapper>
+    <div className="group/card h-full">
+      <BentoGridItem
+        title={titleNode}
+        description={description}
+        header={header}
+        className="h-full border-white/[0.1] transition-colors duration-200 hover:border-white/20"
+      />
+    </div>
   )
 }
 
 export function Work() {
-  const featuredProjects = projects.filter((p) => p.featured)
+  const items = projects.filter((p) => p.featured)
+  const hero = items.find((p) => p.slug === "sirius-trading-platform")
+  const rest = items.filter((p) => p.slug !== "sirius-trading-platform")
 
   return (
     <section id="work" className="relative bg-black py-20 md:py-32">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="mb-12">
-          <h2 className="bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-4xl font-bold text-transparent">
-            Selected Work
-          </h2>
-          <div className="mt-1 h-1 w-20 rounded-full bg-gradient-to-r from-blue-500 to-violet-500" />
-        </div>
+        <SectionHeader title="Selected Work" />
 
-        <BentoGrid className="mx-auto max-w-7xl md:auto-rows-auto">
-          {featuredProjects.map((project) => (
+        {hero && <FeaturedCard project={hero} />}
+
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {rest.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
-        </BentoGrid>
+        </div>
       </div>
     </section>
   )

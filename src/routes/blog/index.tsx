@@ -1,6 +1,8 @@
 import { getAllPosts } from "@/lib/blog"
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { Calendar, Tag, ArrowLeft } from "lucide-react"
+import { Calendar, Tag } from "lucide-react"
+import { SkipLink } from "@/components/sections/skip-link"
+import { PageHeader } from "@/components/sections/page-header"
 
 export const Route = createFileRoute("/blog/")({ component: BlogIndex })
 
@@ -8,15 +10,10 @@ function BlogIndex() {
   const posts = getAllPosts()
 
   return (
-    <main className="min-h-screen bg-black text-white">
-      <div className="mx-auto max-w-3xl px-4 pt-32 pb-24">
-        <Link
-          to="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to main
-        </Link>
+    <main id="main" tabIndex={-1} className="min-h-screen bg-black text-white">
+      <SkipLink />
+      <div className="mx-auto max-w-3xl px-4 pt-24 pb-24">
+        <PageHeader backTo="/" backLabel="Back to Home" />
 
         <div className="mb-16">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
@@ -39,7 +36,7 @@ function BlogIndex() {
                 {post.title}
               </h2>
               <p className="mt-2 text-zinc-400">{post.description}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-500">
+              <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-400">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-3.5 w-3.5" />
                   {new Date(post.date).toLocaleDateString("en-US", {
