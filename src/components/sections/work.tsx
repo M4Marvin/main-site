@@ -26,6 +26,9 @@ function getThumbnail(project: Project) {
   if (project.slug === "sirius-trading-platform") {
     return "/sirius-architecture.svg"
   }
+  if (project.slug === "acbr-drug-discovery") {
+    return "/acbr-ankalan.webp"
+  }
   return null
 }
 
