@@ -1,4 +1,4 @@
-import { MapPin, GraduationCap, BookOpen, Users, Server } from "lucide-react"
+import { GraduationCap, BookOpen, Users, Server } from "lucide-react"
 import { Link } from "@tanstack/react-router"
 import { CardSpotlight } from "@/components/ui/card-spotlight"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -7,10 +7,7 @@ import { profile, about } from "@/lib/portfolio-data"
 
 const PAPER_URL = "https://pubs.acs.org/doi/10.1021/acs.jpcb.4c07090"
 
-const quickFacts = [
-  { icon: MapPin, label: "Location", value: profile.location },
-  { icon: GraduationCap, label: "Education", value: profile.education.map((e) => `${e.degree} (${e.year})`).join(" · ") },
-]
+const educationText = profile.education.map((e) => `${e.degree} (${e.year})`).join(" · ")
 
 export function About() {
   return (
@@ -44,19 +41,15 @@ export function About() {
           </div>
         </CardSpotlight>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {quickFacts.map((fact) => (
-            <CardSpotlight key={fact.label} className="border-white/10 bg-black/50 p-6">
+        <CardSpotlight className="border-white/10 bg-black/50 p-6">
               <div className="flex items-center gap-3">
-                <fact.icon className="h-5 w-5 text-blue-400" />
+                <GraduationCap className="h-5 w-5 shrink-0 text-blue-400" />
                 <div>
-                  <p className="text-xs font-medium text-neutral-400 uppercase tracking-wider">{fact.label}</p>
-                  <p className="mt-0.5 text-sm text-neutral-300">{fact.value}</p>
+                  <p className="text-xs font-medium text-neutral-400 uppercase tracking-wider">Education</p>
+                  <p className="mt-0.5 text-sm text-neutral-300">{educationText}</p>
                 </div>
               </div>
             </CardSpotlight>
-          ))}
-        </div>
 
         <div className="mt-8 flex flex-col gap-3 rounded-md border border-white/10 bg-white/[0.02] p-6 text-sm text-neutral-300">
           <p className="flex items-start gap-3">
@@ -81,7 +74,7 @@ export function About() {
           <p className="flex items-start gap-3">
             <Server className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" aria-hidden />
             <span>
-              Runs his own self-hosted cloud —{" "}
+              I run my own self-hosted cloud —{" "}
               <Link
                 to="/self-hosted-cloud"
                 className="font-medium text-blue-400 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60"

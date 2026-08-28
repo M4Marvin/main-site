@@ -12,11 +12,11 @@ export function Contact() {
     <section id="contact" className="relative overflow-hidden bg-black py-24 md:py-32">
       <div className="mx-auto flex max-w-3xl flex-col items-center px-4 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
-          Available now — Architect / Tech Lead · Abu Dhabi, UAE
+          Available now.
         </h2>
 
         <p className="mt-4 max-w-md text-center text-sm leading-relaxed text-neutral-400 md:text-base">
-          Open to full-time or contractor roles. Immediate joining. Email me about your team.
+          Open to Architect / Tech Lead roles in Abu Dhabi, UAE — full-time or contractor. Immediate joining.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
