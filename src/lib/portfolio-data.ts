@@ -68,16 +68,17 @@ export const about = {
 export const projects: Project[] = [
   {
     slug: "sirius-trading-platform",
-    title: "Sirius International Holding — Algorithmic Trading Platform",
+    title: "Sirius — Algorithmic Trading Platform",
     summary:
-      "Second engineering hire. I built the execution engine, signal ingestor, and monitoring dashboard solo, end to end — the traders designed the strategies, I built the platform that executes them: 106,185+ signals processed and 5,000+ automated trades per day on average.",
+      "Traders design the strategies; I built the platform that executes them — execution engine, signal ingestor, monitoring dashboard — end to end, solo.",
     role: "Algorithmic Trading Infrastructure Engineer",
     org: "Sirius International Holding",
     period: "Apr 2025 – Feb 2026",
     location: "Abu Dhabi, UAE",
     story: [
-      "Second engineering hire. Built the core trading engine and signal ingestor solo end to end, and built the trading dashboard solo; AWS, VPC, and Cloudflare infrastructure were shared with one coworker.",
-      "Processed 106,185+ signals and averaged 5,000+ automated trades per day across 50 Windows systems, with 200ms end-to-end latency and zero downtime for four months.",
+      "The MetaTrader 5 Python API is clunky, old, and unreliable — no robust trading system can sit directly on it. I designed a custom mt5-client wrapper by hand: OOP design, full error handling, price and spread conditions. It became essential to the platform's reliability.",
+      "The ingestor is the only server exposed to the internet — it authenticates, validates, and routes every signal, and accepts traffic only from Cloudflare IPs.",
+      "The monitoring dashboard is still in daily use at the desk, with execution reports, signal-quality stats, strategy performance, and inter-strategy correlation.",
     ],
     contributions: [
       {
@@ -101,15 +102,45 @@ export const projects: Project[] = [
         text: "Onboarded and mentored 6 engineers over the tenure, establishing production engineering standards.",
       },
     ],
-    tech: ["Python", "FastAPI", "React", "TanStack Start", "MetaTrader 5", "PostgreSQL"],
+    tech: ["Python", "FastAPI", "MetaTrader 5", "PostgreSQL"],
     reflection: "Real money, real risk, real consequences. Not a side project or a demo.",
+    featured: true,
+  },
+  {
+    slug: "acbr-drug-discovery",
+    title: "ACBR Drug Discovery Web Server",
+    summary:
+      "Designed and built the web platform that deploys and serves the lab's ML models for early-stage drug discovery — virtual screening, Tanimoto similarity, QED drug-likeness.",
+    role: "Sole Engineer — ML & Web Platform",
+    org: "ACBR (Ambedkar Center for Biomedical Research), University of Delhi",
+    period: "Sep 2024 – Mar 2025",
+    location: "New Delhi, India",
+    story: [
+      "Models were built by the lab; my role was optimization, MLOps for deploying and serving trained models, and the website.",
+    ],
+    contributions: [
+      {
+        label: "Frontend",
+        text: "Designed and developed the Next.js + React + Tailwind website for the open-source server.",
+      },
+      {
+        label: "Backend",
+        text: "Built FastAPI services to deploy and serve the lab's trained models for bioactivity prediction and virtual screening.",
+      },
+      {
+        label: "Integration",
+        text: "Integrated Tanimoto similarity and RDKit QED drug-likeness analysis into the web platform.",
+      },
+    ],
+    tech: ["Next.js", "FastAPI", "RDKit", "Docker"],
+    link: "https://bic.acbr.du.ac.in/ankalan",
     featured: true,
   },
   {
     slug: "marvfinancialcharts",
     title: "mFinancialCharts",
     summary:
-      "Bitcoin alone averages 2M trades a day — the charting engine renders per-trade footprint data at p99 60fps across thousands of on-screen objects. Built solo, end to end. Live at charts.m4marvin.com.",
+      "Built solo for a five-person trading desk: Bitcoin alone averages 2M trades a day, so the charting engine renders per-trade footprints at p99 60fps — with 4TB of compressed Parquet behind it.",
     role: "Founding Engineer",
     org: "mFinancialCharts",
     period: "Aug 2023 – Sep 2024",
@@ -140,40 +171,10 @@ export const projects: Project[] = [
         text: "Multi-canvas rendering, virtualization, and dynamic multi-pane/multi-axis layouts achieved p99 60fps on Firefox and Chrome with thousands of objects on screen.",
       },
     ],
-    tech: ["Python", "FastAPI", "React", "TypeScript", "Polars", "Parquet", "HTML5 Canvas", "Zustand", "React Query"],
+    tech: ["React", "TypeScript", "HTML5 Canvas", "Polars"],
     reflection:
       "Built the data pipeline and charting engine around the hardest case—Bitcoin's high-volume trade stream—so the same system could serve every supported instrument and timeframe.",
     link: "https://charts.m4marvin.com",
-    featured: true,
-  },
-  {
-    slug: "acbr-drug-discovery",
-    title: "ACBR Drug Discovery Web Server",
-    summary:
-      "Designed and built the web platform that deploys and serves the lab's ML models for early-stage drug discovery — virtual screening, Tanimoto similarity, QED drug-likeness.",
-    role: "Sole Engineer — ML & Web Platform",
-    org: "ACBR (Ambedkar Center for Biomedical Research), University of Delhi",
-    period: "Sep 2024 – Mar 2025",
-    location: "New Delhi, India",
-    story: [
-      "Models were built by the lab; my role was optimization, MLOps for deploying and serving trained models, and the website.",
-    ],
-    contributions: [
-      {
-        label: "Frontend",
-        text: "Designed and developed the Next.js + React + Tailwind website for the open-source server.",
-      },
-      {
-        label: "Backend",
-        text: "Built FastAPI services to deploy and serve the lab's trained models for bioactivity prediction and virtual screening.",
-      },
-      {
-        label: "Integration",
-        text: "Integrated Tanimoto similarity and RDKit QED drug-likeness analysis into the web platform.",
-      },
-    ],
-    tech: ["Next.js", "React", "FastAPI", "Tailwind CSS", "RDKit", "MLOps"],
-    link: "https://bic.acbr.du.ac.in/",
     featured: true,
   },
 ]

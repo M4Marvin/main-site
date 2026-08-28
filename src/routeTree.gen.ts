@@ -9,15 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as FootprintChartsRouteImport } from './routes/footprint-charts'
 import { Route as SelfHostedCloudRouteImport } from './routes/self-hosted-cloud'
+import { Route as FootprintChartsRouteImport } from './routes/footprint-charts'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as WorkSiriusRouteImport } from './routes/work/sirius'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SelfHostedCloudRoute = SelfHostedCloudRouteImport.update({
+  id: '/self-hosted-cloud',
+  path: '/self-hosted-cloud',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FootprintChartsRoute = FootprintChartsRouteImport.update({
@@ -25,14 +26,19 @@ const FootprintChartsRoute = FootprintChartsRouteImport.update({
   path: '/footprint-charts',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SelfHostedCloudRoute = SelfHostedCloudRouteImport.update({
-  id: '/self-hosted-cloud',
-  path: '/self-hosted-cloud',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkSiriusRoute = WorkSiriusRouteImport.update({
+  id: '/work/sirius',
+  path: '/work/sirius',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/work/sirius': typeof WorkSiriusRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/work/sirius': typeof WorkSiriusRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -61,20 +69,33 @@ export interface FileRoutesById {
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/work/sirius': typeof WorkSiriusRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/footprint-charts' | '/self-hosted-cloud' | '/blog/$slug' | '/blog/'
+    | '/'
+    | '/footprint-charts'
+    | '/self-hosted-cloud'
+    | '/blog/$slug'
+    | '/work/sirius'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/footprint-charts' | '/self-hosted-cloud' | '/blog/$slug' | '/blog'
+  to:
+    | '/'
+    | '/footprint-charts'
+    | '/self-hosted-cloud'
+    | '/blog/$slug'
+    | '/work/sirius'
+    | '/blog'
   id:
     | '__root__'
     | '/'
     | '/footprint-charts'
     | '/self-hosted-cloud'
     | '/blog/$slug'
+    | '/work/sirius'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
@@ -83,16 +104,17 @@ export interface RootRouteChildren {
   FootprintChartsRoute: typeof FootprintChartsRoute
   SelfHostedCloudRoute: typeof SelfHostedCloudRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  WorkSiriusRoute: typeof WorkSiriusRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/self-hosted-cloud': {
+      id: '/self-hosted-cloud'
+      path: '/self-hosted-cloud'
+      fullPath: '/self-hosted-cloud'
+      preLoaderRoute: typeof SelfHostedCloudRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/footprint-charts': {
@@ -102,11 +124,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FootprintChartsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/self-hosted-cloud': {
-      id: '/self-hosted-cloud'
-      path: '/self-hosted-cloud'
-      fullPath: '/self-hosted-cloud'
-      preLoaderRoute: typeof SelfHostedCloudRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -114,6 +136,13 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work/sirius': {
+      id: '/work/sirius'
+      path: '/work/sirius'
+      fullPath: '/work/sirius'
+      preLoaderRoute: typeof WorkSiriusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -131,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   FootprintChartsRoute: FootprintChartsRoute,
   SelfHostedCloudRoute: SelfHostedCloudRoute,
   BlogSlugRoute: BlogSlugRoute,
+  WorkSiriusRoute: WorkSiriusRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
