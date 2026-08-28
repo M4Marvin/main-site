@@ -1,7 +1,7 @@
 ---
-title: "Phone Connect: Full Android Integration with Hyprland"
+title: "Android screen, input, and clipboard over Tailscale on Hyprland"
 date: "2026-07-28"
-description: "Screen mirroring, remote input, clipboard sync, and file sharing — all over Tailscale mesh VPN. No USB, no same-WiFi required."
+description: "scrcpy + KDE Connect + Tailscale: phone screen, remote input, and clipboard on a Wayland desktop with no USB and no same-WiFi requirement."
 tags: ["hyprland", "kdeconnect", "scrcpy", "tailscale", "wayland", "linux"]
 ---
 

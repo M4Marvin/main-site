@@ -1,12 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { ExternalLink } from "lucide-react"
 import { Image } from "@unpic/react"
 import { Typeset } from "@/components/ui/typeset"
-import { SkipLink } from "@/components/sections/skip-link"
-import { PageHeader } from "@/components/sections/page-header"
+import { pageHead } from "@/lib/seo"
 
 export const Route = createFileRoute("/self-hosted-cloud")({
   component: SelfHostedCloudPage,
+  head: () =>
+    pageHead({
+      title: "Self-hosted cloud",
+      description:
+        "Eight services on one Hetzner VPS, a Cloudflare tunnel, and a Tailscale tailnet. No open ports.",
+      path: "/self-hosted-cloud",
+    }),
 })
 
 function Diagram({
@@ -26,9 +31,9 @@ function Diagram({
         width={720}
         height={420}
         layout="constrained"
-        className="rounded-lg border border-white/10"
+        className="border border-zinc-800"
       />
-      <figcaption className="mt-2 text-center text-xs text-neutral-400">
+      <figcaption className="mt-2 text-center font-mono text-[12px] text-zinc-500">
         {caption}
       </figcaption>
     </figure>
@@ -37,23 +42,16 @@ function Diagram({
 
 function SelfHostedCloudPage() {
   return (
-    <main id="main" tabIndex={-1} className="relative min-h-screen bg-black text-white">
-      <SkipLink />
-      <div className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-16">
-        <PageHeader backTo="/" backLabel="Back to Home" />
-
+    <main id="main" tabIndex={-1} className="pb-8">
         <Typeset>
           <h1>My Personal Cloud: Two Boxes, One Tunnel, Zero Open Ports</h1>
 
           <p>
             Eight services, one Hetzner VPS, one Cloudflare tunnel, and a
             Tailscale tailnet. No third parties holding my data, no firewall
-            holes, no monthly bills to anyone but a German hosting company. This
-            is the story of how I built it, what runs on it, and what I learned
-            about networking, security, and the real cost of convenience along
-            the way. The full infrastructure overview is on the{" "}
-            <Link to="/">home page</Link>, and the live services are linked
-            throughout.
+            holes. This is how I run git, passwords, status, chat, photos, and
+            files for myself — a homelab, not a trading platform. Live services
+            are linked throughout.
           </p>
 
           <h2>The Box</h2>
@@ -257,7 +255,7 @@ function SelfHostedCloudPage() {
             inside the container. <strong>Charts</strong>,
             reached at <code>charts.m4marvin.com</code>. The mFinancialCharts
             instance, built from the codebase covered in the{" "}
-            <Link to="/footprint-charts">footprint charts writeup</Link>.{" "}
+            <Link to="/work/charts">charting engine writeup</Link>.{" "}
             <strong>Chat</strong> reached at{" "}
             <code>chat.m4marvin.com</code>. A small custom app (Better Auth
             and SQLite, with a local DB file) for a private messaging surface. <strong>Beszel</strong> provides metrics through a Tailscale-only hub backed by SQLite.
@@ -403,7 +401,7 @@ function SelfHostedCloudPage() {
               rel="noopener noreferrer"
             >
               git.m4marvin.com
-              <ExternalLink className="ml-0.5 inline-block h-3 w-3" />
+              <span aria-hidden="true"> ↗</span>
             </a>
             ,{" "}
             <a
@@ -412,7 +410,7 @@ function SelfHostedCloudPage() {
               rel="noopener noreferrer"
             >
               vault.m4marvin.com
-              <ExternalLink className="ml-0.5 inline-block h-3 w-3" />
+              <span aria-hidden="true"> ↗</span>
             </a>
             ,{" "}
             <a
@@ -421,7 +419,7 @@ function SelfHostedCloudPage() {
               rel="noopener noreferrer"
             >
               status.m4marvin.com
-              <ExternalLink className="ml-0.5 inline-block h-3 w-3" />
+              <span aria-hidden="true"> ↗</span>
             </a>
             ,{" "}
             <a
@@ -430,7 +428,7 @@ function SelfHostedCloudPage() {
               rel="noopener noreferrer"
             >
               files.m4marvin.com
-              <ExternalLink className="ml-0.5 inline-block h-3 w-3" />
+              <span aria-hidden="true"> ↗</span>
             </a>
             ,{" "}
             <a
@@ -439,7 +437,7 @@ function SelfHostedCloudPage() {
               rel="noopener noreferrer"
             >
               charts.m4marvin.com
-              <ExternalLink className="ml-0.5 inline-block h-3 w-3" />
+              <span aria-hidden="true"> ↗</span>
             </a>
             , and{" "}
             <a
@@ -448,13 +446,12 @@ function SelfHostedCloudPage() {
               rel="noopener noreferrer"
             >
               chat.m4marvin.com
-              <ExternalLink className="ml-0.5 inline-block h-3 w-3" />
+              <span aria-hidden="true"> ↗</span>
             </a>
             . The status page is the first place to look if anything looks
             off.
           </p>
         </Typeset>
-      </div>
     </main>
   )
 }

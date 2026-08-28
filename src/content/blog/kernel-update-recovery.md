@@ -1,7 +1,7 @@
 ---
-title: "The Update That Nearly Broke My Computer"
+title: "Recovering a half-applied Arch kernel update without a reinstall"
 date: "2026-08-16"
-description: "A half-finished system update left my boot files out of sync with the new kernel, killed my GPU driver, and locked the package manager. Here's the story of how it got fixed."
+description: "A mid-flight pacman transaction left boot files pointing at a missing kernel, stranded the NVIDIA driver, and locked the package manager. How it was unwound."
 tags: ["linux", "arch", "omarchy", "kernel", "nvidia", "bootloader"]
 ---
 
@@ -9,28 +9,6 @@ Updates are supposed to be the boring part of owning a computer. You press a but
 
 ![The journey from update to recovery](/ku-journey.svg)
 
-<details>
-<summary>Journey diagram (mermaid source)</summary>
-
-```mermaid
-flowchart TD
-    A["Big update starts<br/>(300+ packages)"] --> B["New kernel lands on disk"]
-    B --> C["Update killed mid-way<br/>'transaction interrupted'"]
-    C --> D["Boot file still describes the old kernel"]
-    C --> E["GPU driver stranded on old version"]
-    D --> F["System boots, but half-updated"]
-    E --> F
-    F --> G["Next update blocked by an orphaned file"]
-    G --> H["Finish the update the proper way"]
-    H --> I["Switch driver to the DKMS build"]
-    I --> J["Rebuild boot files for both kernels"]
-    J --> K["Verified: hashes match, GPU works"]
-
-    C -. "what saved it" .-> S["Recovery kernel entry in the boot menu"]
-    S --> H
-```
-
-</details>
 
 ## What Happened
 
@@ -44,25 +22,6 @@ To understand why, you need to know how my computer starts up. The motherboard d
 
 ![How the boot chain works, and where it broke](/ku-bootchain.svg)
 
-<details>
-<summary>Boot chain diagram (mermaid source)</summary>
-
-```mermaid
-flowchart TD
-    subgraph normal["A normal update"]
-        N1["New kernel lands on disk"] --> N2["Automatic step rebuilds the boot file"]
-        N2 --> N3["Automatic step updates the boot menu and checksums"]
-        N3 --> N4["Reboot: everything matches"]
-    end
-
-    subgraph broken["What happened to me"]
-        B1["New kernel lands on disk"] --> B2["Update killed before the automatic steps ran"]
-        B2 --> B3["Boot file still describes the old kernel"]
-        B3 --> B4["Reboot: boot file and kernel disagree"]
-    end
-```
-
-</details>
 
 My update died between those two steps. The new kernel was safely on disk, but the boot files still described the old one — a kernel that no longer existed. The boot file is a snapshot taken the moment the update finished, and mine was a snapshot of a ghost. This is the classic danger of a partial upgrade on a system like mine: the parts that actually start the computer are rebuilt by automatic steps, and if those steps never run, the boot files quietly go stale. Nothing checks for it afterward.
 

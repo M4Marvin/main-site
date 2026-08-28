@@ -14,6 +14,8 @@ import { Route as FootprintChartsRouteImport } from './routes/footprint-charts'
 import { Route as SelfHostedCloudRouteImport } from './routes/self-hosted-cloud'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as WorkAcbrRouteImport } from './routes/work/acbr'
+import { Route as WorkChartsRouteImport } from './routes/work/charts'
 import { Route as WorkSiriusRouteImport } from './routes/work/sirius'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +43,16 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkAcbrRoute = WorkAcbrRouteImport.update({
+  id: '/work/acbr',
+  path: '/work/acbr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkChartsRoute = WorkChartsRouteImport.update({
+  id: '/work/charts',
+  path: '/work/charts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkSiriusRoute = WorkSiriusRouteImport.update({
   id: '/work/sirius',
   path: '/work/sirius',
@@ -52,6 +64,8 @@ export interface FileRoutesByFullPath {
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/work/acbr': typeof WorkAcbrRoute
+  '/work/charts': typeof WorkChartsRoute
   '/work/sirius': typeof WorkSiriusRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -60,6 +74,8 @@ export interface FileRoutesByTo {
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/work/acbr': typeof WorkAcbrRoute
+  '/work/charts': typeof WorkChartsRoute
   '/work/sirius': typeof WorkSiriusRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -69,6 +85,8 @@ export interface FileRoutesById {
   '/footprint-charts': typeof FootprintChartsRoute
   '/self-hosted-cloud': typeof SelfHostedCloudRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/work/acbr': typeof WorkAcbrRoute
+  '/work/charts': typeof WorkChartsRoute
   '/work/sirius': typeof WorkSiriusRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -79,6 +97,8 @@ export interface FileRouteTypes {
     | '/footprint-charts'
     | '/self-hosted-cloud'
     | '/blog/$slug'
+    | '/work/acbr'
+    | '/work/charts'
     | '/work/sirius'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +107,8 @@ export interface FileRouteTypes {
     | '/footprint-charts'
     | '/self-hosted-cloud'
     | '/blog/$slug'
+    | '/work/acbr'
+    | '/work/charts'
     | '/work/sirius'
     | '/blog'
   id:
@@ -95,6 +117,8 @@ export interface FileRouteTypes {
     | '/footprint-charts'
     | '/self-hosted-cloud'
     | '/blog/$slug'
+    | '/work/acbr'
+    | '/work/charts'
     | '/work/sirius'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -104,6 +128,8 @@ export interface RootRouteChildren {
   FootprintChartsRoute: typeof FootprintChartsRoute
   SelfHostedCloudRoute: typeof SelfHostedCloudRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  WorkAcbrRoute: typeof WorkAcbrRoute
+  WorkChartsRoute: typeof WorkChartsRoute
   WorkSiriusRoute: typeof WorkSiriusRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -145,6 +171,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work/acbr': {
+      id: '/work/acbr'
+      path: '/work/acbr'
+      fullPath: '/work/acbr'
+      preLoaderRoute: typeof WorkAcbrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work/charts': {
+      id: '/work/charts'
+      path: '/work/charts'
+      fullPath: '/work/charts'
+      preLoaderRoute: typeof WorkChartsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/work/sirius': {
       id: '/work/sirius'
       path: '/work/sirius'
@@ -160,6 +200,8 @@ const rootRouteChildren: RootRouteChildren = {
   FootprintChartsRoute: FootprintChartsRoute,
   SelfHostedCloudRoute: SelfHostedCloudRoute,
   BlogSlugRoute: BlogSlugRoute,
+  WorkAcbrRoute: WorkAcbrRoute,
+  WorkChartsRoute: WorkChartsRoute,
   WorkSiriusRoute: WorkSiriusRoute,
   BlogIndexRoute: BlogIndexRoute,
 }

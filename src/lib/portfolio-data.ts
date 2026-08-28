@@ -22,6 +22,11 @@ export interface Contribution {
   text: string
 }
 
+export interface Stat {
+  value: string
+  label: string
+}
+
 export interface Project {
   slug: string
   title: string
@@ -33,15 +38,11 @@ export interface Project {
   story: string[]
   contributions: Contribution[]
   tech: string[]
+  stats: Stat[]
   reflection?: string
   link?: string
   image?: string
   featured: boolean
-}
-
-export interface NavItem {
-  name: string
-  link: string
 }
 
 export const profile: Profile = {
@@ -58,11 +59,6 @@ export const profile: Profile = {
   education: [
     { degree: "B.Tech + M.S. Dual Degree — Computer Science & Engineering + Computational Biology", school: "Jawaharlal Nehru University", year: "2018–2023" },
   ],
-}
-
-export const about = {
-  summary:
-    "I've spent three years shipping production systems end to end: trading infrastructure at Sirius — the execution engine, signal ingestor, and monitoring dashboard; the charting and data platform at mFinancialCharts, built solo; and the ML serving platform at ACBR. I started in computational biology — a B.Tech + M.S. dual degree from JNU and a co-authored paper in J. Phys. Chem. B — before moving into distributed systems and web engineering.",
 }
 
 export const projects: Project[] = [
@@ -103,6 +99,11 @@ export const projects: Project[] = [
       },
     ],
     tech: ["Python", "FastAPI", "MetaTrader 5", "PostgreSQL"],
+    stats: [
+      { value: "200ms", label: "Signal-to-trade" },
+      { value: "5,000+", label: "Trades / day" },
+      { value: "106,185+", label: "Signals processed" },
+    ],
     reflection: "Real money, real risk, real consequences. Not a side project or a demo.",
     featured: true,
   },
@@ -133,6 +134,7 @@ export const projects: Project[] = [
       },
     ],
     tech: ["Next.js", "FastAPI", "RDKit", "Docker"],
+    stats: [{ value: "4", label: "Cancer targets served" }],
     link: "https://bic.acbr.du.ac.in/ankalan",
     featured: true,
   },
@@ -172,6 +174,11 @@ export const projects: Project[] = [
       },
     ],
     tech: ["React", "TypeScript", "HTML5 Canvas", "Polars"],
+    stats: [
+      { value: "p99 60fps", label: "Chart render" },
+      { value: "4TB", label: "Compressed Parquet" },
+      { value: "2M", label: "BTC trades / day" },
+    ],
     reflection:
       "Built the data pipeline and charting engine around the hardest case—Bitcoin's high-volume trade stream—so the same system could serve every supported instrument and timeframe.",
     link: "https://charts.m4marvin.com",
@@ -179,20 +186,3 @@ export const projects: Project[] = [
   },
 ]
 
-export interface Stat {
-  value: number
-  suffix?: string
-  prefix?: string
-  label: string
-}
-
-export const stats: Stat[] = [
-  { value: 200, suffix: "ms", label: "Signal-to-trade, end to end" },
-  { value: 5000, suffix: "+", label: "Automated trades per day (average)" },
-  { value: 106185, suffix: "+", label: "Signals processed across the platform" },
-]
-
-export const navItems: NavItem[] = [
-  { name: "Work", link: "#work" },
-  { name: "Contact", link: "#contact" },
-]

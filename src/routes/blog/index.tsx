@@ -1,68 +1,59 @@
 import { getAllPosts } from "@/lib/blog"
 import { createFileRoute, Link } from "@tanstack/react-router"
-import { Calendar, Tag } from "lucide-react"
-import { SkipLink } from "@/components/sections/skip-link"
-import { PageHeader } from "@/components/sections/page-header"
+import { pageHead } from "@/lib/seo"
 
-export const Route = createFileRoute("/blog/")({ component: BlogIndex })
+export const Route = createFileRoute("/blog/")({
+  component: BlogIndex,
+  head: () =>
+    pageHead({
+      title: "Writing",
+      description: "Engineering notes on recovery, hardware, and the systems on this site.",
+      path: "/blog",
+    }),
+})
+
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+}
 
 function BlogIndex() {
   const posts = getAllPosts()
 
   return (
-    <main id="main" tabIndex={-1} className="min-h-screen bg-black text-white">
-      <SkipLink />
-      <div className="mx-auto max-w-3xl px-4 pt-24 pb-24">
-        <PageHeader backTo="/" backLabel="Back to Home" />
+    <main id="main" tabIndex={-1} className="pb-8">
+      <header className="pb-10">
+        <h1 className="text-[1.65rem] font-medium tracking-[-0.02em] text-zinc-50 sm:text-[1.85rem]">
+          Writing
+        </h1>
+        <p className="mt-3 text-[0.98rem] leading-relaxed text-zinc-400">
+          Engineering notes — recovery, hardware, and the systems on this site.
+        </p>
+      </header>
 
-        <div className="mb-16">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Blog
-          </h1>
-          <p className="mt-4 text-lg text-zinc-400">
-            Notes on Linux, Hyprland, and building things.
-          </p>
-        </div>
-
-        <div className="space-y-8">
-          {posts.map((post) => (
-            <Link
-              key={post.slug}
-              to="/blog/$slug"
-              params={{ slug: post.slug }}
-              className="group block rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-white/20 hover:bg-white/[0.04]"
-            >
-              <h2 className="text-xl font-semibold group-hover:text-blue-400 transition-colors">
-                {post.title}
-              </h2>
-              <p className="mt-2 text-zinc-400">{post.description}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-400">
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="h-3.5 w-3.5" />
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Tag className="h-3.5 w-3.5" />
-                  <span className="flex gap-2">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-white/5 px-2 py-0.5 text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </span>
-                </span>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.slug} className="border-t border-zinc-800 py-6">
+            <Link to="/blog/$slug" params={{ slug: post.slug }} className="group block">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h2 className="text-[1.05rem] font-medium tracking-[-0.015em] text-zinc-50 underline decoration-transparent underline-offset-[0.18em] transition-[text-decoration-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:decoration-current">
+                  {post.title}
+                </h2>
+                <time dateTime={post.date} className="font-mono text-[12px] text-zinc-500">
+                  {formatDate(post.date)}
+                </time>
               </div>
+              <p className="mt-2 max-w-[36em] text-[0.95rem] leading-relaxed text-zinc-400">
+                {post.description}
+              </p>
+              <p className="mt-2 font-mono text-[12px] text-zinc-600">{post.tags.join(" · ")}</p>
             </Link>
-          ))}
-        </div>
-      </div>
+          </li>
+        ))}
+      </ul>
     </main>
   )
 }

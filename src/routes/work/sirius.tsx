@@ -1,112 +1,120 @@
-import { createFileRoute } from "@tanstack/react-router"
-import { SkipLink } from "@/components/sections/skip-link"
-import { PageHeader } from "@/components/sections/page-header"
+import { createFileRoute, Link } from "@tanstack/react-router"
 import { Typeset } from "@/components/ui/typeset"
+import { SignalFlow } from "@/components/sections/signal-flow"
+import { pageHead } from "@/lib/seo"
+import { profile } from "@/lib/portfolio-data"
 
 export const Route = createFileRoute("/work/sirius")({
   component: SiriusPage,
+  head: () =>
+    pageHead({
+      title: "Sirius",
+      description:
+        "Algorithmic trading infrastructure: 200ms signal-to-trade, 5,000+ trades a day, 106,185+ signals. Execution engine, ingestor, and desk dashboard — built end to end.",
+      path: "/work/sirius",
+    }),
 })
 
 function SiriusPage() {
   return (
-    <main id="main" tabIndex={-1} className="relative min-h-screen bg-black text-white">
-      <SkipLink />
-      <div className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-16">
-        <PageHeader backTo="/" backLabel="Back to Home" />
+    <main id="main" tabIndex={-1} className="pb-8">
+      <Typeset>
+        <h1>Sirius — Algorithmic Trading Infrastructure</h1>
 
-        <Typeset>
-          <h1>Sirius — Algorithmic Trading Infrastructure</h1>
+        <p className="mt-2 !font-mono !text-[12px] !tracking-normal !text-zinc-500">
+          Algorithmic Trading Infrastructure Engineer · Sirius International Holding · Abu Dhabi,
+          UAE · Apr 2025 – Feb 2026
+        </p>
 
-          <p className="mt-2 text-xs font-medium tracking-wider text-neutral-400 uppercase">
-            Algorithmic Trading Infrastructure Engineer · Sirius International Holding · Abu Dhabi, UAE · Apr 2025 – Feb 2026
-          </p>
+        <p>
+          Signals in, orders out, 200ms later. Traders design the strategies — I built the
+          platform that executes them.
+        </p>
 
-          <p>
-            Signals in, orders out, 200ms later. Traders design the strategies — I built the
-            platform that executes them, every layer, solo.
-          </p>
+        <figure className="my-8 not-prose">
+          <SignalFlow />
+          <figcaption className="mt-2 text-center font-mono text-[12px] text-zinc-500">
+            Signals → ingestor (auth · validate · route) → 50 execution systems → dashboard.
+          </figcaption>
+        </figure>
 
-          <figure className="my-8">
-            <img
-              src="/sirius-architecture.svg"
-              alt="Architecture: TradingView webhooks and proprietary signals flow through the ingestor to 50 execution systems, with a monitoring dashboard"
-              width={1000}
-              height={500}
-              decoding="async"
-              className="rounded-xl border border-white/10"
-            />
-            <figcaption className="mt-2 text-center text-xs text-neutral-400">
-              Signals → ingestor (auth · validate · route) → 50 execution systems → dashboard.
-            </figcaption>
-          </figure>
+        <h2>What I owned</h2>
 
-          <h2>The constraint</h2>
+        <p>
+          Traders designed the strategy logic — grids, pyramiding, reversals. I did not. I built
+          the machine that takes a signal and turns it into an order: the execution engine, the
+          ingestor, and the monitoring dashboard, each of those layers solo. AWS VPC, certificates,
+          and Cloudflare IP filtering were built with one coworker. Over the tenure I onboarded six
+          engineers onto that production stack.
+        </p>
 
-          <p>
-            The MetaTrader 5 Python API is clunky, old, and unreliable — no robust trading
-            system can sit directly on it. I designed a custom mt5-client wrapper by hand: OOP
-            design, full error handling, price and spread conditions. It became essential to
-            the platform&apos;s reliability.
-          </p>
+        <h2>The constraint</h2>
 
-          <h2>Core trading engine (owned end-to-end)</h2>
+        <p>
+          The MetaTrader 5 Python API is clunky, old, and unreliable — no robust trading system
+          can sit directly on it. I designed a custom mt5-client wrapper by hand: OOP design, full
+          error handling, price and spread conditions. It became essential to the platform&apos;s
+          reliability.
+        </p>
 
-          <ul>
-            <li>Executes trades per algorithm from raw signals.</li>
-            <li>
-              Strategy logic (grids, pyramiding, reversals) is designed by the traders — I
-              built the machine that executes them, not the strategies.
-            </li>
-            <li>
-              Risk controls at every layer: dynamic position sizing, circuit breakers,
-              multi-channel alerting.
-            </li>
-            <li>Every signal carries a correlation ID traceable end-to-end.</li>
-            <li>Dual logging — on-system + Postgres.</li>
-          </ul>
+        <h2>200ms</h2>
 
-          <h2>The Ingestor (custom message queue)</h2>
+        <p>
+          Signal-to-trade is the interval from a signal arriving at the ingestor (authenticated
+          and validated) to the execution engine submitting the order to the broker API. It is
+          not exchange round-trip, and it is not fill confirmation. 5,000+ trades a day average;
+          106,185+ signals processed across the platform. Holding periods of hours to days,
+          Monday to Friday — systematic execution, not HFT.
+        </p>
 
-          <p>
-            The only server exposed to the internet. It receives TradingView webhooks plus
-            proprietary signal sources, authenticates, validates, and routes each signal to
-            the correct execution system. Routing is exposed as a REST API, and the ingestor
-            accepts traffic only from Cloudflare IPs.
-          </p>
+        <h2>Core trading engine</h2>
 
-          <h2>Trading dashboard</h2>
+        <ul>
+          <li>Executes trades per algorithm from raw signals.</li>
+          <li>
+            Risk controls at every layer: dynamic position sizing, circuit breakers, multi-channel
+            alerting.
+          </li>
+          <li>Every signal carries a correlation ID traceable end-to-end.</li>
+          <li>Dual logging — on-system + Postgres.</li>
+        </ul>
 
-          <p>
-            Live monitoring and control, still in daily use at the desk. Execution reports,
-            signal-quality stats, strategy performance, inter-strategy correlation. Deliberately
-            dynamic — new stat views without rework. Built with TanStack Start, Tailwind,
-            TanStack Query, Polars + Parquet, and Postgres.
-          </p>
+        <h2>The Ingestor</h2>
 
-          <h2>Infrastructure (built with one coworker)</h2>
+        <p>
+          The only server exposed to the internet. It receives TradingView webhooks plus
+          proprietary signal sources, authenticates, validates, and routes each signal to the
+          correct execution system. Routing is exposed as a REST API, and the ingestor accepts
+          traffic only from Cloudflare IPs.
+        </p>
 
-          <p>
-            AWS VPC, certificates, and Cloudflare IP filtering — only verified signal sources
-            reach the ingestor.
-          </p>
+        <h2>Trading dashboard</h2>
 
-          <h2>Scale &amp; operations</h2>
+        <p>
+          Live monitoring and control, still in daily use at the desk. Execution reports,
+          signal-quality stats, strategy performance, inter-strategy correlation. Deliberately
+          dynamic — new stat views without rework. Built with TanStack Start, Tailwind, TanStack
+          Query, Polars + Parquet, and Postgres.
+        </p>
 
-          <ul>
-            <li>50 execution systems — 50 Windows machines on AWS (MT5 Python is Windows-only), each running its own algorithm version on its own account.</li>
-            <li>5 brokers, 20–25 instruments across metals, crypto, energy, forex.</li>
-            <li>200ms signal-to-trade.</li>
-            <li>106,185+ signals processed; 5,000+ trades per day (average).</li>
-            <li>Mon–Fri, holding periods of hours to days — systematic execution, not HFT.</li>
-            <li>Onboarded 6 engineers over the tenure.</li>
-          </ul>
+        <h2>Scale</h2>
 
-          <p>
-            This is an internal platform for a private company — no public screenshots exist.
-            The architecture above is the tour.
-          </p>
-        </Typeset>
-      </div>
+        <ul>
+          <li>
+            50 execution systems — 50 Windows machines on AWS (MT5 Python is Windows-only), each
+            running its own algorithm version on its own account.
+          </li>
+          <li>5 brokers, 20–25 instruments across metals, crypto, energy, forex.</li>
+        </ul>
+
+        <p>
+          This is an internal platform for a private company, so there is no public UI to click.
+          The architecture above is the tour. For a system you can open, see the{" "}
+          <Link to="/work/charts">charting engine</Link>
+          — or email me at{" "}
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+        </p>
+      </Typeset>
     </main>
   )
 }

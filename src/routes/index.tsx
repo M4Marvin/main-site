@@ -1,24 +1,20 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Navbar } from '@/components/sections/navbar'
-import { Hero } from '@/components/sections/hero'
-import { Work } from '@/components/sections/work'
-import { About } from '@/components/sections/about'
-import { Contact } from '@/components/sections/contact'
-import { Footer } from '@/components/sections/footer'
-import { SkipLink } from '@/components/sections/skip-link'
+import { createFileRoute } from "@tanstack/react-router"
+import { Hero } from "@/components/sections/hero"
+import { Work } from "@/components/sections/work"
+import { About } from "@/components/sections/about"
+import { pageHead } from "@/lib/seo"
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute("/")({
+  component: Home,
+  head: () => pageHead({ path: "/" }),
+})
 
 function Home() {
   return (
-    <main id="main" tabIndex={-1} className="relative min-h-screen bg-black text-white">
-      <SkipLink />
-      <Navbar />
+    <main id="main" tabIndex={-1}>
       <Hero />
       <Work />
       <About />
-      <Contact />
-      <Footer />
     </main>
   )
 }

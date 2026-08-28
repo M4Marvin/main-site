@@ -2,10 +2,15 @@
 @plugin "@tailwindcss/typography";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+    --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -47,106 +52,329 @@
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Dark-only. Inverted zinc, same register as a well-set document. */
 :root {
-    --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+    --radius: 0.25rem;
+    --background: #09090b;
+    --foreground: #fafafa;
+    --card: #09090b;
+    --card-foreground: #fafafa;
+    --popover: #18181b;
+    --popover-foreground: #fafafa;
+    --primary: #fafafa;
+    --primary-foreground: #09090b;
+    --secondary: #18181b;
+    --secondary-foreground: #fafafa;
+    --muted: #18181b;
+    --muted-foreground: #a1a1aa;
+    --accent: #18181b;
+    --accent-foreground: #fafafa;
     --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
-}
-
-@layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
+    --destructive-foreground: #fafafa;
+    --border: #27272a;
+    --input: #27272a;
+    --ring: #a1a1aa;
+    --chart-1: #a1a1aa;
+    --chart-2: #d4d4d8;
+    --chart-3: #71717a;
+    --chart-4: #52525b;
+    --chart-5: #3f3f46;
+    --sidebar: #09090b;
+    --sidebar-foreground: #fafafa;
+    --sidebar-primary: #fafafa;
+    --sidebar-primary-foreground: #09090b;
+    --sidebar-accent: #18181b;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: #27272a;
+    --sidebar-ring: #a1a1aa;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @theme {
     --shadow-input: 0px 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
-:root {
-    --chart-1: oklch(0.55 0.2 255);
-    --chart-2: oklch(0.6 0.22 285);
-}
-
-.dark {
-    --primary: oklch(0.7 0.18 255);
-    --ring: oklch(0.7 0.18 255);
-    --chart-1: oklch(0.62 0.22 255);
-    --chart-2: oklch(0.65 0.24 290);
-}
-
-html {
-    scroll-behavior: smooth;
-    color-scheme: dark;
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    html {
+        scroll-behavior: smooth;
+        color-scheme: dark;
+        scroll-padding-top: 1.25rem;
+        background-color: var(--background);
+    }
+    body {
+        @apply bg-background text-foreground antialiased;
+        font-family: var(--font-sans);
+        font-optical-sizing: auto;
+        font-synthesis: none;
+    }
+    p {
+        text-wrap: pretty;
+    }
+    ::selection {
+        color: var(--foreground);
+        background-color: #3f3f46;
+    }
 }
 
 section[id] {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-top: 1.25rem;
 }
 
-/* Print: plain black-on-white document, expanded URLs, chrome hidden */
+.nav-link {
+    color: #a1a1aa;
+    text-decoration: none;
+    transition: color 200ms var(--ease-out);
+}
+.nav-link[aria-current="page"] {
+    color: var(--foreground);
+}
+.nav-link:focus-visible {
+    outline: 2px solid oklch(1 0 0 / 35%);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+.text-link {
+    color: #a1a1aa;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+    transition:
+        color 200ms var(--ease-out),
+        text-decoration-color 200ms var(--ease-out);
+}
+.text-link:focus-visible {
+    outline: 2px solid oklch(1 0 0 / 35%);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+.name-link {
+    transition: opacity 200ms var(--ease-out);
+}
+.name-link:focus-visible {
+    outline: 2px solid oklch(1 0 0 / 35%);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+.ext-hint,
+.action-hint {
+    display: inline-block;
+    transition: transform 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .nav-link:hover,
+    .text-link:hover {
+        color: var(--foreground);
+    }
+    .text-link:hover {
+        text-decoration-color: currentColor;
+    }
+    .name-link:hover {
+        opacity: 0.7;
+    }
+    a:hover .ext-hint {
+        transform: translate(2px, -2px);
+    }
+    a:hover .action-hint {
+        transform: translateX(3px);
+    }
+}
+
+/* Geometric construction behind the masthead — same register as desengs.com. */
+.page-mark-clip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+    height: 34rem;
+    overflow: hidden;
+    pointer-events: none;
+    animation: mark-clip-in 700ms var(--ease-out) both;
+    mask-image: linear-gradient(to bottom, #000 36%, transparent 80%);
+}
+.page-mark-clip-compact {
+    height: 13rem;
+    mask-image: linear-gradient(to bottom, #000 45%, transparent);
+}
+.page-mark {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 350px;
+    background: #18181b66;
+    border: 1px solid #27272a;
+    border-radius: 50%;
+    opacity: 0.5;
+    transform: translate(-50%, -50%);
+    animation: mark-spin 180s linear infinite;
+}
+.page-mark::before {
+    position: absolute;
+    inset: 50px;
+    content: "";
+    background: #09090b;
+    border: 1px dashed #27272a;
+    border-radius: 50%;
+}
+.page-mark::after {
+    position: absolute;
+    inset: -50px;
+    content: "";
+    border: 1px dashed #27272a;
+    border-radius: 50%;
+}
+.page-mark-axis {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid #27272a;
+    transform: translate(-50%, -50%);
+    animation: mark-spin 120s linear infinite reverse;
+}
+.page-mark-axis-x {
+    width: 350px;
+}
+.page-mark-axis-x::before,
+.page-mark-axis-x::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 450px;
+    height: 0;
+    content: "";
+    border: 1px dashed #27272a;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.page-mark-axis-x::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.page-mark-axis-y {
+    width: 0;
+    height: 350px;
+}
+.page-mark-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #27272a;
+    border-radius: 50%;
+}
+.page-mark-ring-x {
+    transform: translate(-50%);
+}
+.page-mark-ring-x::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    border: inherit;
+    border-radius: 50%;
+    transform: translate(100%);
+}
+.page-mark-ring-y {
+    transform: translateY(-50%);
+}
+.page-mark-ring-y::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    border: inherit;
+    border-radius: 50%;
+    transform: translateY(100%);
+}
+.page-mark-outer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    width: 700px;
+    height: 700px;
+    border: 1px solid #27272a;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+.page-mark-outer::before {
+    position: absolute;
+    inset: -50px;
+    content: "";
+    background-color: #09090b;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #27272a 0,
+        #27272a 1px,
+        #09090b 0,
+        #09090b 50%
+    );
+    background-size: 10px 10px;
+    border: 1px dashed #27272a;
+    border-radius: 50%;
+    opacity: 0.8;
+    mask-image: radial-gradient(circle at center, transparent 350px, #000 35px);
+}
+
+.hatch {
+    width: 100%;
+    height: 12px;
+    margin-top: 3.25rem;
+    background-image: repeating-linear-gradient(
+        315deg,
+        #27272a 0,
+        #27272a 1px,
+        transparent 0,
+        transparent 50%
+    );
+    background-size: 10px 10px;
+    mask-image: linear-gradient(90deg, #000, transparent);
+}
+
+.reveal {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity 250ms var(--ease-out) var(--reveal-delay, 0ms),
+        transform 250ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+.reveal[data-shown="false"] {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+@keyframes mark-spin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+@keyframes mark-clip-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 @media print {
     body,
     main,
@@ -165,22 +393,10 @@ section[id] {
     a {
         color: #000 !important;
     }
-    h1,
-    h2,
-    h3,
-    h4 {
-        background: none !important;
-        -webkit-text-fill-color: currentColor !important;
-    }
-    .fixed,
-    .availability-banner,
-    .hero-fade-up {
-        display: none !important;
-    }
-    .hero-fade-up {
-        animation: none !important;
-        opacity: 1 !important;
-        transform: none !important;
+    .nav-link,
+    .text-link {
+        color: #000 !important;
+        text-decoration-color: currentColor !important;
     }
     a[href^="http"]::after {
         content: " (" attr(href) ")";
@@ -190,27 +406,16 @@ section[id] {
     section[id] {
         scroll-margin-top: 0;
     }
-}
-
-/* One-time entrance for hero content. Duration is collapsed to 0 by the
-   prefers-reduced-motion block below, which is the intended fallback. */
-.hero-fade-up {
-    animation: hero-fade-up 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-@keyframes hero-fade-up {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
+    .page-mark-clip,
+    .hatch {
+        display: none !important;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
 
-/* Collapse all motion for users who ask for it. The site keeps opacity/color
-   transitions that aid comprehension (they run near-instantly here). */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -219,5 +424,18 @@ section[id] {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+    .page-mark,
+    .page-mark-axis {
+        animation: none !important;
+    }
+    .page-mark-clip {
+        animation: none !important;
+        opacity: 1;
+    }
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }

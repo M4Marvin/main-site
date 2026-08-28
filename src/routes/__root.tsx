@@ -1,11 +1,43 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Outlet, createRootRoute, useRouterState } from "@tanstack/react-router"
+import { SkipLink } from "@/components/sections/skip-link"
+import { SiteHeader } from "@/components/sections/site-header"
+import { Footer } from "@/components/sections/footer"
+import { PageMark } from "@/components/sections/page-mark"
+import { Reveal } from "@/components/ui/reveal"
+import { NotFoundPage } from "@/components/sections/not-found"
+import { pageHead } from "@/lib/seo"
 
-import '../styles.css'
+import "../styles.css"
 
 export const Route = createRootRoute({
   component: RootComponent,
+  notFoundComponent: NotFoundPage,
+  head: () => pageHead({ path: "/" }),
 })
 
 function RootComponent() {
-  return <Outlet />
+  const home = useRouterState({ select: (s) => s.location.pathname === "/" })
+
+  return (
+    <div className="relative isolate min-h-dvh">
+      <HeadContent />
+      <SkipLink />
+      <PageMark compact={!home} />
+      <div
+        className={
+          home
+            ? "relative z-10 mx-auto flex min-h-dvh w-full max-w-[68rem] flex-col px-6 sm:px-8"
+            : "relative z-10 mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-6 sm:px-8"
+        }
+      >
+        <Reveal>
+          <SiteHeader />
+        </Reveal>
+        <div className="flex-1">
+          <Outlet />
+        </div>
+        <Footer />
+      </div>
+    </div>
+  )
 }

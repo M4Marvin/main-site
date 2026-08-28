@@ -2,9 +2,9 @@ import { getPostBySlug, getAllPosts } from "@/lib/blog"
 import { createFileRoute, Link, notFound } from "@tanstack/react-router"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
-import { Calendar, Tag } from "lucide-react"
-import { SkipLink } from "@/components/sections/skip-link"
-import { PageHeader } from "@/components/sections/page-header"
+import { Typeset } from "@/components/ui/typeset"
+import { pageHead } from "@/lib/seo"
+import { NotFoundPage } from "@/components/sections/not-found"
 
 export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
@@ -13,21 +13,21 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!post) throw notFound()
     return post
   },
-  notFoundComponent: NotFound,
+  head: ({ loaderData }) =>
+    pageHead({
+      title: loaderData?.title,
+      description: loaderData?.description,
+      path: loaderData ? `/blog/${loaderData.slug}` : "/blog",
+    }),
+  notFoundComponent: NotFoundPage,
 })
 
-function NotFound() {
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-black text-white">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">404</h1>
-        <p className="mt-2 text-zinc-400">Post not found.</p>
-        <Link to="/blog" className="mt-4 inline-block text-blue-400 hover:underline">
-          Back to blog
-        </Link>
-      </div>
-    </main>
-  )
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
 }
 
 function BlogPost() {
@@ -38,79 +38,48 @@ function BlogPost() {
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null
 
   return (
-    <main id="main" tabIndex={-1} className="min-h-screen bg-black text-white">
-      <SkipLink />
-      <article className="mx-auto max-w-3xl px-4 pt-24 pb-24">
-        <PageHeader backTo="/blog" backLabel="Back to Home" />
-
-        <header className="mb-12">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+    <main id="main" tabIndex={-1} className="pb-8">
+      <article>
+        <header className="mb-10">
+          <h1 className="text-[1.65rem] font-medium tracking-[-0.02em] text-zinc-50 sm:text-[1.85rem]">
             {post.title}
           </h1>
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-400">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="h-3.5 w-3.5" />
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Tag className="h-3.5 w-3.5" />
-              <span className="flex gap-2">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-white/5 px-2 py-0.5 text-xs"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </span>
-            </span>
-          </div>
+          <p className="mt-3 font-mono text-[12px] text-zinc-500">
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            <span aria-hidden="true"> · </span>
+            {post.tags.join(" · ")}
+          </p>
         </header>
 
-        <div className="prose prose-invert max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {post.content}
-          </ReactMarkdown>
-        </div>
-
-        {(prevPost || nextPost) && (
-          <nav className="mt-16 flex items-center justify-between border-t border-white/10 pt-8">
-            {prevPost ? (
-              <Link
-                to="/blog/$slug"
-                params={{ slug: prevPost.slug }}
-                className="group text-left"
-              >
-                <span className="text-xs text-zinc-400">Previous</span>
-                <p className="mt-1 text-sm font-medium group-hover:text-blue-400 transition-colors">
-                  {prevPost.title}
-                </p>
-              </Link>
-            ) : (
-              <div />
-            )}
-            {nextPost ? (
-              <Link
-                to="/blog/$slug"
-                params={{ slug: nextPost.slug }}
-                className="group text-right"
-              >
-                <span className="text-xs text-zinc-400">Next</span>
-                <p className="mt-1 text-sm font-medium group-hover:text-blue-400 transition-colors">
-                  {nextPost.title}
-                </p>
-              </Link>
-            ) : (
-              <div />
-            )}
-          </nav>
-        )}
+        <Typeset>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+        </Typeset>
       </article>
+
+      {(prevPost || nextPost) && (
+        <nav className="mt-16 flex items-start justify-between gap-8 border-t border-zinc-800 pt-8">
+          {prevPost ? (
+            <Link to="/blog/$slug" params={{ slug: prevPost.slug }} className="group max-w-[45%] text-left">
+              <span className="font-mono text-[12px] text-zinc-500">Previous</span>
+              <p className="mt-1 text-sm text-zinc-300 underline decoration-transparent underline-offset-[0.18em] transition-[text-decoration-color] duration-200 group-hover:decoration-current">
+                {prevPost.title}
+              </p>
+            </Link>
+          ) : (
+            <div />
+          )}
+          {nextPost ? (
+            <Link to="/blog/$slug" params={{ slug: nextPost.slug }} className="group max-w-[45%] text-right">
+              <span className="font-mono text-[12px] text-zinc-500">Next</span>
+              <p className="mt-1 text-sm text-zinc-300 underline decoration-transparent underline-offset-[0.18em] transition-[text-decoration-color] duration-200 group-hover:decoration-current">
+                {nextPost.title}
+              </p>
+            </Link>
+          ) : (
+            <div />
+          )}
+        </nav>
+      )}
     </main>
   )
 }

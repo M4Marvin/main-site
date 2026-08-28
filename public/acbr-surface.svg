@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 140" width="880" height="140" role="img" aria-labelledby="acbr-title">
+  <title id="acbr-title">Ankalan surface: prediction, virtual screening, Tanimoto similarity, and QED drug-likeness</title>
+  <g fill="none" stroke="#3f3f46" stroke-width="1">
+    <rect x="8" y="20" width="200" height="100" rx="4"/>
+    <rect x="228" y="20" width="200" height="100" rx="4"/>
+    <rect x="448" y="20" width="200" height="100" rx="4"/>
+    <rect x="668" y="20" width="204" height="100" rx="4"/>
+  </g>
+  <g font-family="ui-sans-serif, system-ui, sans-serif" text-anchor="middle">
+    <text x="108" y="64" fill="#fafafa" font-size="15" font-weight="500">Prediction</text>
+    <text x="108" y="86" fill="#71717a" font-size="11">bioactivity class</text>
+    <text x="328" y="64" fill="#fafafa" font-size="15" font-weight="500">Screening</text>
+    <text x="328" y="86" fill="#71717a" font-size="11">virtual libraries</text>
+    <text x="548" y="64" fill="#fafafa" font-size="15" font-weight="500">Tanimoto</text>
+    <text x="548" y="86" fill="#71717a" font-size="11">similarity</text>
+    <text x="770" y="64" fill="#fafafa" font-size="15" font-weight="500">QED</text>
+    <text x="770" y="86" fill="#71717a" font-size="11">drug-likeness</text>
+  </g>
+</svg>

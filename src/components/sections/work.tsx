@@ -1,33 +1,16 @@
-import { ArrowRight, ExternalLink, LineChart, TrendingUp, Sparkles } from "lucide-react"
 import { Link } from "@tanstack/react-router"
 import { Image } from "@unpic/react"
-import { BentoGridItem } from "@/components/ui/bento-grid"
-import { Badge } from "@/components/ui/badge"
-import { SectionHeader } from "@/components/sections/section-header"
 import { projects } from "@/lib/portfolio-data"
-import { cn } from "@/lib/utils"
-import type { Project } from "@/lib/portfolio-data"
-
-function getProjectIcon(slug: string) {
-  switch (slug) {
-    case "marvfinancialcharts":
-      return LineChart
-    case "sirius-trading-platform":
-      return TrendingUp
-    default:
-      return Sparkles
-  }
-}
+import type { Project, Stat } from "@/lib/portfolio-data"
+import { Reveal } from "@/components/ui/reveal"
+import { SignalFlow } from "@/components/sections/signal-flow"
 
 function getThumbnail(project: Project) {
   if (project.slug === "marvfinancialcharts") {
     return "https://files.m4marvin.com/charts_app/1.png"
   }
-  if (project.slug === "sirius-trading-platform") {
-    return "/sirius-architecture.svg"
-  }
   if (project.slug === "acbr-drug-discovery") {
-    return "/acbr-ankalan.webp"
+    return "/acbr-surface.svg"
   }
   return null
 }
@@ -36,198 +19,156 @@ type Action = { label: string; to?: string; href?: string }
 
 function cardAction(project: Project): Action | null {
   if (project.slug === "sirius-trading-platform") {
-    return { label: "Read the case study", to: "/work/sirius" }
+    return { label: "Case study", to: "/work/sirius" }
   }
-  if (project.slug === "acbr-drug-discovery" && project.link) {
-    return { label: "Open the live tool", href: project.link }
+  if (project.slug === "acbr-drug-discovery") {
+    return { label: "Case study", to: "/work/acbr" }
   }
-  if (project.link) {
+  if (project.slug === "marvfinancialcharts") {
     return { label: "Live demo", href: project.link }
   }
   return null
 }
 
-function titleTarget(project: Project): { to?: string; href?: string } {
+function titleTarget(project: Project): { to?: string } {
   if (project.slug === "sirius-trading-platform") return { to: "/work/sirius" }
-  if (project.slug === "marvfinancialcharts") return { to: "/footprint-charts" }
-  if (project.link) return { href: project.link }
+  if (project.slug === "acbr-drug-discovery") return { to: "/work/acbr" }
+  if (project.slug === "marvfinancialcharts") return { to: "/work/charts" }
   return {}
 }
 
-const focusRing = "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/40"
+function Title({ project }: { project: Project }) {
+  const target = titleTarget(project)
+  const className =
+    "text-[1.15rem] font-medium tracking-[-0.02em] text-zinc-50 underline decoration-transparent underline-offset-[0.18em] transition-[text-decoration-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:decoration-current sm:text-xl"
 
-function ProjectMeta({ project }: { project: Project }) {
-  return (
-    <div className="flex items-center gap-1.5 text-sm uppercase tracking-wider text-neutral-300">
-      <span>{project.role}</span>
-      {project.period && (
-        <>
-          <span aria-hidden>·</span>
-          <span className="whitespace-nowrap">{project.period}</span>
-        </>
-      )}
-    </div>
-  )
+  if (target.to) {
+    return (
+      <Link to={target.to} className={className}>
+        {project.title}
+      </Link>
+    )
+  }
+  return <span className="text-[1.15rem] font-medium tracking-[-0.02em] text-zinc-50 sm:text-xl">{project.title}</span>
 }
 
-function TechBadges({ tech }: { tech: string[] }) {
-  return (
-    <div className="flex flex-wrap gap-1.5">
-      {tech.map((t) => (
-        <Badge key={t} variant="secondary" className="h-6 border-white/10 bg-white/5 px-2.5 text-sm text-neutral-400">
-          {t}
-        </Badge>
-      ))}
-    </div>
-  )
-}
-
-function ActionButton({ action }: { action: Action }) {
-  const cls =
-    "inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-blue-400 transition-colors duration-200 hover:border-blue-400/30 hover:bg-blue-400/10 hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
+function ActionLink({ action }: { action: Action }) {
   if (action.to) {
     return (
-      <Link to={action.to} className={cls}>
-        {action.label}
-        <ArrowRight className="h-3 w-3" />
+      <Link to={action.to} className="text-link font-mono text-[13px]">
+        {action.label} <span className="action-hint">→</span>
       </Link>
     )
   }
   return (
-    <a href={action.href} target="_blank" rel="noopener noreferrer" className={cls}>
-      <ExternalLink className="h-3 w-3" />
-      {action.label}
+    <a href={action.href} target="_blank" rel="noopener noreferrer" className="text-link font-mono text-[13px]">
+      {action.label} <span className="ext-hint">↗</span>
     </a>
   )
 }
 
-function FeaturedCard({ project }: { project: Project }) {
-  const Icon = getProjectIcon(project.slug)
-  const action = cardAction(project)
-  const target = titleTarget(project)
-
+function Stats({ stats }: { stats: Stat[] }) {
   return (
-    <div className="grid grid-cols-1 overflow-hidden rounded-xl border border-white/10 bg-black transition-colors duration-200 hover:border-white/20 md:grid-cols-5">
-      <div className="bg-black md:col-span-3">
-        <img
-          src="/sirius-architecture.svg"
-          alt={project.title}
-          width={960}
-          height={480}
-          decoding="async"
-          className="h-full w-full object-contain"
-        />
-      </div>
-      <div className="flex flex-col justify-center gap-4 p-6 md:col-span-2 md:p-8">
-        <Link to={target.to} aria-label={project.title} className={cn("w-fit", focusRing)}>
-          <div className="flex items-center gap-2 font-sans text-xl font-bold text-neutral-200 md:text-2xl">
-            <Icon className="h-5 w-5 shrink-0 text-neutral-400" aria-hidden />
-            <span className="text-neutral-200">{project.title}</span>
-          </div>
-        </Link>
-        <ProjectMeta project={project} />
-        <p className="text-base leading-relaxed text-neutral-300">{project.summary}</p>
-        <TechBadges tech={project.tech} />
-        {action && <ActionButton action={action} />}
-      </div>
-    </div>
+    <dl className={`mt-6 grid grid-cols-1 gap-4 ${stats.length > 1 ? "sm:grid-cols-3" : "sm:grid-cols-3"}`}>
+      {stats.map((stat) => (
+        <div key={stat.label}>
+          <dd className="font-mono text-[1.65rem] leading-none tabular-nums tracking-tight text-zinc-50 sm:text-[2rem]">
+            {stat.value}
+          </dd>
+          <dt className="mt-1.5 font-mono text-[12px] text-zinc-500">{stat.label}</dt>
+        </div>
+      ))}
+    </dl>
   )
 }
 
-function ProjectCard({ project }: { project: Project }) {
-  const Icon = getProjectIcon(project.slug)
-  const thumbnail = getThumbnail(project)
-  const isExternalImage = !!thumbnail?.startsWith("http")
-  const action = cardAction(project)
-  const target = titleTarget(project)
+function ProjectFigure({ project }: { project: Project }) {
+  if (project.slug === "sirius-trading-platform") {
+    return (
+      <figure className="mt-6">
+        <SignalFlow />
+      </figure>
+    )
+  }
 
-  const header = thumbnail ? (
-    <div className="relative aspect-[2/1] min-h-[8rem] w-full overflow-hidden rounded-t-xl bg-black">
-      {!isExternalImage ? (
-        <img
-          src={thumbnail}
-          alt={project.title}
-          className="h-full w-full object-cover transition-transform duration-300 group-hover/card:scale-105"
-          loading="lazy"
-          decoding="async"
-        />
-      ) : (
+  const thumbnail = getThumbnail(project)
+  if (!thumbnail) return null
+  const isExternal = thumbnail.startsWith("http")
+  const imgClass = "h-auto w-full border border-zinc-800"
+
+  return (
+    <figure className="mt-6">
+      {isExternal ? (
         <Image
           src={thumbnail}
           alt={project.title}
-          className="h-full w-full object-cover transition-transform duration-300 group-hover/card:scale-105"
+          className={imgClass}
           width={800}
           height={400}
           layout="constrained"
           fallback="wsrv"
         />
+      ) : (
+        <img
+          src={thumbnail}
+          alt={project.title}
+          width={800}
+          height={400}
+          loading="lazy"
+          decoding="async"
+          className={imgClass}
+        />
       )}
-    </div>
-  ) : null
-
-  const title = (
-    <div className="flex items-center gap-2 font-sans font-bold text-neutral-200">
-      <Icon className="h-4 w-4 shrink-0 text-neutral-400" aria-hidden />
-      <span className="text-neutral-200">{project.title}</span>
-    </div>
+    </figure>
   )
+}
 
-  const titleNode = target.to ? (
-    <Link to={target.to} aria-label={project.title} className={focusRing}>
-      {title}
-    </Link>
-  ) : target.href ? (
-    <a
-      href={target.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={project.title}
-      className={focusRing}
-    >
-      {title}
-    </a>
-  ) : (
-    title
-  )
-
-  const description = (
-    <div className={cn("space-y-3", !thumbnail && "pt-5 md:pt-7")}>
-      <ProjectMeta project={project} />
-      <p className="text-base leading-relaxed text-neutral-300">{project.summary}</p>
-      <TechBadges tech={project.tech} />
-      {action && <ActionButton action={action} />}
-    </div>
-  )
+function ProjectArticle({ project }: { project: Project }) {
+  const action = cardAction(project)
 
   return (
-    <div className="group/card h-full">
-      <BentoGridItem
-        title={titleNode}
-        description={description}
-        header={header}
-        className="h-full border-white/[0.1] transition-colors duration-200 hover:border-white/20"
-      />
-    </div>
+    <article className="py-10">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <h3>
+          <Title project={project} />
+        </h3>
+        <p className="font-mono text-[12px] text-zinc-500">{project.period}</p>
+      </div>
+
+      <p className="mt-1 font-mono text-[12px] text-zinc-500">
+        {project.role}
+        <span aria-hidden="true"> · </span>
+        {project.org}
+      </p>
+
+      <p className="mt-4 max-w-[36em] text-[0.98rem] leading-relaxed text-zinc-300">{project.summary}</p>
+
+      {project.stats.length > 0 && <Stats stats={project.stats} />}
+
+      <ProjectFigure project={project} />
+
+      <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+        <p className="font-mono text-[12px] text-zinc-500">{project.tech.join(" · ")}</p>
+        {action && <ActionLink action={action} />}
+      </div>
+    </article>
   )
 }
 
 export function Work() {
   const items = projects.filter((p) => p.featured)
-  const hero = items.find((p) => p.slug === "sirius-trading-platform")
-  const rest = items.filter((p) => p.slug !== "sirius-trading-platform")
 
   return (
-    <section id="work" className="relative bg-black py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <SectionHeader title="Selected Work" />
-
-        {hero && <FeaturedCard project={hero} />}
-
-        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {rest.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
+    <section id="work" className="pt-8 pb-4">
+      <Reveal>
+        <h2 className="font-mono text-[13px] text-zinc-500">Work</h2>
+      </Reveal>
+      <div className="mt-4 divide-y divide-zinc-800">
+        {items.map((project, i) => (
+          <Reveal key={project.slug} delay={i * 40}>
+            <ProjectArticle project={project} />
+          </Reveal>
+        ))}
       </div>
     </section>
   )

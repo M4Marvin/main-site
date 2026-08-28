@@ -1,7 +1,7 @@
 ---
-title: "The Power Button That Unlocks My Computer"
+title: "Bringing an EH577 power-button fingerprint reader up on Linux"
 date: "2026-08-13"
-description: "The fingerprint reader hiding inside my PC's power button was dead on Linux. Now one touch unlocks it. A person and some AI agents figured it out together."
+description: "EgisTec EH577 in a Beelink power button had no libfprint driver. Side-by-side install of a community driver plus the vendor matching engine, on Arch."
 tags: ["linux", "fingerprint", "libfprint", "ai-agents", "hyprland"]
 ---
 
@@ -9,28 +9,6 @@ Press the power button on my desktop and you'll find a secret. The button has a 
 
 ![The journey from dead button to working fingerprint](/eh577-journey.svg)
 
-<details>
-<summary>Journey diagram (mermaid source)</summary>
-
-```mermaid
-flowchart TD
-    A["Power button has a fingerprint reader"] --> B["Linux: No devices available"]
-    B --> C["Find community driver + vendor engine"]
-    C --> D["Patch Arch install script (2 lines)"]
-    D --> E["Install: side-by-side, reversible"]
-    E --> F["Enroll finger (8 stages)"]
-    F --> G["Verify: MATCH"]
-    G --> H["Finger unlocks work"]
-
-    C -. side-quest .-> V["Build live visualizer"]
-    V --> V2["Frame confirmed: real fingerprint"]
-    V2 --> F
-
-    E -. side-quest .-> X["Found + fixed stack overflow on cancel"]
-    X --> F
-```
-
-</details>
 
 ## The Problem in Plain Words
 
@@ -46,22 +24,6 @@ Here's where the team came in. I'm the person with a problem. The AI agents are 
 
 ![The USB conversation, simplified](/eh577-protocol.svg)
 
-<details>
-<summary>Protocol diagram (mermaid source)</summary>
-
-```mermaid
-sequenceDiagram
-    participant Host as Linux host
-    participant Sensor as EH577 sensor
-    Host->>Sensor: init (99 commands)
-    Host->>Sensor: ARM (EGIS 61 2d 13)
-    Host->>Sensor: STATUS poll (60 00 13)
-    Host->>Sensor: GRAB (64 0f 96)
-    Sensor->>Host: 3990-byte 70x57 frame
-    Host->>Sensor: DISARM (61 2d 20)
-```
-
-</details>
 
 The conversation itself is short. The computer arms the sensor, checks its status, grabs a frame, and gets back the 70 by 57 picture. Then it disarms. Ninety-nine setup commands run first, and after that the dance is only four steps.
 
@@ -71,21 +33,6 @@ Installing meant running one script with administrator rights. I typed the passw
 
 ![The software stack, side by side with the system's own](/eh577-stack.svg)
 
-<details>
-<summary>Stack diagram (mermaid source)</summary>
-
-```mermaid
-flowchart TB
-    Apps["Apps (sudo, login, apps)"] --> fprintd["fprintd (D-Bus daemon)"]
-    fprintd --> ourlib["our libfprint<br/>(/usr/local/lib/eh577)"]
-    ourlib --> drv["eh577 driver<br/>(capture, enroll, verify)"]
-    drv --> eng["vendor engine<br/>eh577-engine.so (matching)"]
-    eng --> usb["USB sensor 1c7a:0577"]
-    drv --> usb
-    distro["distro libfprint untouched (side-by-side)"] -.-> fprintd
-```
-
-</details>
 
 But there was a catch, and it's my favorite part of this whole story. The install script was written for Fedora, which uses an extra security system called SELinux. I run Arch Linux, which doesn't have it. Two lines in the script assumed Fedora tools that simply don't exist here. The script runs in a strict mode where any failing command stops everything, so those two lines would have killed the install halfway through.
 
