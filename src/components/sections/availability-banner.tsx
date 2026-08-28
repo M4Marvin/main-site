@@ -2,13 +2,10 @@ export function AvailabilityBanner() {
   return (
     <a
       href="#contact"
-      className="availability-banner flex flex-col items-center justify-center gap-0.5 border-b border-white/10 bg-white/[0.02] px-4 py-2.5 text-center text-xs font-medium leading-snug text-neutral-300 transition-colors duration-200 hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-400/40 sm:text-sm"
+      className="availability-banner inline-flex max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-neutral-300 transition-colors duration-200 hover:border-white/20 hover:bg-white/[0.07] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/40 sm:text-sm"
     >
-      <span className="flex items-center gap-2">
-        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden />
-        Open to Architect / Tech Lead roles · Abu Dhabi, UAE
-      </span>
-      <span>Immediate joining · Full-time or contractor</span>
+      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden />
+      <span>Available now · Architect / Tech Lead · Abu Dhabi</span>
     </a>
   )
 }

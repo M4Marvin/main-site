@@ -1,14 +1,17 @@
 import { ArrowDown, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { profile, stats } from "@/lib/portfolio-data"
+import { AvailabilityBanner } from "@/components/sections/availability-banner"
 
 export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-black px-4 py-16"
+      className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden bg-black px-4 pt-24 pb-16 md:pt-28"
     >
-      <div className="hero-fade-up relative z-20 flex w-full max-w-2xl flex-col items-center gap-4 text-center">
+      <div className="hero-fade-up relative z-20 flex w-full max-w-2xl flex-col items-center gap-5 text-center">
+        <AvailabilityBanner />
+
         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl">
           {profile.name}
         </h1>
