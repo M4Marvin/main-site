@@ -58,7 +58,7 @@ const focusRing = "rounded focus-visible:outline-none focus-visible:ring-2 focus
 
 function ProjectMeta({ project }: { project: Project }) {
   return (
-    <div className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-neutral-300">
+    <div className="flex items-center gap-1.5 text-sm uppercase tracking-wider text-neutral-300">
       <span>{project.role}</span>
       {project.period && (
         <>
@@ -74,7 +74,7 @@ function TechBadges({ tech }: { tech: string[] }) {
   return (
     <div className="flex flex-wrap gap-1.5">
       {tech.map((t) => (
-        <Badge key={t} variant="secondary" className="border-white/10 bg-white/5 text-xs text-neutral-400">
+        <Badge key={t} variant="secondary" className="h-6 border-white/10 bg-white/5 px-2.5 text-sm text-neutral-400">
           {t}
         </Badge>
       ))}
@@ -84,7 +84,7 @@ function TechBadges({ tech }: { tech: string[] }) {
 
 function ActionButton({ action }: { action: Action }) {
   const cls =
-    "inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-blue-400 transition-colors duration-200 hover:border-blue-400/30 hover:bg-blue-400/10 hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
+    "inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-blue-400 transition-colors duration-200 hover:border-blue-400/30 hover:bg-blue-400/10 hover:text-blue-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 active:scale-[0.97]"
   if (action.to) {
     return (
       <Link to={action.to} className={cls}>
@@ -112,10 +112,10 @@ function FeaturedCard({ project }: { project: Project }) {
         <img
           src="/sirius-architecture.svg"
           alt={project.title}
-          width={1000}
-          height={500}
+          width={960}
+          height={480}
           decoding="async"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
         />
       </div>
       <div className="flex flex-col justify-center gap-4 p-6 md:col-span-2 md:p-8">
@@ -126,7 +126,7 @@ function FeaturedCard({ project }: { project: Project }) {
           </div>
         </Link>
         <ProjectMeta project={project} />
-        <p className="text-sm leading-relaxed text-neutral-300">{project.summary}</p>
+        <p className="text-base leading-relaxed text-neutral-300">{project.summary}</p>
         <TechBadges tech={project.tech} />
         {action && <ActionButton action={action} />}
       </div>
@@ -193,7 +193,7 @@ function ProjectCard({ project }: { project: Project }) {
   const description = (
     <div className={cn("space-y-3", !thumbnail && "pt-5 md:pt-7")}>
       <ProjectMeta project={project} />
-      <p className="text-sm leading-relaxed text-neutral-300">{project.summary}</p>
+      <p className="text-base leading-relaxed text-neutral-300">{project.summary}</p>
       <TechBadges tech={project.tech} />
       {action && <ActionButton action={action} />}
     </div>
@@ -217,7 +217,7 @@ export function Work() {
   const rest = items.filter((p) => p.slug !== "sirius-trading-platform")
 
   return (
-    <section id="work" className="relative bg-black py-20 md:py-32">
+    <section id="work" className="relative bg-black py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <SectionHeader title="Selected Work" />
 

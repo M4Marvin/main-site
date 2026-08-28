@@ -1,6 +1,6 @@
 export function SectionHeader({ title }: { title: string }) {
   return (
-    <div className="mb-12">
+    <div className="mb-10">
       <h2 className="bg-linear-to-b from-white to-neutral-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent">
         {title}
       </h2>

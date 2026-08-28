@@ -11,11 +11,11 @@ export const FloatingNav = ({
   return (
     <div
       className={cn(
-        "flex max-w-fit fixed top-10 inset-x-0 mx-auto z-[5000] items-center justify-center",
+        "flex max-w-fit fixed top-6 inset-x-0 mx-auto z-[5000] items-center justify-center",
         className
       )}
     >
-      <div className="flex items-center justify-center gap-2 rounded-full border border-white/10 bg-black/50 px-2 py-1.5 shadow-lg shadow-black/10 backdrop-blur-md">
+      <div className="flex items-center justify-center gap-2 rounded-full border border-white/10 bg-black/50 px-2 py-2 shadow-lg shadow-black/10 backdrop-blur-md">
         <div className="flex items-center gap-1">
           {navItems.map((navItem, idx: number) => (
             <a

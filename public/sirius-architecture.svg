@@ -1,35 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 410" width="800" height="410" role="img" aria-labelledby="sirius-title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="960" height="480" role="img" aria-labelledby="sirius-title">
   <title id="sirius-title">Signal flow: TradingView webhooks and proprietary signals through the ingestor to 50 execution systems and the monitoring dashboard</title>
   <defs>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#3b82f6"/>
       <stop offset="1" stop-color="#8b5cf6"/>
     </linearGradient>
+    <symbol id="node" viewBox="0 0 198 172">
+      <rect width="198" height="172" rx="16" fill="url(#border)"/>
+      <rect x="2" y="2" width="194" height="168" rx="14" fill="#09090b"/>
+    </symbol>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="11" markerHeight="11" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1.5 1.8 L10.5 6 L1.5 10.2 z" fill="#818cf8"/>
+    </marker>
   </defs>
-  <rect width="800" height="410" fill="#000000"/>
-  <g font-family="system-ui, -apple-system, sans-serif" text-anchor="middle">
-    <rect x="20" y="150" width="170" height="110" rx="10" fill="#ffffff08" stroke="url(#accent)" stroke-width="1.5"/>
-    <text x="105" y="196" font-size="26" font-weight="600" fill="#e4e4e7">TradingView</text>
-    <text x="105" y="226" font-size="26" font-weight="600" fill="#e4e4e7">webhooks</text>
+  <rect width="960" height="480" fill="#000000"/>
 
-    <rect x="210" y="150" width="190" height="110" rx="10" fill="#ffffff08" stroke="url(#accent)" stroke-width="1.5"/>
-    <text x="305" y="192" font-size="26" font-weight="600" fill="#e4e4e7">Ingestor</text>
-    <text x="305" y="222" font-size="15" fill="#a1a1aa">auth · validate · route</text>
+  <use href="#node" x="36" y="154" width="198" height="172"/>
+  <use href="#node" x="266" y="154" width="198" height="172"/>
+  <use href="#node" x="496" y="154" width="198" height="172"/>
+  <use href="#node" x="726" y="154" width="198" height="172"/>
 
-    <rect x="420" y="150" width="170" height="110" rx="10" fill="#ffffff08" stroke="url(#accent)" stroke-width="1.5"/>
-    <text x="505" y="196" font-size="26" font-weight="600" fill="#e4e4e7">50 execution</text>
-    <text x="505" y="226" font-size="26" font-weight="600" fill="#e4e4e7">systems</text>
-
-    <rect x="610" y="150" width="170" height="110" rx="10" fill="#ffffff08" stroke="url(#accent)" stroke-width="1.5"/>
-    <text x="695" y="196" font-size="26" font-weight="600" fill="#e4e4e7">Dashboard</text>
-    <text x="695" y="226" font-size="15" fill="#a1a1aa">monitoring</text>
+  <g fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round">
+    <line x1="242" y1="240" x2="258" y2="240" marker-end="url(#arrow)"/>
+    <line x1="472" y1="240" x2="488" y2="240" marker-end="url(#arrow)"/>
+    <line x1="702" y1="240" x2="718" y2="240" marker-end="url(#arrow)"/>
   </g>
-  <g stroke="url(#accent)" stroke-width="2.5">
-    <line x1="194" y1="205" x2="204" y2="205"/>
-    <polygon points="212,205 202,198 202,212" fill="#8b5cf6"/>
-    <line x1="404" y1="205" x2="414" y2="205"/>
-    <polygon points="422,205 412,198 412,212" fill="#8b5cf6"/>
-    <line x1="594" y1="205" x2="604" y2="205"/>
-    <polygon points="612,205 602,198 602,212" fill="#8b5cf6"/>
+
+  <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" text-anchor="middle">
+    <text x="135" y="240" fill="#f4f4f5" font-size="22" font-weight="600">
+      <tspan x="135" dy="-0.72em">TradingView</tspan>
+      <tspan x="135" dy="1.28em">webhooks</tspan>
+    </text>
+
+    <text x="365" y="228" fill="#f4f4f5" font-size="22" font-weight="600">Ingestor</text>
+    <text x="365" y="256" fill="#a1a1aa" font-size="13">auth · validate · route</text>
+
+    <text x="595" y="240" fill="#f4f4f5" font-size="22" font-weight="600">
+      <tspan x="595" dy="-0.72em">50 execution</tspan>
+      <tspan x="595" dy="1.28em">systems</tspan>
+    </text>
+
+    <text x="825" y="228" fill="#f4f4f5" font-size="22" font-weight="600">Dashboard</text>
+    <text x="825" y="256" fill="#a1a1aa" font-size="13">monitoring</text>
   </g>
 </svg>

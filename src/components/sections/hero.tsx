@@ -7,16 +7,16 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden bg-black px-4 pt-24 pb-16 md:pt-28"
+      className="relative flex min-h-dvh w-full flex-col items-center justify-center overflow-hidden bg-black px-4 pt-24 pb-16"
     >
-      <div className="hero-fade-up relative z-20 flex w-full max-w-2xl flex-col items-center gap-5 text-center">
+      <div className="hero-fade-up relative z-20 flex w-full max-w-3xl flex-col items-center gap-6 text-center">
         <AvailabilityBanner />
 
-        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl">
+        <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl">
           {profile.name}
         </h1>
 
-        <p className="text-base leading-normal text-neutral-300 sm:text-lg sm:leading-relaxed">
+        <p className="max-w-2xl text-lg leading-relaxed text-neutral-300 sm:text-xl">
           {profile.tagline}
         </p>
 
@@ -37,7 +37,7 @@ export function Hero() {
           </a>
         </div>
 
-        <div className="mt-3 grid w-full grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3">
+        <div className="mt-2 grid w-full grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
           {stats.map((stat, i) => (
             <div
               key={stat.label}
@@ -46,12 +46,12 @@ export function Hero() {
                 stats.length === 3 && i === 2 && "col-span-2 sm:col-span-1",
               )}
             >
-              <div className="text-2xl font-bold tabular-nums text-white sm:text-3xl">
+              <div className="text-3xl font-bold tabular-nums text-white sm:text-4xl">
                 {stat.prefix}
                 {stat.value.toLocaleString()}
                 {stat.suffix}
               </div>
-              <span className="text-xs leading-tight text-neutral-400">
+              <span className="text-sm leading-tight text-neutral-400">
                 {stat.label}
               </span>
             </div>

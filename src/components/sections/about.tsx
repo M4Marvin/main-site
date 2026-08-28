@@ -11,15 +11,15 @@ const educationText = profile.education.map((e) => `${e.degree} (${e.year})`).jo
 
 export function About() {
   return (
-    <section id="about" className="relative bg-black py-20 md:py-32">
-      <div className="mx-auto max-w-4xl px-6">
+    <section id="about" className="relative bg-black py-20 md:py-28">
+      <div className="mx-auto max-w-5xl px-6">
         <SectionHeader title="About" />
 
         <CardSpotlight className="border-white/10 bg-black/50 p-8">
           <div className="flex flex-col items-center gap-6 md:flex-row md:gap-8">
             <div className="shrink-0">
               <div className="rounded-full bg-white/10 p-1">
-                <Avatar className="h-32 w-32 border-2 border-white/10">
+                <Avatar className="h-40 w-40 border-2 border-white/10">
                   <AvatarImage
                     src="https://wsrv.nl/?url=files.m4marvin.com%2Fmarvin_no_bg.png&w=256&h=256&fit=cover&output=png"
                     alt={profile.name}
@@ -32,7 +32,7 @@ export function About() {
             </div>
 
             <div className="flex flex-col justify-center gap-4">
-              <div className="space-y-4 leading-relaxed text-neutral-300">
+              <div className="space-y-4 text-base leading-relaxed text-neutral-300 md:text-lg">
                 {about.summary.split("\n\n").map((paragraph, i) => (
                   <p key={i}>{paragraph}</p>
                 ))}
@@ -45,13 +45,13 @@ export function About() {
               <div className="flex items-center gap-3">
                 <GraduationCap className="h-5 w-5 shrink-0 text-blue-400" />
                 <div>
-                  <p className="text-xs font-medium text-neutral-400 uppercase tracking-wider">Education</p>
-                  <p className="mt-0.5 text-sm text-neutral-300">{educationText}</p>
+                  <p className="text-sm font-medium text-neutral-400 uppercase tracking-wider">Education</p>
+                  <p className="mt-0.5 text-base text-neutral-300">{educationText}</p>
                 </div>
               </div>
             </CardSpotlight>
 
-        <div className="mt-8 flex flex-col gap-3 rounded-md border border-white/10 bg-white/[0.02] p-6 text-sm text-neutral-300">
+        <div className="mt-6 flex flex-col gap-3 rounded-md border border-white/10 bg-white/[0.02] p-6 text-base text-neutral-300">
           <p className="flex items-start gap-3">
             <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" aria-hidden />
             <span>
