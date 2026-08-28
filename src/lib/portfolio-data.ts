@@ -47,7 +47,7 @@ export interface NavItem {
 export const profile: Profile = {
   name: "Marvin V Prakash",
   tagline:
-    "I build trading systems end-to-end — the execution engine, the signal ingestor, the monitoring dashboard, and the infrastructure underneath.",
+    "I build real-time systems end to end — trading infrastructure, market-data platforms, and ML serving — from the engine to the interface.",
   location: "Abu Dhabi, UAE",
   email: "marvinprakash@gmail.com",
   phone: "+971 553391151",
@@ -190,7 +190,6 @@ export const stats: Stat[] = [
   { value: 200, suffix: "ms", label: "Signal-to-trade, end to end" },
   { value: 5000, suffix: "+", label: "Automated trades per day (average)" },
   { value: 106185, suffix: "+", label: "Signals processed across the platform" },
-  { value: 4, suffix: "TB", label: "Market-data lake, compressed, built solo" },
 ]
 
 export const navItems: NavItem[] = [

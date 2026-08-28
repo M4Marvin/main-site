@@ -125,37 +125,6 @@
     --shadow-input: 0px 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
-@layer utilities {
-    .bg-grid-white\/\[0\.1\] {
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-        background-size: 40px 40px;
-    }
-    .bg-grid-white\/\[0\.2\] {
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
-        background-size: 40px 40px;
-    }
-    .bg-grid-small-white\/\[0\.2\] {
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
-    .bg-grid-small-black\/\[0\.2\] {
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
-    .bg-dot-white\/\[0\.2\] {
-        background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
-    .bg-dot-black\/\[0\.2\] {
-        background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
-}
-
 :root {
     --chart-1: oklch(0.55 0.2 255);
     --chart-2: oklch(0.6 0.22 285);
