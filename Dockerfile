@@ -3,6 +3,7 @@ RUN corepack enable
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV HUSKY=0
 RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm build && chmod -R a+r /app/dist

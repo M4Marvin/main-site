@@ -8,12 +8,16 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
-    "build": "vite build",
+    "build": "node scripts/gen-sitemap.mjs && vite build",
+    "sitemap": "node scripts/gen-sitemap.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "diagrams": "node scripts/gen-diagrams.mjs"
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "diagrams": "node scripts/gen-diagrams.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -47,8 +51,18 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.4.1",
+    "oxfmt": "^0.65.0",
     "oxlint": "^1.72.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs}": [
+      "oxfmt",
+      "oxlint --fix"
+    ],
+    "*.{json,jsonc,css,yml,yaml,html,md}": "oxfmt"
   }
 }
