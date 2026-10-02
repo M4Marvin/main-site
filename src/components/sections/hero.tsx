@@ -13,9 +13,7 @@ export function Hero() {
         <p className="mt-6 font-mono text-[13px] leading-relaxed text-zinc-500 sm:mt-8">
           {profile.location}
           <span aria-hidden="true"> · </span>
-          <a href={`mailto:${profile.email}`} className="nav-link">
-            available now
-          </a>
+          {profile.status}
         </p>
       </Reveal>
       <Reveal delay={140}>

@@ -7,6 +7,7 @@ export interface Education {
 export interface Profile {
   name: string
   tagline: string
+  status: string
   location: string
   email: string
   phone: string
@@ -25,6 +26,15 @@ export interface Contribution {
 export interface Stat {
   value: string
   label: string
+}
+
+export interface Experience {
+  company: string
+  role: string
+  mode: string
+  period: string
+  tech: string[]
+  bullets: string[]
 }
 
 export interface Project {
@@ -48,7 +58,10 @@ export interface Project {
 export const profile: Profile = {
   name: "Marvin V Prakash",
   tagline:
-    "I build real-time systems end to end — trading infrastructure, market-data platforms, and ML serving — from the engine to the interface.",
+    "I build real-time systems end to end — trading infrastructure, market-data platforms, and AI integrations that turn messy, duplicated data into tools agents can use.",
+  status: "Senior Software Engineer at Morphotech Data",
+  // Archive location rule: this site's markets are Gulf/Europe/US-remote, where the
+  // label is Abu Dhabi, UAE. Bangalore is the India-facing label (gens/main only).
   location: "Abu Dhabi, UAE",
   email: "marvinprakash@gmail.com",
   phone: "+971 553391151",
@@ -186,3 +199,29 @@ export const projects: Project[] = [
   },
 ]
 
+// Pending (archive §12): whether morphotechdata.com should be linked from this
+// entry. It is the employer's marketing site, not Marvin's work — do not add
+// the link until that question is answered.
+export const experiences: Experience[] = [
+  {
+    company: "Morphotech Data",
+    role: "Senior Software Engineer",
+    mode: "Full-time, remote",
+    period: "Apr 2026 – Present",
+    tech: [
+      "TypeScript",
+      "TanStack Start",
+      "AI SDK",
+      "MCP",
+      "Bun",
+      "Elysia",
+      "Node",
+      "Python",
+    ],
+    bullets: [
+      "Lead a small team of mid-level and junior engineers, embedded with a client company, building AI-integrated B2B solutions — two engagements delivered end to end.",
+      "Client data arrives messy and duplicated, and existing stacks cannot support AI — so I rebuild the relational schema, dedupe, and migrate the data before any AI is connected.",
+      "Build the MCP servers that expose that data to AI agents — query and search tools plus write operations — used by off-the-shelf coding agents and a web app built for the client. Clients saved ~5 hours per employee per week after the first onboarding month.",
+    ],
+  },
+]

@@ -2,8 +2,7 @@ import { profile } from "@/lib/portfolio-data"
 
 export const SITE_URL = "https://m4marvin.com"
 
-export const SITE_DESCRIPTION =
-  "I build real-time systems end to end — trading infrastructure, market-data platforms, and ML serving — from the engine to the interface."
+export const SITE_DESCRIPTION = profile.tagline
 
 export function pageHead({
   title,

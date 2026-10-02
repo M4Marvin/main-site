@@ -4,9 +4,7 @@ import { profile } from "@/lib/portfolio-data"
 export function Footer() {
   return (
     <footer className="border-t border-zinc-800 pt-8 pb-16">
-      <p className="font-mono text-[13px] text-zinc-400">
-        {profile.location} · available now
-      </p>
+      <p className="font-mono text-[13px] text-zinc-400">{profile.location}</p>
       <p className="mt-3">
         <a
           href={`mailto:${profile.email}`}

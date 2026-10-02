@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Hero } from "@/components/sections/hero"
 import { Work } from "@/components/sections/work"
+import { Experience } from "@/components/sections/experience"
 import { About } from "@/components/sections/about"
 import { pageHead } from "@/lib/seo"
 
@@ -14,6 +15,7 @@ function Home() {
     <main id="main" tabIndex={-1}>
       <Hero />
       <Work />
+      <Experience />
       <About />
     </main>
   )
