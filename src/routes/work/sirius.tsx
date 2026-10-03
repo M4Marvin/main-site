@@ -35,7 +35,7 @@ function SiriusPage() {
           <DemoVideo title="Sirius — algorithmic trading infrastructure, 25 second walkthrough" />
           <figcaption className="mt-2 text-center font-mono text-[12px] text-zinc-500">
             The pipeline on video — signals → ingestor (auth · validate · route) → 50 execution
-            systems → dashboard. 25s, with sound.
+            systems → dashboard. 25s, looping, silent.
           </figcaption>
         </figure>
 

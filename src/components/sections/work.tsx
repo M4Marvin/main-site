@@ -108,10 +108,10 @@ function ProjectFigure({ project }: { project: Project }) {
 
   if (project.slug === "sirius-trading-platform") {
     // The card used to carry the four-box diagram; the demo video says the same thing and
-    // moves. It loops silently here — the sound and controls are on the case study page.
+    // moves. Same silent loop as the case study page, so the two never disagree.
     return (
       <figure className="mt-6">
-        <DemoVideo title={`${project.title} — demo`} loop />
+        <DemoVideo title={`${project.title} — demo`} />
       </figure>
     )
   }
