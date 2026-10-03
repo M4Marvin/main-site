@@ -28,15 +28,6 @@ export interface Stat {
   label: string
 }
 
-export interface Experience {
-  company: string
-  role: string
-  mode: string
-  period: string
-  tech: string[]
-  bullets: string[]
-}
-
 export interface Project {
   slug: string
   title: string
@@ -70,11 +61,37 @@ export const profile: Profile = {
   website: "https://m4marvin.com",
   resumeUrl: "https://files.m4marvin.com/MARVIN_V_PRAKASH_RESUME.pdf",
   education: [
-    { degree: "B.Tech + M.S. Dual Degree — Computer Science & Engineering + Computational Biology", school: "Jawaharlal Nehru University", year: "2018–2023" },
+    {
+      degree: "B.Tech + M.S. Dual Degree — Computer Science & Engineering + Computational Biology",
+      school: "Jawaharlal Nehru University",
+      year: "2018–2023",
+    },
   ],
 }
 
 export const projects: Project[] = [
+  // Current role, so it leads the Work list (reverse-chronological).
+  // Pending (archive §12): whether morphotechdata.com should be linked from this
+  // entry. It is the employer's marketing site, not Marvin's work — do not add
+  // the link until that question is answered.
+  {
+    slug: "morphotech-data",
+    title: "Morphotech Data — AI-Integrated B2B Solutions",
+    summary:
+      "Client data arrives messy and duplicated, and the stack around it can't support AI — so I rebuild the relational schema, dedupe, and migrate first, then expose it to agents as MCP tools. Embedded with the client, owned end to end.",
+    role: "Senior Software Engineer",
+    org: "Morphotech Data",
+    period: "Apr 2026 – Present",
+    location: "Remote",
+    story: [],
+    contributions: [],
+    tech: ["TypeScript", "PostgreSQL", "MCP", "AI SDK", "AWS"],
+    stats: [
+      { value: "~5 hrs", label: "Saved / employee / week" },
+      { value: "2", label: "Client engagements delivered" },
+    ],
+    featured: true,
+  },
   {
     slug: "sirius-trading-platform",
     title: "Sirius — Algorithmic Trading Platform",
@@ -196,32 +213,5 @@ export const projects: Project[] = [
       "Built the data pipeline and charting engine around the hardest case—Bitcoin's high-volume trade stream—so the same system could serve every supported instrument and timeframe.",
     link: "https://charts.m4marvin.com",
     featured: true,
-  },
-]
-
-// Pending (archive §12): whether morphotechdata.com should be linked from this
-// entry. It is the employer's marketing site, not Marvin's work — do not add
-// the link until that question is answered.
-export const experiences: Experience[] = [
-  {
-    company: "Morphotech Data",
-    role: "Senior Software Engineer",
-    mode: "Full-time, remote",
-    period: "Apr 2026 – Present",
-    tech: [
-      "TypeScript",
-      "TanStack Start",
-      "AI SDK",
-      "MCP",
-      "Bun",
-      "Elysia",
-      "Node",
-      "Python",
-    ],
-    bullets: [
-      "Lead a small team of mid-level and junior engineers, embedded with a client company, building AI-integrated B2B solutions — two engagements delivered end to end.",
-      "Client data arrives messy and duplicated, and existing stacks cannot support AI — so I rebuild the relational schema, dedupe, and migrate the data before any AI is connected.",
-      "Build the MCP servers that expose that data to AI agents — query and search tools plus write operations — used by off-the-shelf coding agents and a web app built for the client. Clients saved ~5 hours per employee per week after the first onboarding month.",
-    ],
   },
 ]

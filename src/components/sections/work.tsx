@@ -3,7 +3,7 @@ import { Image } from "@unpic/react"
 import { projects } from "@/lib/portfolio-data"
 import type { Project, Stat } from "@/lib/portfolio-data"
 import { Reveal } from "@/components/ui/reveal"
-import { SignalFlow } from "@/components/sections/signal-flow"
+import { SignalFlow, RebuildFlow } from "@/components/sections/signal-flow"
 
 function getThumbnail(project: Project) {
   if (project.slug === "marvfinancialcharts") {
@@ -49,7 +49,11 @@ function Title({ project }: { project: Project }) {
       </Link>
     )
   }
-  return <span className="text-[1.15rem] font-medium tracking-[-0.02em] text-zinc-50 sm:text-xl">{project.title}</span>
+  return (
+    <span className="text-[1.15rem] font-medium tracking-[-0.02em] text-zinc-50 sm:text-xl">
+      {project.title}
+    </span>
+  )
 }
 
 function ActionLink({ action }: { action: Action }) {
@@ -61,7 +65,12 @@ function ActionLink({ action }: { action: Action }) {
     )
   }
   return (
-    <a href={action.href} target="_blank" rel="noopener noreferrer" className="text-link font-mono text-[13px]">
+    <a
+      href={action.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-link font-mono text-[13px]"
+    >
       {action.label} <span className="ext-hint">↗</span>
     </a>
   )
@@ -69,7 +78,9 @@ function ActionLink({ action }: { action: Action }) {
 
 function Stats({ stats }: { stats: Stat[] }) {
   return (
-    <dl className={`mt-6 grid grid-cols-1 gap-4 ${stats.length > 1 ? "sm:grid-cols-3" : "sm:grid-cols-3"}`}>
+    <dl
+      className={`mt-6 grid grid-cols-1 gap-4 ${stats.length > 1 ? "sm:grid-cols-3" : "sm:grid-cols-3"}`}
+    >
       {stats.map((stat) => (
         <div key={stat.label}>
           <dd className="font-mono text-[1.65rem] leading-none tabular-nums tracking-tight text-zinc-50 sm:text-[2rem]">
@@ -83,6 +94,14 @@ function Stats({ stats }: { stats: Stat[] }) {
 }
 
 function ProjectFigure({ project }: { project: Project }) {
+  if (project.slug === "morphotech-data") {
+    return (
+      <figure className="mt-6">
+        <RebuildFlow />
+      </figure>
+    )
+  }
+
   if (project.slug === "sirius-trading-platform") {
     return (
       <figure className="mt-6">
@@ -141,7 +160,9 @@ function ProjectArticle({ project }: { project: Project }) {
         {project.org}
       </p>
 
-      <p className="mt-4 max-w-[36em] text-[0.98rem] leading-relaxed text-zinc-300">{project.summary}</p>
+      <p className="mt-4 max-w-[36em] text-[0.98rem] leading-relaxed text-zinc-300">
+        {project.summary}
+      </p>
 
       {project.stats.length > 0 && <Stats stats={project.stats} />}
 
