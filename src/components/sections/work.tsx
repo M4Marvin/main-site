@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/reveal"
 import { SignalFlow, RebuildFlow } from "@/components/sections/signal-flow"
 
 function getThumbnail(project: Project) {
-  if (project.slug === "marvfinancialcharts") {
+  if (project.slug === "mfinancialcharts") {
     return "https://files.m4marvin.com/charts_app/1.png"
   }
   if (project.slug === "acbr-drug-discovery") {
@@ -24,7 +24,7 @@ function cardAction(project: Project): Action | null {
   if (project.slug === "acbr-drug-discovery") {
     return { label: "Case study", to: "/work/acbr" }
   }
-  if (project.slug === "marvfinancialcharts") {
+  if (project.slug === "mfinancialcharts") {
     return { label: "Live demo", href: project.link }
   }
   return null
@@ -33,7 +33,7 @@ function cardAction(project: Project): Action | null {
 function titleTarget(project: Project): { to?: string } {
   if (project.slug === "sirius-trading-platform") return { to: "/work/sirius" }
   if (project.slug === "acbr-drug-discovery") return { to: "/work/acbr" }
-  if (project.slug === "marvfinancialcharts") return { to: "/work/charts" }
+  if (project.slug === "mfinancialcharts") return { to: "/work/charts" }
   return {}
 }
 

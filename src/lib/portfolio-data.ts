@@ -169,7 +169,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "marvfinancialcharts",
+    slug: "mfinancialcharts",
     title: "mFinancialCharts",
     summary:
       "Built solo for a five-person trading desk: Bitcoin alone averages 2M trades a day, so the charting engine renders per-trade footprints at p99 60fps — with 4TB of compressed Parquet behind it.",
