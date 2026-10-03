@@ -18,6 +18,9 @@ function getThumbnail(project: Project) {
 type Action = { label: string; to?: string; href?: string }
 
 function cardAction(project: Project): Action | null {
+  if (project.slug === "morphotech-data") {
+    return { label: "Site", href: project.link }
+  }
   if (project.slug === "sirius-trading-platform") {
     return { label: "Case study", to: "/work/sirius" }
   }

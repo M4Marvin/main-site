@@ -71,9 +71,8 @@ export const profile: Profile = {
 
 export const projects: Project[] = [
   // Current role, so it leads the Work list (reverse-chronological).
-  // Pending (archive §12): whether morphotechdata.com should be linked from this
-  // entry. It is the employer's marketing site, not Marvin's work — do not add
-  // the link until that question is answered.
+  // The morphotechdata.com link is company evidence only — never attach an
+  // individual-contribution claim to it (archive §5.1, §11.37).
   {
     slug: "morphotech-data",
     title: "Morphotech Data — AI-Integrated B2B Solutions",
@@ -90,6 +89,7 @@ export const projects: Project[] = [
       { value: "~5 hrs", label: "Saved / employee / week" },
       { value: "2", label: "Client engagements delivered" },
     ],
+    link: "https://morphotechdata.com",
     featured: true,
   },
   {
