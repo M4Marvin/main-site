@@ -167,7 +167,7 @@ function ProjectArticle({ project }: { project: Project }) {
         {project.summary}
       </p>
 
-      {project.stats.length > 0 && <Stats stats={project.stats} />}
+      {project.stats && project.stats.length > 0 && <Stats stats={project.stats} />}
 
       <ProjectFigure project={project} />
 

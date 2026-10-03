@@ -6,6 +6,7 @@ export interface Education {
 
 export interface Profile {
   name: string
+  title: string
   tagline: string
   status: string
   location: string
@@ -39,7 +40,9 @@ export interface Project {
   story: string[]
   contributions: Contribution[]
   tech: string[]
-  stats: Stat[]
+  // Optional on purpose. A card with no defensible number should render no stat
+  // row rather than carry an invented one (archive §13: real proof, no filler).
+  stats?: Stat[]
   reflection?: string
   link?: string
   image?: string
@@ -48,6 +51,11 @@ export interface Project {
 
 export const profile: Profile = {
   name: "Marvin V Prakash",
+  // Archive §3: the ONE public headline string, settled 2026-10-03. It is the
+  // search target. The held title stays visible in `status` below and in the
+  // Morphotech work card — headline = target, experience = held. Do not also
+  // render a Sirius function ("Trading Systems Engineer") as a co-equal title.
+  title: "Full Stack Architect | Technical Lead",
   tagline:
     "I build real-time systems end to end — trading infrastructure, market-data platforms, and AI integrations that turn messy, duplicated data into tools agents can use.",
   status: "Senior Software Engineer at Morphotech Data",
@@ -164,8 +172,9 @@ export const projects: Project[] = [
       },
     ],
     tech: ["Next.js", "FastAPI", "RDKit", "Docker"],
-    stats: [{ value: "4", label: "Cancer targets served" }],
-    link: "https://bic.acbr.du.ac.in/ankalan",
+    // No count of targets: archive §5.4 says only "various cancer and virus
+    // targets". An unsourced "4" was removed 2026-10-03 rather than published.
+    link: "https://bic.acbr.du.ac.in",
     featured: true,
   },
   {

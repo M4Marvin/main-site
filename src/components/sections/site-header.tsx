@@ -19,7 +19,10 @@ export function SiteHeader() {
         </Link>
       )}
 
-      <nav aria-label="Primary" className="flex flex-wrap items-baseline gap-x-5 gap-y-1 font-mono text-[13px] sm:justify-end">
+      <nav
+        aria-label="Primary"
+        className="flex flex-wrap items-baseline gap-x-5 gap-y-1 font-mono text-[13px] sm:justify-end"
+      >
         <a href="/#work" className="nav-link">
           Work
         </a>
@@ -29,12 +32,13 @@ export function SiteHeader() {
         <a href={`mailto:${profile.email}`} className="nav-link">
           Email
         </a>
-        <a
-          href={profile.resumeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="nav-link"
-        >
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="nav-link">
+          LinkedIn
+          <span aria-hidden="true" className="ext-hint ml-1 text-zinc-600">
+            ↗
+          </span>
+        </a>
+        <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="nav-link">
           Resume
           <span aria-hidden="true" className="ext-hint ml-1 text-zinc-600">
             ↗

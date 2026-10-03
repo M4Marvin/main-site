@@ -6,7 +6,7 @@ export const Route = createFileRoute("/work/acbr")({
   component: AcbrPage,
   head: () =>
     pageHead({
-      title: "ACBR Ankalan",
+      title: "ACBR Drug Discovery Web Server",
       description:
         "ML serving platform for early-stage drug discovery at ACBR, University of Delhi — prediction, virtual screening, Tanimoto similarity, QED. Sole engineer.",
       path: "/work/acbr",
@@ -25,20 +25,21 @@ function AcbrPage() {
 
         <p>
           The lab built the models. I deployed and served them, and I designed the website
-          researchers use to run them: virtual screening, Tanimoto similarity, QED
-          drug-likeness, bioactivity prediction against four cancer targets (BCR-ABL, HDAC6,
-          PARP1, Telomerase).
+          researchers use to run them: virtual screening, Tanimoto similarity, QED drug-likeness,
+          bioactivity prediction against four cancer targets (BCR-ABL, HDAC6, PARP1, Telomerase).
         </p>
 
         <figure className="my-8">
           <img
             src="/acbr-surface.svg"
-            alt="Ankalan surface: prediction, virtual screening, Tanimoto similarity, and QED drug-likeness"
+            alt="ACBR platform surface: prediction, virtual screening, Tanimoto similarity, and QED drug-likeness"
             width={880}
             height={140}
             decoding="async"
           />
-          <figcaption>Prediction · Screening · Tanimoto · QED — four surfaces, one FastAPI backend.</figcaption>
+          <figcaption>
+            Prediction · Screening · Tanimoto · QED — four surfaces, one FastAPI backend.
+          </figcaption>
         </figure>
 
         <h2>What I built</h2>
@@ -55,8 +56,8 @@ function AcbrPage() {
 
         <p>
           Live at{" "}
-          <a href="https://bic.acbr.du.ac.in/ankalan" target="_blank" rel="noopener noreferrer">
-            bic.acbr.du.ac.in/ankalan
+          <a href="https://bic.acbr.du.ac.in" target="_blank" rel="noopener noreferrer">
+            bic.acbr.du.ac.in
             <span aria-hidden="true"> ↗</span>
           </a>
           .

@@ -13,7 +13,10 @@ export function pageHead({
   description?: string
   path?: string
 }) {
-  const fullTitle = title ? `${title} — ${profile.name}` : profile.name
+  // Archive §3: the §3 headline belongs in `<title>` and the OG title. With no
+  // page title it reads "Full Stack Architect | Technical Lead — Marvin V Prakash".
+  const head = title ?? profile.title
+  const fullTitle = head ? `${head} — ${profile.name}` : profile.name
   const desc = description ?? SITE_DESCRIPTION
   const url = path ? `${SITE_URL}${path}` : SITE_URL
   const image = `${SITE_URL}/og.png`
