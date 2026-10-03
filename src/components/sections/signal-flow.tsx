@@ -1,12 +1,5 @@
 type FlowStep = { title: string; note: string | null }
 
-const SIRIUS_STEPS: FlowStep[] = [
-  { title: "TradingView webhooks", note: null },
-  { title: "Ingestor", note: "auth · validate · route" },
-  { title: "50 execution systems", note: null },
-  { title: "Dashboard", note: "monitoring" },
-]
-
 const REBUILD_STEPS: FlowStep[] = [
   { title: "Client data", note: "messy · duplicated" },
   { title: "Rebuild & migrate", note: "schema · dedupe" },
@@ -44,10 +37,7 @@ function Flow({ steps }: { steps: FlowStep[] }) {
   )
 }
 
-export function SignalFlow() {
-  return <Flow steps={SIRIUS_STEPS} />
-}
-
+/** The Morphotech card's four-step rebuild diagram, on the home page Work list. */
 export function RebuildFlow() {
   return <Flow steps={REBUILD_STEPS} />
 }

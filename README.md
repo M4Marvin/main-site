@@ -35,14 +35,14 @@ Multi-stage build: `node:22-slim` for the build, `nginx:alpine` for serving stat
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Vite dev server on :3000 |
-| `pnpm build` | Production build to `dist/` |
-| `pnpm preview` | Serve production build |
-| `pnpm test` | Run Vitest |
-| `pnpm typecheck` | TypeScript type check |
-| `pnpm lint` | oxlint |
+| Command                | Description                           |
+| ---------------------- | ------------------------------------- |
+| `pnpm dev`             | Vite dev server on :3000              |
+| `pnpm build`           | Production build to `dist/`           |
+| `pnpm preview`         | Serve production build                |
+| `pnpm test`            | Run Vitest                            |
+| `pnpm typecheck`       | TypeScript type check                 |
+| `pnpm lint`            | oxlint                                |
 | `pnpm generate-routes` | Regenerate TanStack Router route tree |
 
 ## Project Layout
@@ -60,10 +60,19 @@ Multi-stage build: `node:22-slim` for the build, `nginx:alpine` for serving stat
 └── package.json
 ```
 
+## Media
+
+Images live in `public/`. Video does not: the Sirius demo on `/work/sirius` and the home page
+Work card streams from `files.m4marvin.com/sirius_demo/sirius-demo.mp4`, next to the charting
+app's thumbnails, so the repository does not carry a 2.5 MB binary. That host serves it with
+`accept-ranges: bytes`, so seeking works. Source and render pipeline for it:
+`~/codes/sirius-demo` (fframes).
+
 ## Related
 
 This portfolio is part of the broader self-hosted `m4marvin.com` ecosystem.
 Infrastructure docs (architecture, deployment, services) live in a separate repo:
+
 - `git.m4marvin.com` — self-hosted Forgejo (git)
 - `vault.m4marvin.com` — self-hosted Vaultwarden (passwords)
 - `status.m4marvin.com` — self-hosted Uptime Kuma (monitoring)

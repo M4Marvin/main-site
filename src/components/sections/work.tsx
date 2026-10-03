@@ -3,7 +3,8 @@ import { Image } from "@unpic/react"
 import { projects } from "@/lib/portfolio-data"
 import type { Project, Stat } from "@/lib/portfolio-data"
 import { Reveal } from "@/components/ui/reveal"
-import { SignalFlow, RebuildFlow } from "@/components/sections/signal-flow"
+import { DemoVideo } from "@/components/ui/demo-video"
+import { RebuildFlow } from "@/components/sections/signal-flow"
 
 function getThumbnail(project: Project) {
   if (project.slug === "mfinancialcharts") {
@@ -106,9 +107,11 @@ function ProjectFigure({ project }: { project: Project }) {
   }
 
   if (project.slug === "sirius-trading-platform") {
+    // The card used to carry the four-box diagram; the demo video says the same thing and
+    // moves. It loops silently here — the sound and controls are on the case study page.
     return (
       <figure className="mt-6">
-        <SignalFlow />
+        <DemoVideo title={`${project.title} — demo`} loop />
       </figure>
     )
   }

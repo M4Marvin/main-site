@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { Typeset } from "@/components/ui/typeset"
-import { SignalFlow } from "@/components/sections/signal-flow"
+import { DemoVideo } from "@/components/ui/demo-video"
 import { pageHead } from "@/lib/seo"
 import { profile } from "@/lib/portfolio-data"
 
@@ -27,22 +27,23 @@ function SiriusPage() {
         </p>
 
         <p>
-          Signals in, orders out, 200ms later. Traders design the strategies — I built the
-          platform that executes them.
+          Signals in, orders out, 200ms later. Traders design the strategies — I built the platform
+          that executes them.
         </p>
 
         <figure className="my-8 not-prose">
-          <SignalFlow />
+          <DemoVideo title="Sirius — algorithmic trading infrastructure, 25 second walkthrough" />
           <figcaption className="mt-2 text-center font-mono text-[12px] text-zinc-500">
-            Signals → ingestor (auth · validate · route) → 50 execution systems → dashboard.
+            The pipeline on video — signals → ingestor (auth · validate · route) → 50 execution
+            systems → dashboard. 25s, with sound.
           </figcaption>
         </figure>
 
         <h2>What I owned</h2>
 
         <p>
-          Traders designed the strategy logic — grids, pyramiding, reversals. I did not. I built
-          the machine that takes a signal and turns it into an order: the execution engine, the
+          Traders designed the strategy logic — grids, pyramiding, reversals. I did not. I built the
+          machine that takes a signal and turns it into an order: the execution engine, the
           ingestor, and the monitoring dashboard, each of those layers solo. AWS VPC, certificates,
           and Cloudflare IP filtering were built with one coworker. Over the tenure I onboarded six
           engineers onto that production stack.
@@ -51,20 +52,20 @@ function SiriusPage() {
         <h2>The constraint</h2>
 
         <p>
-          The MetaTrader 5 Python API is clunky, old, and unreliable — no robust trading system
-          can sit directly on it. I designed a custom mt5-client wrapper by hand: OOP design, full
-          error handling, price and spread conditions. It became essential to the platform&apos;s
+          The MetaTrader 5 Python API is clunky, old, and unreliable — no robust trading system can
+          sit directly on it. I designed a custom mt5-client wrapper by hand: OOP design, full error
+          handling, price and spread conditions. It became essential to the platform&apos;s
           reliability.
         </p>
 
         <h2>200ms</h2>
 
         <p>
-          Signal-to-trade is the interval from a signal arriving at the ingestor (authenticated
-          and validated) to the execution engine submitting the order to the broker API. It is
-          not exchange round-trip, and it is not fill confirmation. 5,000+ trades a day average;
-          106,185+ signals processed across the platform. Holding periods of hours to days,
-          Monday to Friday — systematic execution, not HFT.
+          Signal-to-trade is the interval from a signal arriving at the ingestor (authenticated and
+          validated) to the execution engine submitting the order to the broker API. It is not
+          exchange round-trip, and it is not fill confirmation. 5,000+ trades a day average;
+          106,185+ signals processed across the platform. Holding periods of hours to days, Monday
+          to Friday — systematic execution, not HFT.
         </p>
 
         <h2>Core trading engine</h2>
@@ -82,10 +83,10 @@ function SiriusPage() {
         <h2>The Ingestor</h2>
 
         <p>
-          The only server exposed to the internet. It receives TradingView webhooks plus
-          proprietary signal sources, authenticates, validates, and routes each signal to the
-          correct execution system. Routing is exposed as a REST API, and the ingestor accepts
-          traffic only from Cloudflare IPs.
+          The only server exposed to the internet. It receives TradingView webhooks plus proprietary
+          signal sources, authenticates, validates, and routes each signal to the correct execution
+          system. Routing is exposed as a REST API, and the ingestor accepts traffic only from
+          Cloudflare IPs.
         </p>
 
         <h2>Trading dashboard</h2>
@@ -108,10 +109,9 @@ function SiriusPage() {
         </ul>
 
         <p>
-          This is an internal platform for a private company, so there is no public UI to click.
-          The architecture above is the tour. For a system you can open, see the{" "}
-          <Link to="/work/charts">charting engine</Link>
-          — or email me at{" "}
+          This is an internal platform for a private company, so there is no public UI to click. The
+          architecture above is the tour. For a system you can open, see the{" "}
+          <Link to="/work/charts">charting engine</Link> — or email me at{" "}
           <a href={`mailto:${profile.email}`}>{profile.email}</a>.
         </p>
       </Typeset>
