@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils"
  * repository does not carry a 2.5 MB binary. It is served with `accept-ranges: bytes`, so
  * seeking works.
  */
-export const SIRIUS_DEMO_VIDEO = "https://files.m4marvin.com/sirius_demo/sirius-demo.mp4"
+export const SIRIUS_DEMO_VIDEO = "https://files.m4marvin.com/media/sirius-demo-vertical.mp4"
 
 export function DemoVideo({ title, className }: { title: string; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null)

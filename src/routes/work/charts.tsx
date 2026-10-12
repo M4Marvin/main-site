@@ -55,7 +55,7 @@ function FootprintChartsPage() {
 
         <figure className="my-8">
           <Image
-            src="https://files.m4marvin.com/charts_app/1.png"
+            src="https://files.m4marvin.com/media/charts_app/1.png"
             alt="Footprint chart with Bollinger Bands, imbalance zones, and ROC indicator"
             width={1600}
             height={950}
@@ -195,7 +195,7 @@ function FootprintChartsPage() {
         </p>
 
         <Image
-          src="https://files.m4marvin.com/charts_app/2.png"
+          src="https://files.m4marvin.com/media/charts_app/2.png"
           alt="Classic footprint chart with Bollinger Bands and imbalance zones"
           width={1600}
           height={950}
@@ -311,7 +311,7 @@ function FootprintChartsPage() {
         </p>
 
         <Image
-          src="https://files.m4marvin.com/charts_app/3.png"
+          src="https://files.m4marvin.com/media/charts_app/3.png"
           alt="Detailed footprint chart showing numeric buy/sell volumes per price level"
           width={1600}
           height={950}
@@ -360,7 +360,7 @@ function FootprintChartsPage() {
         </p>
 
         <Image
-          src="https://files.m4marvin.com/charts_app/4.png"
+          src="https://files.m4marvin.com/media/charts_app/4.png"
           alt="Footprint Chart Settings panel"
           width={1600}
           height={950}

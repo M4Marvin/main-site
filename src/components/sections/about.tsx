@@ -3,7 +3,8 @@ import { profile } from "@/lib/portfolio-data"
 import { Reveal } from "@/components/ui/reveal"
 
 const PAPER_URL = "https://pubs.acs.org/doi/10.1021/acs.jpcb.4c07090"
-const PHOTO_URL = "https://wsrv.nl/?url=files.m4marvin.com%2Fmarvin_no_bg.png&w=192&h=192&fit=cover&output=png"
+const PHOTO_URL =
+  "https://wsrv.nl/?url=files.m4marvin.com%2Fmedia%2Fmarvin_no_bg.png&w=192&h=192&fit=cover&output=png"
 
 export function About() {
   const education = profile.education[0]

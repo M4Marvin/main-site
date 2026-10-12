@@ -8,7 +8,7 @@ import { RebuildFlow } from "@/components/sections/signal-flow"
 
 function getThumbnail(project: Project) {
   if (project.slug === "mfinancialcharts") {
-    return "https://files.m4marvin.com/charts_app/1.png"
+    return "https://files.m4marvin.com/media/charts_app/1.png"
   }
   if (project.slug === "acbr-drug-discovery") {
     return "/acbr-surface.svg"

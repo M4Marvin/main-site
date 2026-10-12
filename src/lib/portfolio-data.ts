@@ -67,7 +67,7 @@ export const profile: Profile = {
   github: "https://github.com/M4Marvin",
   linkedin: "https://www.linkedin.com/in/marvin-v-prakash/",
   website: "https://m4marvin.com",
-  resumeUrl: "https://files.m4marvin.com/MARVIN_V_PRAKASH_RESUME.pdf",
+  resumeUrl: "https://files.m4marvin.com/resume/Marvin%20V%20Prakash%20-%20Resume.pdf",
   education: [
     {
       degree: "B.Tech + M.S. Dual Degree — Computer Science & Engineering + Computational Biology",
