@@ -1,11 +1,6 @@
-import { useEffect } from "react"
 import { Link } from "@tanstack/react-router"
 
 export function NotFoundPage() {
-  useEffect(() => {
-    document.title = "Page not found — Marvin V Prakash"
-  }, [])
-
   return (
     <main id="main" tabIndex={-1} className="pb-16">
       <h1 className="text-[1.65rem] font-medium tracking-[-0.02em] text-zinc-50">Page not found</h1>

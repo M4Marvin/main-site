@@ -17,7 +17,7 @@ function Flow({ steps }: { steps: FlowStep[] }) {
               {step.title}
             </p>
             {step.note && (
-              <p className="mt-1 font-mono text-[11px] text-zinc-500 sm:whitespace-nowrap">
+              <p className="mt-1 font-mono text-[11px] text-zinc-400 sm:whitespace-nowrap">
                 {step.note}
               </p>
             )}
@@ -25,7 +25,7 @@ function Flow({ steps }: { steps: FlowStep[] }) {
           {i < steps.length - 1 && (
             <span
               aria-hidden="true"
-              className="flex justify-center py-0.5 font-mono text-[12px] text-zinc-600 sm:absolute sm:top-1/2 sm:right-[-0.65rem] sm:z-10 sm:translate-x-0 sm:-translate-y-1/2 sm:py-0"
+              className="flex justify-center py-0.5 font-mono text-[12px] text-zinc-400 sm:absolute sm:top-1/2 sm:right-[-0.65rem] sm:z-10 sm:translate-x-0 sm:-translate-y-1/2 sm:py-0"
             >
               <span className="sm:hidden">↓</span>
               <span className="hidden sm:inline">→</span>

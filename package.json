@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
-    "build": "node scripts/gen-sitemap.mjs && vite build",
+    "build": "node scripts/gen-sitemap.mjs && vite build && node scripts/prerender-meta.mjs",
     "sitemap": "node scripts/gen-sitemap.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",

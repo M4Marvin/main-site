@@ -16,6 +16,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as WorkAcbrRouteImport } from './routes/work/acbr'
 import { Route as WorkChartsRouteImport } from './routes/work/charts'
+import { Route as WorkMorphotechRouteImport } from './routes/work/morphotech'
 import { Route as WorkSiriusRouteImport } from './routes/work/sirius'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +54,11 @@ const WorkChartsRoute = WorkChartsRouteImport.update({
   path: '/work/charts',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkMorphotechRoute = WorkMorphotechRouteImport.update({
+  id: '/work/morphotech',
+  path: '/work/morphotech',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkSiriusRoute = WorkSiriusRouteImport.update({
   id: '/work/sirius',
   path: '/work/sirius',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/work/acbr': typeof WorkAcbrRoute
   '/work/charts': typeof WorkChartsRoute
+  '/work/morphotech': typeof WorkMorphotechRoute
   '/work/sirius': typeof WorkSiriusRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/work/acbr': typeof WorkAcbrRoute
   '/work/charts': typeof WorkChartsRoute
+  '/work/morphotech': typeof WorkMorphotechRoute
   '/work/sirius': typeof WorkSiriusRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/work/acbr': typeof WorkAcbrRoute
   '/work/charts': typeof WorkChartsRoute
+  '/work/morphotech': typeof WorkMorphotechRoute
   '/work/sirius': typeof WorkSiriusRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/work/acbr'
     | '/work/charts'
+    | '/work/morphotech'
     | '/work/sirius'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/work/acbr'
     | '/work/charts'
+    | '/work/morphotech'
     | '/work/sirius'
     | '/blog'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/work/acbr'
     | '/work/charts'
+    | '/work/morphotech'
     | '/work/sirius'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   WorkAcbrRoute: typeof WorkAcbrRoute
   WorkChartsRoute: typeof WorkChartsRoute
+  WorkMorphotechRoute: typeof WorkMorphotechRoute
   WorkSiriusRoute: typeof WorkSiriusRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkChartsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work/morphotech': {
+      id: '/work/morphotech'
+      path: '/work/morphotech'
+      fullPath: '/work/morphotech'
+      preLoaderRoute: typeof WorkMorphotechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/work/sirius': {
       id: '/work/sirius'
       path: '/work/sirius'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   WorkAcbrRoute: WorkAcbrRoute,
   WorkChartsRoute: WorkChartsRoute,
+  WorkMorphotechRoute: WorkMorphotechRoute,
   WorkSiriusRoute: WorkSiriusRoute,
   BlogIndexRoute: BlogIndexRoute,
 }

@@ -3,7 +3,6 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Typeset } from "@/components/ui/typeset"
-import { pageHead } from "@/lib/seo"
 import { NotFoundPage } from "@/components/sections/not-found"
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -13,17 +12,11 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!post) throw notFound()
     return post
   },
-  head: ({ loaderData }) =>
-    pageHead({
-      title: loaderData?.title,
-      description: loaderData?.description,
-      path: loaderData ? `/blog/${loaderData.slug}` : "/blog",
-    }),
   notFoundComponent: NotFoundPage,
 })
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString("en-US", {
+  return new Date(`${date}T00:00:00`).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -44,7 +37,7 @@ function BlogPost() {
           <h1 className="text-[1.65rem] font-medium tracking-[-0.02em] text-zinc-50 sm:text-[1.85rem]">
             {post.title}
           </h1>
-          <p className="mt-3 font-mono text-[12px] text-zinc-500">
+          <p className="mt-3 font-mono text-[12px] text-zinc-400">
             <time dateTime={post.date}>{formatDate(post.date)}</time>
             <span aria-hidden="true"> · </span>
             {post.tags.join(" · ")}
@@ -59,8 +52,12 @@ function BlogPost() {
       {(prevPost || nextPost) && (
         <nav className="mt-16 flex items-start justify-between gap-8 border-t border-zinc-800 pt-8">
           {prevPost ? (
-            <Link to="/blog/$slug" params={{ slug: prevPost.slug }} className="group max-w-[45%] text-left">
-              <span className="font-mono text-[12px] text-zinc-500">Previous</span>
+            <Link
+              to="/blog/$slug"
+              params={{ slug: prevPost.slug }}
+              className="group max-w-[45%] text-left"
+            >
+              <span className="font-mono text-[12px] text-zinc-400">Previous</span>
               <p className="mt-1 text-sm text-zinc-300 underline decoration-transparent underline-offset-[0.18em] transition-[text-decoration-color] duration-200 group-hover:decoration-current">
                 {prevPost.title}
               </p>
@@ -69,8 +66,12 @@ function BlogPost() {
             <div />
           )}
           {nextPost ? (
-            <Link to="/blog/$slug" params={{ slug: nextPost.slug }} className="group max-w-[45%] text-right">
-              <span className="font-mono text-[12px] text-zinc-500">Next</span>
+            <Link
+              to="/blog/$slug"
+              params={{ slug: nextPost.slug }}
+              className="group max-w-[45%] text-right"
+            >
+              <span className="font-mono text-[12px] text-zinc-400">Next</span>
               <p className="mt-1 text-sm text-zinc-300 underline decoration-transparent underline-offset-[0.18em] transition-[text-decoration-color] duration-200 group-hover:decoration-current">
                 {nextPost.title}
               </p>

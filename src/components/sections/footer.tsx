@@ -32,7 +32,7 @@ export function Footer() {
           Self-hosted cloud
         </Link>
       </nav>
-      <p className="mt-6 font-mono text-[12px] text-zinc-600">
+      <p className="mt-6 font-mono text-[12px] text-zinc-400">
         © {new Date().getFullYear()} {profile.name}
       </p>
     </footer>

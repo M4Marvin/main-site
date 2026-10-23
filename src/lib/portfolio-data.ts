@@ -9,6 +9,8 @@ export interface Profile {
   title: string
   tagline: string
   status: string
+  scope: string
+  availability: string
   location: string
   email: string
   phone: string
@@ -59,6 +61,10 @@ export const profile: Profile = {
   tagline:
     "I build real-time systems end to end — trading infrastructure, market-data platforms, and AI integrations that turn messy, duplicated data into tools agents can use.",
   status: "Senior Software Engineer at Morphotech Data",
+  // The held title and the years sit next to the positioning headline so a
+  // reader never has to open the PDF to discover the level.
+  scope: "3+ yrs · TypeScript / Python / FastAPI · real-time trading, market data, AI tooling",
+  availability: "UAE visa to Apr 2028 · Actively looking",
   // Archive location rule: this site's markets are Gulf/Europe/US-remote, where the
   // label is Abu Dhabi, UAE. Bangalore is the India-facing label (gens/main only).
   location: "Abu Dhabi, UAE",
@@ -79,13 +85,13 @@ export const profile: Profile = {
 
 export const projects: Project[] = [
   // Current role, so it leads the Work list (reverse-chronological).
-  // The morphotechdata.com link is company evidence only — never attach an
-  // individual-contribution claim to it (archive §5.1, §11.37).
+  // The company link is context; the case study is the individual-contribution
+  // evidence. Client names stay private.
   {
     slug: "morphotech-data",
-    title: "Morphotech Data — AI-Integrated B2B Solutions",
+    title: "Morphotech Data — Client Data to Agent Tools",
     summary:
-      "Client data arrives messy and duplicated, and the stack around it can't support AI — so I rebuild the relational schema, dedupe, and migrate first, then expose it to agents as MCP tools. Embedded with the client, owned end to end.",
+      "At Morphotech Data I lead a small team delivering two B2B client engagements. Client data arrives messy and duplicated, and the stack around it can't support AI — so I rebuild the relational schema, dedupe, and migrate it, then ship MCP tools that let coding agents query, search, and write it.",
     role: "Senior Software Engineer",
     org: "Morphotech Data",
     period: "Apr 2026 – Present",
@@ -94,8 +100,8 @@ export const projects: Project[] = [
     contributions: [],
     tech: ["TypeScript", "PostgreSQL", "MCP", "AI SDK", "AWS"],
     stats: [
-      { value: "~5 hrs", label: "Saved / employee / week" },
-      { value: "2", label: "Client engagements delivered" },
+      { value: "15", label: "MCP tools shipped" },
+      { value: "2", label: "Client engagements" },
     ],
     link: "https://morphotechdata.com",
     featured: true,
@@ -104,7 +110,7 @@ export const projects: Project[] = [
     slug: "sirius-trading-platform",
     title: "Sirius — Algorithmic Trading Platform",
     summary:
-      "Traders design the strategies; I built the platform that executes them — execution engine, signal ingestor, monitoring dashboard — end to end, solo.",
+      "Traders design the strategies; I built the execution engine, signal ingestor, and monitoring dashboard — solo. AWS/VPC, certificates, and Cloudflare filtering were built with one engineer. p99 signal-to-trade is 200 ms over 10,000 measurement points.",
     role: "Algorithmic Trading Infrastructure Engineer",
     org: "Sirius International Holding",
     period: "Apr 2025 – Feb 2026",
@@ -133,23 +139,24 @@ export const projects: Project[] = [
       },
       {
         label: "Team",
-        text: "Onboarded and mentored 6 engineers over the tenure, establishing production engineering standards.",
+        text: "Onboarded 6 engineers over the tenure and set production engineering standards.",
       },
     ],
     tech: ["Python", "FastAPI", "MetaTrader 5", "PostgreSQL"],
     stats: [
-      { value: "200ms", label: "Signal-to-trade" },
+      { value: "200ms", label: "p99 signal-to-trade" },
       { value: "5,000+", label: "Trades / day" },
       { value: "106,185+", label: "Signals processed" },
     ],
-    reflection: "Real money, real risk, real consequences. Not a side project or a demo.",
+    reflection:
+      "Zero downtime over four months. 50 Windows MT5 hosts, 5 brokers, 20–25 instruments.",
     featured: true,
   },
   {
     slug: "acbr-drug-discovery",
     title: "ACBR Drug Discovery Web Server",
     summary:
-      "Designed and built the web platform that deploys and serves the lab's ML models for early-stage drug discovery — virtual screening, Tanimoto similarity, QED drug-likeness.",
+      "Designed and built the web platform that deploys and serves the lab's ML models for early-stage drug discovery — virtual screening, Tanimoto similarity, QED drug-likeness. It peaked at thousands of users.",
     role: "Sole Engineer — ML & Web Platform",
     org: "ACBR (Ambedkar Center for Biomedical Research), University of Delhi",
     period: "Sep 2024 – Mar 2025",
@@ -160,7 +167,7 @@ export const projects: Project[] = [
     contributions: [
       {
         label: "Frontend",
-        text: "Designed and developed the Next.js + React + Tailwind website for the open-source server.",
+        text: "Designed and developed the Next.js + React + Tailwind website for the lab's web server.",
       },
       {
         label: "Backend",
@@ -171,17 +178,17 @@ export const projects: Project[] = [
         text: "Integrated Tanimoto similarity and RDKit QED drug-likeness analysis into the web platform.",
       },
     ],
-    tech: ["Next.js", "FastAPI", "RDKit", "Docker"],
+    tech: ["Next.js", "FastAPI", "RDKit", "CentOS"],
     // No count of targets: archive §5.4 says only "various cancer and virus
     // targets". An unsourced "4" was removed 2026-10-03 rather than published.
-    link: "https://bic.acbr.du.ac.in",
+    link: "https://bic.acbr.du.ac.in/ankalan.html",
     featured: true,
   },
   {
     slug: "mfinancialcharts",
     title: "mFinancialCharts",
     summary:
-      "Built solo for a five-person trading desk: Bitcoin alone averages 2M trades a day, so the charting engine renders per-trade footprints at p99 60fps — with 4TB of compressed Parquet behind it.",
+      "Built solo for a five-person trading desk. The archive holds five years and ~400 coins — 4 TB of compressed Parquet — and Bitcoin alone averages 2M trades a day. The charting engine renders per-trade footprints at p99 60fps. The public demo is a 5-symbol subset.",
     role: "Founding Engineer",
     org: "mFinancialCharts",
     period: "Aug 2023 – Sep 2024",
@@ -215,7 +222,7 @@ export const projects: Project[] = [
     tech: ["React", "TypeScript", "HTML5 Canvas", "Polars"],
     stats: [
       { value: "p99 60fps", label: "Chart render" },
-      { value: "4TB", label: "Compressed Parquet" },
+      { value: "4TB", label: "Parquet · 5 yrs, ~400 coins" },
       { value: "2M", label: "BTC trades / day" },
     ],
     reflection:

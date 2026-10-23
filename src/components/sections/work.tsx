@@ -1,9 +1,8 @@
 import { Link } from "@tanstack/react-router"
-import { Image } from "@unpic/react"
+import type { ReactNode } from "react"
 import { projects } from "@/lib/portfolio-data"
 import type { Project, Stat } from "@/lib/portfolio-data"
 import { Reveal } from "@/components/ui/reveal"
-import { DemoVideo } from "@/components/ui/demo-video"
 import { RebuildFlow } from "@/components/sections/signal-flow"
 
 function getThumbnail(project: Project) {
@@ -11,7 +10,7 @@ function getThumbnail(project: Project) {
     return "https://files.m4marvin.com/media/charts_app/1.png"
   }
   if (project.slug === "acbr-drug-discovery") {
-    return "/acbr-surface.svg"
+    return "/acbr-ankalan.webp"
   }
   return null
 }
@@ -20,7 +19,7 @@ type Action = { label: string; to?: string; href?: string }
 
 function cardAction(project: Project): Action | null {
   if (project.slug === "morphotech-data") {
-    return { label: "Site", href: project.link }
+    return { label: "Case study", to: "/work/morphotech" }
   }
   if (project.slug === "sirius-trading-platform") {
     return { label: "Case study", to: "/work/sirius" }
@@ -35,6 +34,7 @@ function cardAction(project: Project): Action | null {
 }
 
 function titleTarget(project: Project): { to?: string } {
+  if (project.slug === "morphotech-data") return { to: "/work/morphotech" }
   if (project.slug === "sirius-trading-platform") return { to: "/work/sirius" }
   if (project.slug === "acbr-drug-discovery") return { to: "/work/acbr" }
   if (project.slug === "mfinancialcharts") return { to: "/work/charts" }
@@ -44,7 +44,7 @@ function titleTarget(project: Project): { to?: string } {
 function Title({ project }: { project: Project }) {
   const target = titleTarget(project)
   const className =
-    "text-[1.15rem] font-medium tracking-[-0.02em] text-zinc-50 underline decoration-transparent underline-offset-[0.18em] transition-[text-decoration-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:decoration-current sm:text-xl"
+    "text-[1.15rem] font-medium tracking-[-0.02em] text-zinc-50 underline decoration-zinc-600 underline-offset-[0.18em] transition-[text-decoration-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:decoration-current sm:text-xl"
 
   if (target.to) {
     return (
@@ -83,18 +83,22 @@ function ActionLink({ action }: { action: Action }) {
 function Stats({ stats }: { stats: Stat[] }) {
   return (
     <dl
-      className={`mt-6 grid grid-cols-1 gap-4 ${stats.length > 1 ? "sm:grid-cols-3" : "sm:grid-cols-3"}`}
+      className={`mt-6 grid grid-cols-1 gap-4 ${stats.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"}`}
     >
       {stats.map((stat) => (
-        <div key={stat.label}>
+        <div key={stat.label} className="flex flex-col-reverse">
+          <dt className="mt-1.5 font-mono text-[12px] text-zinc-400">{stat.label}</dt>
           <dd className="font-mono text-[1.65rem] leading-none tabular-nums tracking-tight text-zinc-50 sm:text-[2rem]">
             {stat.value}
           </dd>
-          <dt className="mt-1.5 font-mono text-[12px] text-zinc-500">{stat.label}</dt>
         </div>
       ))}
     </dl>
   )
+}
+
+function Caption({ children }: { children: ReactNode }) {
+  return <figcaption className="mt-2 font-mono text-[12px] text-zinc-400">{children}</figcaption>
 }
 
 function ProjectFigure({ project }: { project: Project }) {
@@ -102,48 +106,58 @@ function ProjectFigure({ project }: { project: Project }) {
     return (
       <figure className="mt-6">
         <RebuildFlow />
+        <Caption>From messy client data to agent-ready tools.</Caption>
       </figure>
     )
   }
 
   if (project.slug === "sirius-trading-platform") {
-    // The card used to carry the four-box diagram; the demo video says the same thing and
-    // moves. Same silent loop as the case study page, so the two never disagree.
+    // The source video is 1080x1920 (a phone-shaped walkthrough); using it in a
+    // wide card would either letterbox or jump to a two-screen-tall block. The
+    // card shows the pipeline still; the case study keeps the full video.
     return (
       <figure className="mt-6">
-        <DemoVideo title={`${project.title} — demo`} />
+        <img
+          src="/sirius-card.webp"
+          alt="Sirius pipeline: TradingView webhooks and proprietary signals, through Cloudflare and the ingestor, to 50 execution systems and the monitoring dashboard"
+          width={1080}
+          height={608}
+          loading="lazy"
+          decoding="async"
+          className="h-auto w-full border border-zinc-800"
+        />
+        <Caption>Signals → ingestor → 50 execution systems → dashboard.</Caption>
       </figure>
     )
   }
 
   const thumbnail = getThumbnail(project)
   if (!thumbnail) return null
-  const isExternal = thumbnail.startsWith("http")
+  const isAcbr = project.slug === "acbr-drug-discovery"
+  const width = 1600
+  const height = isAcbr ? 567 : 950
   const imgClass = "h-auto w-full border border-zinc-800"
 
   return (
     <figure className="mt-6">
-      {isExternal ? (
-        <Image
-          src={thumbnail}
-          alt={project.title}
-          className={imgClass}
-          width={800}
-          height={400}
-          layout="constrained"
-          fallback="wsrv"
-        />
-      ) : (
-        <img
-          src={thumbnail}
-          alt={project.title}
-          width={800}
-          height={400}
-          loading="lazy"
-          decoding="async"
-          className={imgClass}
-        />
-      )}
+      <img
+        src={thumbnail}
+        alt={
+          isAcbr
+            ? "ACBR Ankalan: prediction, virtual screening, Tanimoto similarity, and QED drug-likeness"
+            : "Per-trade footprint chart with imbalance zones and indicators"
+        }
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+        className={imgClass}
+      />
+      <Caption>
+        {isAcbr
+          ? "ACBR Ankalan: prediction, screening, Tanimoto, QED."
+          : "Per-trade footprints, imbalance zones, indicators-on-indicators."}
+      </Caption>
     </figure>
   )
 }
@@ -157,10 +171,10 @@ function ProjectArticle({ project }: { project: Project }) {
         <h3>
           <Title project={project} />
         </h3>
-        <p className="font-mono text-[12px] text-zinc-500">{project.period}</p>
+        <p className="font-mono text-[12px] text-zinc-400">{project.period}</p>
       </div>
 
-      <p className="mt-1 font-mono text-[12px] text-zinc-500">
+      <p className="mt-1 font-mono text-[12px] text-zinc-400">
         {project.role}
         <span aria-hidden="true"> · </span>
         {project.org}
@@ -175,7 +189,7 @@ function ProjectArticle({ project }: { project: Project }) {
       <ProjectFigure project={project} />
 
       <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-        <p className="font-mono text-[12px] text-zinc-500">{project.tech.join(" · ")}</p>
+        <p className="font-mono text-[12px] text-zinc-400">{project.tech.join(" · ")}</p>
         {action && <ActionLink action={action} />}
       </div>
     </article>
@@ -186,9 +200,9 @@ export function Work() {
   const items = projects.filter((p) => p.featured)
 
   return (
-    <section id="work" className="pt-8 pb-4">
+    <section id="work" className="pt-2 pb-4">
       <Reveal>
-        <h2 className="font-mono text-[13px] text-zinc-500">Work</h2>
+        <h2 className="font-mono text-[11px] tracking-[0.14em] text-zinc-400 uppercase">Work</h2>
       </Reveal>
       <div className="mt-4 divide-y divide-zinc-800">
         {items.map((project, i) => (

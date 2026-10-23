@@ -1,0 +1,51 @@
+{
+  "/": {
+    "title": "Full Stack Architect | Technical Lead",
+    "description": "I build real-time systems end to end — trading infrastructure, market-data platforms, and AI integrations that turn messy, duplicated data into tools agents can use.",
+    "path": "/",
+    "type": "website"
+  },
+  "/blog": {
+    "title": "Writing",
+    "description": "Engineering notes on recovery, hardware, and the systems on this site.",
+    "path": "/blog",
+    "type": "website"
+  },
+  "/work/morphotech": {
+    "title": "Client Data to Agent Tools at Morphotech Data",
+    "description": "Client data rebuilt for AI: schema, dedupe, migration, and 15 MCP tools over it. Senior Software Engineer leading two B2B engagements at Morphotech Data.",
+    "path": "/work/morphotech",
+    "type": "article"
+  },
+  "/work/sirius": {
+    "title": "Sirius",
+    "description": "Algorithmic trading infrastructure: p99 200ms signal-to-trade over 10,000 measurement points, 5,000+ trades a day, 106,185+ signals. Execution engine, ingestor, and desk dashboard — built end to end.",
+    "path": "/work/sirius",
+    "type": "article"
+  },
+  "/work/acbr": {
+    "title": "ACBR Drug Discovery Web Server",
+    "description": "ML serving platform for early-stage drug discovery at ACBR, University of Delhi — prediction, virtual screening, Tanimoto similarity, QED. Sole engineer; thousands of users.",
+    "path": "/work/acbr",
+    "type": "article"
+  },
+  "/work/charts": {
+    "title": "mFinancialCharts",
+    "description": "Solo-built market-data platform: five years and ~400 coins, 4 TB Parquet, Bitcoin at 2M trades a day, footprint charts at p99 60fps on HTML5 Canvas. Public demo is a 5-symbol subset.",
+    "path": "/work/charts",
+    "type": "article"
+  },
+  "/self-hosted-cloud": {
+    "title": "Self-hosted cloud",
+    "description": "Eight services on one Hetzner VPS, a Cloudflare tunnel, and a Tailscale tailnet. SSH is the only open port; every app port is loopback.",
+    "path": "/self-hosted-cloud",
+    "type": "article"
+  },
+  "/404": {
+    "title": "Page not found",
+    "description": "That URL doesn't exist. The work, the writing, and a way to email me are still here.",
+    "path": "/404",
+    "type": "website",
+    "noindex": true
+  }
+}

@@ -9,6 +9,7 @@ const OUT = "public/sitemap.xml"
 const STATIC_PATHS = [
   "/",
   "/blog",
+  "/work/morphotech",
   "/work/acbr",
   "/work/sirius",
   "/work/charts",

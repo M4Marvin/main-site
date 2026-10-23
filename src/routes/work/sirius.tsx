@@ -1,18 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { Typeset } from "@/components/ui/typeset"
 import { DemoVideo } from "@/components/ui/demo-video"
-import { pageHead } from "@/lib/seo"
 import { profile } from "@/lib/portfolio-data"
 
 export const Route = createFileRoute("/work/sirius")({
   component: SiriusPage,
-  head: () =>
-    pageHead({
-      title: "Sirius",
-      description:
-        "Algorithmic trading infrastructure: 200ms signal-to-trade, 5,000+ trades a day, 106,185+ signals. Execution engine, ingestor, and desk dashboard — built end to end.",
-      path: "/work/sirius",
-    }),
 })
 
 function SiriusPage() {
@@ -21,23 +13,17 @@ function SiriusPage() {
       <Typeset>
         <h1>Sirius — Algorithmic Trading Infrastructure</h1>
 
-        <p className="mt-2 !font-mono !text-[12px] !tracking-normal !text-zinc-500">
-          Algorithmic Trading Infrastructure Engineer · Sirius International Holding · Abu Dhabi,
-          UAE · Apr 2025 – Feb 2026
+        <p className="mt-2 !font-mono !text-[12px] !tracking-normal !text-zinc-400">
+          Algorithmic Trading Infrastructure Engineer · Sirius International Holding
+        </p>
+        <p className="!mt-1 !font-mono !text-[12px] !tracking-normal !text-zinc-400">
+          Abu Dhabi, UAE · Apr 2025 – Feb 2026
         </p>
 
         <p>
-          Signals in, orders out, 200ms later. Traders design the strategies — I built the platform
-          that executes them.
+          Signals in, orders out — p99 200 ms later across 10,000 measurement points. Traders design
+          the strategies; I built the platform that executes them.
         </p>
-
-        <figure className="my-8 not-prose">
-          <DemoVideo title="Sirius — algorithmic trading infrastructure, 25 second walkthrough" />
-          <figcaption className="mt-2 text-center font-mono text-[12px] text-zinc-500">
-            The pipeline on video — signals → ingestor (auth · validate · route) → 50 execution
-            systems → dashboard. 25s, looping, silent.
-          </figcaption>
-        </figure>
 
         <h2>What I owned</h2>
 
@@ -48,6 +34,16 @@ function SiriusPage() {
           and Cloudflare IP filtering were built with one coworker. Over the tenure I onboarded six
           engineers onto that production stack.
         </p>
+
+        <figure className="my-8 not-prose">
+          <DemoVideo title="Sirius — algorithmic trading infrastructure, 25 second walkthrough" />
+          <figcaption className="mx-auto mt-2 max-w-[34rem] text-center font-mono text-[12px] text-zinc-400">
+            The pipeline on video — signals → ingestor (auth · validate · route) → 50 execution
+            systems → dashboard. 25s, looping, silent. Transcript: signals arrive at the ingestor,
+            are authenticated and validated, route to the 50 execution systems, and report on the
+            dashboard.
+          </figcaption>
+        </figure>
 
         <h2>The constraint</h2>
 
@@ -62,10 +58,12 @@ function SiriusPage() {
 
         <p>
           Signal-to-trade is the interval from a signal arriving at the ingestor (authenticated and
-          validated) to the execution engine submitting the order to the broker API. It is not
-          exchange round-trip, and it is not fill confirmation. 5,000+ trades a day average;
-          106,185+ signals processed across the platform. Holding periods of hours to days, Monday
-          to Friday — systematic execution, not HFT.
+          validated) to the execution engine submitting the order to the broker API. The p99 is 200
+          ms across 10,000 measurement points; p50 and p95 are lower. It is not exchange round-trip,
+          and it is not fill confirmation. 5,000+ trades a day average; 106,185+ signals processed
+          across the platform. That is roughly 480 signals a weekday; the 5,000+ daily trades are
+          the fan-out across 50 execution systems. A signal is not an order and not a fill. Holding
+          periods of hours to days, Monday to Friday — systematic execution, not HFT.
         </p>
 
         <h2>Core trading engine</h2>
@@ -106,6 +104,7 @@ function SiriusPage() {
             running its own algorithm version on its own account.
           </li>
           <li>5 brokers, 20–25 instruments across metals, crypto, energy, forex.</li>
+          <li>Zero downtime over four months.</li>
         </ul>
 
         <p>

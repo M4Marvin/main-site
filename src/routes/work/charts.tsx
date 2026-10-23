@@ -1,31 +1,37 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Image } from "@unpic/react"
 import { Typeset } from "@/components/ui/typeset"
-import { pageHead } from "@/lib/seo"
 
 export const Route = createFileRoute("/work/charts")({
   component: FootprintChartsPage,
-  head: () =>
-    pageHead({
-      title: "mFinancialCharts",
-      description:
-        "Solo-built market-data platform: 4TB Parquet, Bitcoin at 2M trades a day, footprint charts at p99 60fps on HTML5 Canvas. Live at charts.m4marvin.com.",
-      path: "/work/charts",
-    }),
 })
 
-function Diagram({ src, alt, caption }: { src: string; alt: string; caption: string }) {
+function Diagram({
+  src,
+  alt,
+  caption,
+  width,
+  height,
+}: {
+  src: string
+  alt: string
+  caption: string
+  width: number
+  height: number
+}) {
   return (
     <figure className="my-8">
-      <Image
-        src={src}
-        alt={alt}
-        width={720}
-        height={420}
-        layout="constrained"
-        className="border border-zinc-800"
-      />
-      <figcaption className="mt-2 text-center font-mono text-[12px] text-zinc-500">
+      <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={alt}>
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          layout="constrained"
+          className="min-w-[44rem] border border-zinc-800 grayscale sm:min-w-0"
+        />
+      </div>
+      <figcaption className="mt-2 text-center font-mono text-[12px] text-zinc-400">
         {caption}
       </figcaption>
     </figure>
@@ -38,19 +44,21 @@ function FootprintChartsPage() {
       <Typeset>
         <h1>Building Footprint Charts on HTML5 Canvas</h1>
 
-        <p className="mt-2 !font-mono !text-[12px] !tracking-normal !text-zinc-500">
+        <p className="mt-2 !font-mono !text-[12px] !tracking-normal !text-zinc-400">
           Founding Engineer · mFinancialCharts · Aug 2023 – Sep 2024
         </p>
 
         <p>
           Built solo for a five-person trading desk. Bitcoin alone averages 2M trades a day, so the
-          charting engine renders per-trade footprints at p99 60fps — with 4TB of compressed Parquet
-          behind it. Live at{" "}
+          charting engine renders per-trade footprints at p99 60fps — with 4 TB of compressed
+          Parquet behind it. The production archive covers five years and ~400 coins; the public
+          instance at{" "}
           <a href="https://charts.m4marvin.com" target="_blank" rel="noopener noreferrer">
             charts.m4marvin.com
             <span aria-hidden="true"> ↗</span>
-          </a>
-          .
+          </a>{" "}
+          is a five-symbol subset. The benchmark measures p99 frame rate on Firefox and Chrome with
+          thousands of objects on screen; the frame-time budget is 16.7 ms.
         </p>
 
         <figure className="my-8">
@@ -93,6 +101,8 @@ function FootprintChartsPage() {
           src="/charts-context.svg"
           alt="C4 System Context diagram: a trader uses Cloudflare Edge to reach mFinancialCharts, which downloads trade data from Binance and Bybit APIs"
           caption="Figure 1. System context (C4 level 1): the trader, the app, and the exchange APIs."
+          width={832}
+          height={842}
         />
 
         <p>
@@ -108,6 +118,8 @@ function FootprintChartsPage() {
           src="/charts-pipeline.svg"
           alt="Data pipeline diagram showing two phases: Phase A offline ETL from exchange APIs through CLI and Polars into a Parquet data lake, and Phase B online serving from the data lake through FastAPI and Polars to the browser Canvas renderer"
           caption="Figure 2. Data pipeline: offline ETL writes the data lake; online serving reads from it. The two phases never overlap."
+          width={880}
+          height={1031}
         />
 
         <p>
@@ -138,11 +150,11 @@ function FootprintChartsPage() {
         </p>
 
         <p>
-          The CLI is built on Typer and exposes 21 commands across 4 groups: <code>etl</code>{" "}
-          (download, convert, organize, split), <code>exchange</code> (symbol discovery and exchange
-          metadata), <code>index</code> (build, verify, stats), and <code>benchmark</code>{" "}
-          (read-performance, compression-sizes). The backend itself is 65+ Python files, organized
-          around <code>app/core/</code> (config, logging, exceptions),{" "}
+          The CLI is built on Typer and exposes 21 commands across 4 groups, including{" "}
+          <code>etl</code> (download, convert, organize, split), <code>exchange</code> (symbol
+          discovery and exchange metadata), <code>index</code> (build, verify, stats), and{" "}
+          <code>benchmark</code> (read-performance, compression-sizes). The backend itself is 65+
+          Python files, organized around <code>app/core/</code> (config, logging, exceptions),{" "}
           <code>app/infrastructure/</code> (persistence, exchange integrations, ETL), and{" "}
           <code>app/api/v1/endpoints/</code>.
         </p>
@@ -151,6 +163,8 @@ function FootprintChartsPage() {
           src="/charts-container.svg"
           alt="C4 Container diagram: the Hetzner VPS runs a single Docker container with FastAPI serving both the API and the React SPA static files, with a Parquet data lake bind-mounted from the host"
           caption="Figure 3. Container view (C4 level 2): one Docker container, one port, one data lake bind-mount."
+          width={932}
+          height={1036}
         />
 
         <p>
@@ -166,7 +180,7 @@ function FootprintChartsPage() {
         <h2>The API</h2>
 
         <p>
-          FastAPI exposes 14 endpoints. The two that matter for footprint charts are{" "}
+          FastAPI exposes 12 endpoints. The two that matter for footprint charts are{" "}
           <code>GET /ohlc</code> and <code>POST /indicator</code>. The OHLC endpoint takes a symbol,
           time interval, and a <code>footprints</code> flag; when set, it returns per-candle bid/ask
           breakdowns at the requested tick granularity. Pagination is built in for the long history
@@ -179,11 +193,13 @@ function FootprintChartsPage() {
           src="/charts-backend.svg"
           alt="C4 Level 3 Backend Component diagram: the FastAPI backend is organized in six layers from entry points through API routers, services, utilities, infrastructure, down to data stores"
           caption="Figure 4. Backend components (C4 level 3): six layers, each depending only on the one below."
+          width={954}
+          height={2597}
         />
 
         <p>
           The backend is a layered Python application. At the top, two entry points: Uvicorn for the
-          API server, Typer for the offline CLI. The API layer has six routers exposing fourteen
+          API server, Typer for the offline CLI. The API layer has six routers exposing twelve
           endpoints &mdash; the two that carry the real load are <code>GET /ohlc</code> and{" "}
           <code>POST /indicator</code>. Below that, services orchestrate business logic: indicator
           calculations, symbol lookups, file indexing, and data lake management. The utility layer
@@ -215,9 +231,9 @@ function FootprintChartsPage() {
           The frontend does not use TradingView, Chart.js, or Recharts. The 11 renderers in{" "}
           <code>mFinancialCharts/src/canvas/</code> are all raw HTML5 Canvas 2D: candlesticks,
           footprint charts, line, area, bar, stacked bar, column, full column, step line, volume
-          indicator (18 sub-renderings), and indicator data. The footprint renderer alone is 682
-          lines, split between an orchestrator (<code>drawFootprintCharts.ts</code>) and ten focused
-          files in <code>footprintUtils/</code> totaling 1,569 lines.
+          indicator (18 sub-renderings), and indicator data. The footprint renderer is split between
+          a 682-line orchestrator (<code>drawFootprintCharts.ts</code>) and ten focused files in{" "}
+          <code>footprintUtils/</code> totaling 1,569 lines.
         </p>
 
         <p>
@@ -386,7 +402,7 @@ function FootprintChartsPage() {
           </li>
           <li>
             Canvas performance is mostly about what you <em>don&rsquo;t</em> draw. Viewport clipping
-            and multi-canvas layers were worth more than any micro- optimization of the draw loop.
+            and multi-canvas layers were worth more than any micro-optimization of the draw loop.
           </li>
           <li>
             The two VAR algorithms are not interchangeable. Standard VAR is intuitive and fast, but
@@ -399,7 +415,8 @@ function FootprintChartsPage() {
         <hr />
 
         <p>
-          Live charts are at{" "}
+          The public instance is a five-symbol subset (Jan–Jun 2026). The production lake is the
+          five years and ~400 coins described above. Live charts are at{" "}
           <a href="https://charts.m4marvin.com" target="_blank" rel="noopener noreferrer">
             charts.m4marvin.com
             <span aria-hidden="true"> ↗</span>

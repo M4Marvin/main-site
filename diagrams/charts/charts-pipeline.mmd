@@ -16,7 +16,7 @@ flowchart LR
     subgraph PHASE_B["<b>Phase B · Serving (online)</b>"]
         direction TB
         B1["<b>Browser</b><br/>React 18 · TanStack Query<br/>Zustand stores"]
-        B2["<b>FastAPI · uvicorn</b><br/>14 endpoints · :8001<br/>Pydantic v2"]
+        B2["<b>FastAPI · uvicorn</b><br/>12 endpoints · :8001<br/>Pydantic v2"]
         B3["<b>File Index</b><br/>in-memory tree<br/>Market→Symbol→Year→Month→Day"]
         B4["<b>Polars</b><br/>read Parquet · resample<br/>trades_to_footprint"]
         B5["<b>Canvas 2D</b><br/>11 custom renderers<br/>candles · footprints · indicators"]

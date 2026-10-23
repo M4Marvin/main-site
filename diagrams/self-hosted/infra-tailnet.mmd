@@ -1,22 +1,22 @@
 flowchart TB
-    subgraph VPS["<b>hetzner-vps</b><br/>100.80.96.4"]
+    subgraph VPS["<b>hetzner-vps</b><br/>100.64.0.1"]
         direction TB
         VPS_SVC["Forgejo · Vaultwarden · Kuma<br/>Copyparty · Portfolio · Charts · Chat"]
     end
 
-    subgraph BEAST["<b>beast</b><br/>100.105.177.97"]
+    subgraph BEAST["<b>beast</b><br/>100.64.0.2"]
         direction TB
         BEAST_SVC["Immich · Jellyfin<br/>Forgejo runner · ML inference"]
     end
 
-    subgraph MAC["<b>macbook</b><br/>100.71.249.91"]
+    subgraph MAC["<b>macbook</b><br/>100.64.0.3"]
         direction TB
         MAC_SVC["admin · SSH · dev"]
     end
 
-    subgraph PHONE["<b>phone</b><br/>100.91.245.46"]
+    subgraph PHONE["<b>phone</b><br/>100.64.0.4"]
         direction TB
-        PHONE_SVC["offline"]
+        PHONE_SVC["private"]
     end
 
     DNS["<b>MagicDNS</b><br/>resolves node names"]

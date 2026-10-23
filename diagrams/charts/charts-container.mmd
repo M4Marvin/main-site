@@ -1,9 +1,9 @@
 C4Container
     title Container · mFinancialCharts (Hetzner VPS)
 
-    System_Boundary(vps, "Hetzner VPS · 77.42.65.13") {
+    System_Boundary(vps, "Hetzner VPS") {
         Container(spa, "React SPA", "Vite build", "11 Canvas renderers")
-        Container(api, "FastAPI", "uvicorn :8001", "14 endpoints")
+        Container(api, "FastAPI", "uvicorn :8001", "12 endpoints")
 
         Container(cli, "CLI · Typer", "Python 3.14", "21 commands · offline ETL")
         ContainerDb(lake, "Parquet Data Lake", "PyArrow · LZ4", "~1.5GB · bind mount")

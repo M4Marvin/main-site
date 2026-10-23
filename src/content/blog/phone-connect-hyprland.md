@@ -23,7 +23,7 @@ Phone fully integrated with my Hyprland desktop. No USB. No same-WiFi. Works fro
 | Network | Tailscale mesh VPN |
 | Portal bridge | hypr-kdeconnect-fix |
 
-## Trickest Piece: Remote Input
+## Trickiest Piece: Remote Input
 
 The hardest feature to get working was remote mouse and keyboard from the phone. KDE Connect 26.04+ uses the **RemoteDesktop portal** on Wayland for input injection, but the `hypr-kdeconnect-portal` backend kept rejecting sessions because the KDE Connect daemon (`kdeconnectd`) was running as a D-Bus activated service with no `app_id`.
 
@@ -85,7 +85,7 @@ The wrapper script at `~/.local/bin/scrcpy-phone` auto-detects whether ADB is al
 
 ```bash
 #!/bin/bash
-PHONE_TAILSCALE_IP="100.91.245.46"
+PHONE_TAILSCALE_IP="100.64.0.4"  # your phone's tailnet IP
 
 if adb devices 2>/dev/null | grep -q '[0-9a-f.:]\+[[:space:]]\+device'; then
     exec scrcpy --video-codec=h265 --max-fps=60 --no-audio "$@"
