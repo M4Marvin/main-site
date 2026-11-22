@@ -47,9 +47,9 @@ function SelfHostedCloudPage() {
         <p>
           Eight services, one Hetzner VPS, one Cloudflare tunnel, and a Tailscale tailnet. No
           third-party SaaS holding my data, no open application ports. SSH is the only public
-          service port, and it is key-only. This is how I run git, passwords, status, chat, photos,
-          and files for myself — a homelab, not a trading platform. Live services are linked
-          throughout. Last updated: October 2026.
+          service port, and it is key-only. This is how I run git, passwords, status, photos, and
+          files for myself — a homelab, not a trading platform. Live services are linked throughout.
+          Last updated: October 2026.
         </p>
 
         <h2>The Box</h2>
@@ -103,11 +103,11 @@ function SelfHostedCloudPage() {
 
         <p>
           What goes on which network is a deliberate decision. Anything I want the world to use
-          &mdash; Git, password vault, file server, charts, chat, this site &mdash; goes on the
-          public tunnel. Anything I only want for myself &mdash; media servers, internal admin UIs,
-          the Forgejo SSH endpoint, the database sockets &mdash; goes on the tailnet. The two
-          networks are not symmetric. The public one is heavily filtered, the private one is
-          trusted, and the box is the bridge between them.
+          &mdash; Git, password vault, file server, charts, this site &mdash; goes on the public
+          tunnel. Anything I only want for myself &mdash; media servers, internal admin UIs, the
+          Forgejo SSH endpoint, the database sockets &mdash; goes on the tailnet. The two networks
+          are not symmetric. The public one is heavily filtered, the private one is trusted, and the
+          box is the bridge between them.
         </p>
 
         <h2>Cloudflare Tunnels</h2>
@@ -135,17 +135,16 @@ function SelfHostedCloudPage() {
 
         <p>
           The ingress rules are short. The user-mode copy at <code>~/.cloudflared/config.yaml</code>{" "}
-          maps seven public subdomains to local services and ends with a catch-all that returns a
+          maps public hostnames to their local services and ends with a catch-all that returns a
           404. The same tunnel UUID (<code>ffd206b8-...</code>) is referenced by both the root-owned
           and user-owned configs; the dashboard drives most changes, but I keep the user-mode copy
           editable so I can tweak routing without sudo. The full mapping: <code>m4marvin.com</code>{" "}
-          reaches the portfolio, <code>chat.m4marvin.com</code> reaches the chat app,{" "}
-          <code>git.m4marvin.com</code> reaches Forgejo, <code>vault.m4marvin.com</code> reaches
-          Vaultwarden, and <code>status.m4marvin.com</code> reaches Uptime Kuma.{" "}
-          <code>files.m4marvin.com</code> and <code>charts.m4marvin.com</code> are configured
-          through the Cloudflare dashboard directly. The catch-all matters: any other hostname that
-          resolves to the tunnel gets a 404, which is the only sensible answer for a host that
-          should not be reaching into my infrastructure on a guess.
+          reaches the portfolio, <code>git.m4marvin.com</code> reaches Forgejo,{" "}
+          <code>vault.m4marvin.com</code> reaches Vaultwarden, and <code>status.m4marvin.com</code>{" "}
+          reaches Uptime Kuma. <code>files.m4marvin.com</code> and <code>charts.m4marvin.com</code>{" "}
+          are configured through the Cloudflare dashboard directly. The catch-all matters: any other
+          hostname that resolves to the tunnel gets a 404, which is the only sensible answer for a
+          host that should not be reaching into my infrastructure on a guess.
         </p>
 
         <h2>Tailscale</h2>
@@ -194,8 +193,8 @@ function SelfHostedCloudPage() {
 
         <Diagram
           src="/infra-container.svg"
-          alt="C4 Container diagram: the Hetzner VPS contains 8 services plus cloudflared, all on 127.0.0.1, with UFW, fail2ban, AIDE, and unattended-upgrades as host-level security"
-          caption="Figure 3. Container view (C4 level 2): 8 services, all on loopback."
+          alt="C4 Container diagram: the Hetzner VPS runs each public service in its own container, all on 127.0.0.1, with UFW, fail2ban, AIDE, and unattended-upgrades as host-level security"
+          caption="Figure 3. Container view (C4 level 2): public services, all on loopback."
           width={963}
           height={1446}
         />
@@ -222,8 +221,6 @@ function SelfHostedCloudPage() {
           and Vite, served by nginx inside the container. <strong>Charts</strong>, reached at{" "}
           <code>charts.m4marvin.com</code>. The mFinancialCharts instance, built from the codebase
           covered in the <Link to="/work/charts">charting engine writeup</Link>.{" "}
-          <strong>Chat</strong> reached at <code>chat.m4marvin.com</code>. A small custom app
-          (Better Auth and SQLite, with a local DB file) for a private messaging surface.{" "}
           <strong>Beszel</strong> provides metrics through a Tailscale-only hub backed by SQLite.
         </p>
 
@@ -293,17 +290,17 @@ function SelfHostedCloudPage() {
           scheduled on Beast and pulls from the VPS over the Tailscale tailnet, which means the
           backup traffic is encrypted and never touches the public edge. The VPS does not need to
           know backups are happening. The data that moves is the small stuff: Forgejo repositories,
-          Vaultwarden database, Copyparty file index, chat database, and service configs. The actual
-          binary blobs (the photos, the media library) live on Beast, where they are produced.
+          Vaultwarden database, Copyparty file index, and service configs. The actual binary blobs
+          (the photos, the media library) live on Beast, where they are produced.
         </p>
 
         <p>
           The cost math is what sold me on doing this in the first place. The total cost is roughly{" "}
           <strong>€60 a year</strong>, with Cloudflare and Tailscale on the personal tier. That
           covers the whole stack: Git hosting, password sync, file server, status page, this site,
-          the charts, the chat app, plus a private mesh VPN across all my devices. The equivalent
-          managed stack &mdash; GitHub Pro at $48, Bitwarden Premium at $20, Google Photos 200GB at
-          $30, Dropbox Plus at $120, StatusCake Solo at $80, Vercel Pro at $240 &mdash; comes out to{" "}
+          the charts, plus a private mesh VPN across all my devices. The equivalent managed stack
+          &mdash; GitHub Pro at $48, Bitwarden Premium at $20, Google Photos 200GB at $30, Dropbox
+          Plus at $120, StatusCake Solo at $80, Vercel Pro at $240 &mdash; comes out to{" "}
           <strong>roughly $538 a year</strong>, and at the end of it I still do not own a single
           byte of my data.
         </p>
@@ -356,11 +353,6 @@ function SelfHostedCloudPage() {
           ,{" "}
           <a href="https://charts.m4marvin.com" target="_blank" rel="noopener noreferrer">
             charts.m4marvin.com
-            <span aria-hidden="true"> ↗</span>
-          </a>
-          , and{" "}
-          <a href="https://chat.m4marvin.com" target="_blank" rel="noopener noreferrer">
-            chat.m4marvin.com
             <span aria-hidden="true"> ↗</span>
           </a>
           . The status page is the first place to look if anything looks off.

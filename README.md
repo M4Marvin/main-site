@@ -50,15 +50,15 @@ Use it for Uptime Kuma, Cloudflare health checks, or the deploy gate.
 
 ## Scripts
 
-| Command                | Description                           |
-| ---------------------- | ------------------------------------- |
-| `pnpm dev`             | Vite dev server on :3000              |
-| `pnpm build`           | Production build to `dist/`           |
-| `pnpm preview`         | Serve production build                |
-| `pnpm typecheck`       | TypeScript type check                 |
-| `pnpm lint`            | oxlint                                |
-| `pnpm format`          | oxfmt                                 |
-| `pnpm generate-routes` | Regenerate TanStack Router route tree |
+| Command                | Description                             |
+| ---------------------- | --------------------------------------- |
+| `pnpm dev`             | Vite dev server on :3000                |
+| `pnpm build`           | Production build to `dist/`             |
+| `pnpm preview`         | Serve production build                  |
+| `pnpm typecheck`       | TypeScript type check                   |
+| `pnpm lint`            | oxlint                                  |
+| `pnpm format`          | oxfmt                                   |
+| `pnpm generate-routes` | Regenerate TanStack Router route tree   |
 | `pnpm diagrams`        | Regenerate the C4 SVGs from `diagrams/` |
 
 There is no test suite yet; `typecheck`, `lint` and a production build are the checks.
@@ -101,6 +101,5 @@ This portfolio is part of the broader self-hosted `m4marvin.com` ecosystem:
 - `git.m4marvin.com` — self-hosted Forgejo (git)
 - `vault.m4marvin.com` — self-hosted Vaultwarden (passwords)
 - `status.m4marvin.com` — self-hosted Uptime Kuma (monitoring)
-- `chat.m4marvin.com` — self-hosted LLM chat
 - `photos.m4marvin.com` — self-hosted Immich (on beast)
 - `charts.m4marvin.com` — self-hosted trading charts (on beast)

@@ -8,9 +8,8 @@ C4Container
         Container(copyparty, "Copyparty", "Python", "File server · :8009")
         Container(portfolio, "Portfolio", "nginx + React", "This site · :8001")
         Container(charts, "Charts", "FastAPI", "Footprint charts · :8006")
-        Container(chat, "Chat", "Auth+SQLite", "Messaging · :8002")
 
-        ContainerDb(data, "Data volumes", "bind mounts", "forgejo/ · vault/ · kuma/ · chat/ · files/")
+        ContainerDb(data, "Data volumes", "bind mounts", "forgejo/ · vault/ · kuma/ · files/")
     }
 
     System_Ext(tunnel, "cloudflared", "systemd sidecar", "Post-quantum tunnel")
