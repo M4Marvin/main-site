@@ -37,7 +37,7 @@
   },
   "/self-hosted-cloud": {
     "title": "Self-hosted cloud",
-    "description": "Eight services on one Hetzner VPS, a Cloudflare tunnel, and a Tailscale tailnet. SSH is the only open port; every app port is loopback.",
+    "description": "Seven services on one Hetzner VPS, a Cloudflare tunnel, and a Tailscale tailnet. SSH is the only open port; every app port is loopback.",
     "path": "/self-hosted-cloud",
     "type": "article"
   },

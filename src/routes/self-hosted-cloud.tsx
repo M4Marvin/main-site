@@ -45,7 +45,7 @@ function SelfHostedCloudPage() {
         <h1>My Personal Cloud: Two Boxes, One Tunnel, Zero Public Service Ports</h1>
 
         <p>
-          Eight services, one Hetzner VPS, one Cloudflare tunnel, and a Tailscale tailnet. No
+          Seven services, one Hetzner VPS, one Cloudflare tunnel, and a Tailscale tailnet. No
           third-party SaaS holding my data, no open application ports. SSH is the only public
           service port, and it is key-only. This is how I run git, passwords, status, photos, and
           files for myself — a homelab, not a trading platform. Live services are linked throughout.
